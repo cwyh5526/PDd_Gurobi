@@ -41,11 +41,14 @@ void initTet(tet* T, vec3 v0, vec3 v1, vec3 v2, vec3 v3) {
 	T->vertex[2] = v2;
 	T->vertex[3] = v3;
 
-	T->face[0][0] = v0;	T->face[0][1] = v1;	T->face[0][2] = v2;
-	T->face[1][0] = v0;	T->face[1][1] = v2;	T->face[1][2] = v3;
-	T->face[2][0] = v0;	T->face[2][1] = v3;	T->face[2][2] = v1;
-	T->face[3][0] = v1;	T->face[3][1] = v3;	T->face[3][2] = v2;
+	//each face number represent the vertex that the face does not contain.
+	T->face[0][0] = v1;	T->face[0][1] = v3;	T->face[0][2] = v2; //Face 0 has vertex 123
+	T->face[1][0] = v0;	T->face[1][1] = v2;	T->face[1][2] = v3; //Face 1 has vertex 023
+	T->face[2][0] = v0;	T->face[2][1] = v3;	T->face[2][2] = v1;	//Face 2 has vertex 031
+	T->face[3][0] = v0;	T->face[3][1] = v1;	T->face[3][2] = v2; //Face 3 has vertex 012
 
+
+	//edge (0,5) edge(1,4) edge (2,3) are pairs. if one edge is realted to the contact, then other pair edge will be included in the constraints.
 	T->edge[0][0] = v0;	T->edge[0][1] = v1;
 	T->edge[1][0] = v0;	T->edge[1][1] = v2;
 	T->edge[2][0] = v0;	T->edge[2][1] = v3;
@@ -55,6 +58,7 @@ void initTet(tet* T, vec3 v0, vec3 v1, vec3 v2, vec3 v3) {
 
 	T->edge[5][0] = v2;	T->edge[5][1] = v3;
 }
+
 void init(tet *tetS, tet *tetR, tet *tetP, vec3 *rSum, float *rConstant) {
 	//static tetrahedron position
 	initTet(tetS, vec3(0.0, 0.0, 0.0),
@@ -72,8 +76,10 @@ void init(tet *tetS, tet *tetR, tet *tetP, vec3 *rSum, float *rConstant) {
 	initTet(tetP, tetR->vertex[0],
 		tetR->vertex[1],
 		tetR->vertex[2],
-		tetR->vertex[3]);
+		tetR->vertex[3]);	
+}
 
+void rSumrConstantCalculation(tet *tetR, vec3 *rSum, float *rConstant) {
 
 	//precompute the sum of coordinate values of rest pose tet. 
 	(*rSum) = vec3(0.0, 0.0, 0.0);
@@ -94,7 +100,10 @@ void init(tet *tetS, tet *tetR, tet *tetP, vec3 *rSum, float *rConstant) {
 	}
 	(*rConstant) = (float)(constant.x + constant.y + constant.z);
 }
+
+
 void separatingPlaneCalculation(vec3 faceVrtx[3], glm::vec3 *normal, double *d) {
+	//compute the normal vector and constant of the plane equation for 3 vertices
 	glm::vec3 v01 = faceVrtx[1] - faceVrtx[0];
 	glm::vec3 v02 = faceVrtx[2] - faceVrtx[0];
 	std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
@@ -103,12 +112,10 @@ void separatingPlaneCalculation(vec3 faceVrtx[3], glm::vec3 *normal, double *d) 
 	(*normal) = glm::normalize(glm::cross(v01, v02));
 	*(d) = glm::dot(*normal, faceVrtx[0]);
 }
-void deformFaceCosntraint() {
-
-}
 
 
 void optStaticFace(int fIndex, tet sTet, tet rTet, vec3 rSum, float rConstant, tet *pTet, double *optValue,  double *optTime) {
+	cout << "\n =========optStaticFace Face "<< fIndex << endl;
 
 	try {
 		GRBEnv env = GRBEnv();
@@ -158,17 +165,22 @@ void optStaticFace(int fIndex, tet sTet, tet rTet, vec3 rSum, float rConstant, t
 					
 		model.setObjective(obj);
 
-		// Add constraint: 
-	
+		//Calculate the static normal vector
 		glm::vec3 normal;
 		double constraintValue = 0.0 ;
 		separatingPlaneCalculation(sTet.face[fIndex], &normal, &constraintValue);
 
+		// Add constraints: 
+		// n·(p0-s0)>=0
+		// n·(p1-s0)>=0
+		// n·(p2-s0)>=0
+		// n·(p3-s0)>=0
 		model.addConstr(normal.x*xP0 + normal.y * yP0 + normal.z * zP0 >= constraintValue, "c0");
 		model.addConstr(normal.x*xP1 + normal.y * yP1 + normal.z * zP1 >= constraintValue, "c1");
 		model.addConstr(normal.x*xP2 + normal.y * yP2 + normal.z * zP2 >= constraintValue, "c2");
 		model.addConstr(normal.x*xP3 + normal.y * yP3 + normal.z * zP3 >= constraintValue, "c3");
 
+		//Optimization
 		model.optimize();	
 
 		//get Result;
@@ -188,7 +200,120 @@ void optStaticFace(int fIndex, tet sTet, tet rTet, vec3 rSum, float rConstant, t
 		cout << "Exception during optimization" << endl;
 	}
 }
+void optDeformingFace(int fIndex, tet sTet, tet rTet, vec3 rSum, float rConstant, tet *pTet, double *optValue, double *optTime) {
+	cout<<"\n =========optDeforming Face "<<fIndex<<endl;
+	
+	try {
+		GRBEnv env = GRBEnv();
 
+		GRBModel model = GRBModel(env);
+
+		// Create variables
+
+		GRBVar xP0 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "xP0");
+		GRBVar xP1 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "xP1");
+		GRBVar xP2 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "xP2");
+		GRBVar xP3 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "xP3");
+
+		GRBVar yP0 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "yP0");
+		GRBVar yP1 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "yP1");
+		GRBVar yP2 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "yP2");
+		GRBVar yP3 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "yP3");
+
+
+		GRBVar zP0 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "zP0");
+		GRBVar zP1 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "zP1");
+		GRBVar zP2 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "zP2");
+		GRBVar zP3 = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "zP[3]");
+
+		// Set objective
+		GRBQuadExpr obj =
+			xP0*xP0 + xP0*xP1 + xP1*xP1 + xP0*xP2 + xP1*xP2 + xP2*xP2 + xP0*xP3 + xP1*xP3 + xP2*xP3 + xP3*xP3
+			+ yP0*yP0 + yP0*yP1 + yP1*yP1 + yP0*yP2 + yP1*yP2 + yP2*yP2 + yP0*yP3 + yP1*yP3 + yP2*yP3 + yP3*yP3
+			+ zP0*zP0 + zP0*zP1 + zP1*zP1 + zP0*zP2 + zP1*zP2 + zP2*zP2 + zP0*zP3 + zP1*zP3 + zP2*zP3 + zP3*zP3
+
+			- xP0*(rSum.x + rTet.vertex[0].x)
+			- xP1*(rSum.x + rTet.vertex[1].x)
+			- xP2*(rSum.x + rTet.vertex[2].x)
+			- xP3*(rSum.x + rTet.vertex[3].x)
+
+			- yP0*(rSum.y + rTet.vertex[0].y)
+			- yP1*(rSum.y + rTet.vertex[1].y)
+			- yP2*(rSum.y + rTet.vertex[2].y)
+			- yP3*(rSum.y + rTet.vertex[3].y)
+
+			- zP0*(rSum.z + rTet.vertex[0].z)
+			- zP1*(rSum.z + rTet.vertex[1].z)
+			- zP2*(rSum.z + rTet.vertex[2].z)
+			- zP3*(rSum.z + rTet.vertex[3].z)
+
+			+ rConstant;
+
+		model.setObjective(obj);
+
+		//Calculate the static normal vector
+		//n=-r01xr02 : face normal for rest state face
+		//d=n dot p0
+		glm::vec3 normal;
+		double constraintValue = 0.0;
+		separatingPlaneCalculation(rTet.face[fIndex], &normal, &constraintValue);
+		glm::vec3 separatingDirection = -normal;
+		
+		// Add constraints: Face에포함된 vertex를 순서대로 p0 p1 p2라 하고, face에 포함되지 않은 vertex를 p3라 하자. 즉 faceIndex를 가진 vertex 자리에 p3를 넣어주어야 한다.
+		// n·(s0-p0)>=0   --->
+		// n·(s1-p0)>=0
+		// n·(s2-p0)>=0
+		// n·(s3-p0)>=0
+	
+		//(-n)·(p3-p0)>0 ---> n·(p0-p3)>0
+
+		// n·(p1-p0)=0,
+		// n·(p2-p0)=0,
+		// n·(p2-p1)=0,
+		model.addConstr(normal.x*xP0 + normal.y * yP0 + normal.z * zP0 <= dot(normal,sTet.vertex[0]), "c0");
+		model.addConstr(normal.x*xP1 + normal.y * yP1 + normal.z * zP1 >= dot(normal, sTet.vertex[1]), "c1");
+		model.addConstr(normal.x*xP2 + normal.y * yP2 + normal.z * zP2 >= dot(normal, sTet.vertex[2]), "c2");
+		model.addConstr(normal.x*xP3 + normal.y * yP3 + normal.z * zP3 >= dot(normal, sTet.vertex[3]), "c3");
+
+		model.addConstr(normal.x*xP0 + normal.y * yP0 + normal.z * zP0 -(normal.x*xP3 + normal.y * yP3 + normal.z * zP3) >= 0, "c4");
+
+		model.addConstr(normal.x*xP1 + normal.y * yP1 + normal.z * zP1-(normal.x*xP0 + normal.y * yP0 + normal.z * zP0) ==0, "c5");
+		model.addConstr(normal.x*xP2 + normal.y * yP2 + normal.z * zP2 - (normal.x*xP0 + normal.y * yP0 + normal.z * zP0) == 0, "c6");
+		model.addConstr(normal.x*xP1 + normal.y * yP1 + normal.z * zP1 - (normal.x*xP2 + normal.y * yP2 + normal.z * zP2) == 0, "c7");
+
+
+
+
+		//Optimization
+		model.optimize();
+
+		//get Result;
+		*optValue = model.get(GRB_DoubleAttr_ObjVal);
+		*optTime = model.get(GRB_DoubleAttr_Runtime);
+		//faceIndex에 따라서 어디 넣어주느냐가 달라지는거 아니냐
+		//0이면 
+
+
+		vec3 p0(xP0.get(GRB_DoubleAttr_X), yP0.get(GRB_DoubleAttr_X), zP0.get(GRB_DoubleAttr_X));
+		vec3 p1(xP1.get(GRB_DoubleAttr_X), yP1.get(GRB_DoubleAttr_X), zP1.get(GRB_DoubleAttr_X));
+		vec3 p2(xP2.get(GRB_DoubleAttr_X), yP2.get(GRB_DoubleAttr_X), zP2.get(GRB_DoubleAttr_X));
+		vec3 p3(xP3.get(GRB_DoubleAttr_X), yP3.get(GRB_DoubleAttr_X), zP3.get(GRB_DoubleAttr_X));
+		if (fIndex == 0)	  { initTet(pTet, p3, p0, p2, p1); }//p3이 not contact, p0p1p2이 face를 이루고 있음.p3=v0, p0=v1 p1=v3 p2=v2
+		else if (fIndex == 1) { initTet(pTet, p0, p3, p1, p2); }//p3이 not contact, p0p1p2이 face를 이루고 있음. v0=p0,v2=p1,v3=p2
+		else if (fIndex == 2) { initTet(pTet, p0, p2, p3, p1); }//p3이 not contact, p0p1p2이 face를 이루고 있음. v0=p0 v3=p1 v1=p2
+		else if (fIndex == 3) { initTet(pTet, p0, p1, p2 ,p3); }//p3이 not contact, p0p1p2이 face를 이루고 있음. v0=p0 v1=p1 v2=p2
+		else { cout << "Wrong Face Index" << endl; }//p3이 not contact, p0p1p2이 face를 이루고 있음.
+		
+	}
+	catch (GRBException e) {
+		cout << "Error code = " << e.getErrorCode() << endl;
+		cout << e.getMessage() << endl;
+	}
+	catch (...) {
+		cout << "Exception during optimization" << endl;
+	}
+}
+/*
 void optDeformFace(int f, tet sTet, tet rTet, vec3 rSum, float rConstant, tet *pTet, double *optValue, double *optTime, int *contactVertex){
 	// which vertices will be used for constraint? it depends on the face index
 	//f:face index of deforming tetrahedron (0~3) used for optimization
@@ -269,26 +394,26 @@ void optDeformFace(int f, tet sTet, tet rTet, vec3 rSum, float rConstant, tet *p
 			
 			//model.addConstr(() >= 0, "c0");
 
-			/*model.addQConstr((s1.x*((yP[v[f][1]] - yP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]) - (zP[v[f][1]] - zP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]))
-							+ s1.y*((zP[v[f][1]] - zP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]]) - (xP[v[f][1]] - xP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]))
-							+ s1.z*((xP[v[f][1]] - xP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]) - (yP[v[f][1]] - yP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]])))
-								>= (s0.x*(yP[v[f][1]] * zP[v[f][2]] - yP[v[f][2]] * zP[v[f][1]])
-								  + s0.y*(xP[v[f][2]] * zP[v[f][1]] - xP[v[f][1]] * zP[v[f][2]])
-								  + s0.z*(xP[v[f][1]] * yP[v[f][2]] - xP[v[f][2]] * yP[v[f][1]])), "c0");
+			//model.addQConstr((s1.x*((yP[v[f][1]] - yP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]) - (zP[v[f][1]] - zP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]))
+			//				+ s1.y*((zP[v[f][1]] - zP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]]) - (xP[v[f][1]] - xP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]))
+			//				+ s1.z*((xP[v[f][1]] - xP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]) - (yP[v[f][1]] - yP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]])))
+			//					>= (s0.x*(yP[v[f][1]] * zP[v[f][2]] - yP[v[f][2]] * zP[v[f][1]])
+			//					  + s0.y*(xP[v[f][2]] * zP[v[f][1]] - xP[v[f][1]] * zP[v[f][2]])
+			//					  + s0.z*(xP[v[f][1]] * yP[v[f][2]] - xP[v[f][2]] * yP[v[f][1]])), "c0");
 
-			model.addQConstr((s2.x*((yP[v[f][1]] - yP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]) - (zP[v[f][1]] - zP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]))
-							+ s2.y*((zP[v[f][1]] - zP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]]) - (xP[v[f][1]] - xP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]))
-							+ s2.z*((xP[v[f][1]] - xP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]) - (yP[v[f][1]] - yP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]])))
-								>= (s0.x*(yP[v[f][1]] * zP[v[f][2]] - yP[v[f][2]] * zP[v[f][1]])
-								  + s0.y*(xP[v[f][2]] * zP[v[f][1]] - xP[v[f][1]] * zP[v[f][2]])
-								  + s0.z*(xP[v[f][1]] * yP[v[f][2]] - xP[v[f][2]] * yP[v[f][1]])), "c1");
+			//model.addQConstr((s2.x*((yP[v[f][1]] - yP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]) - (zP[v[f][1]] - zP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]))
+			//				+ s2.y*((zP[v[f][1]] - zP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]]) - (xP[v[f][1]] - xP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]))
+			//				+ s2.z*((xP[v[f][1]] - xP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]) - (yP[v[f][1]] - yP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]])))
+			//					>= (s0.x*(yP[v[f][1]] * zP[v[f][2]] - yP[v[f][2]] * zP[v[f][1]])
+			//					  + s0.y*(xP[v[f][2]] * zP[v[f][1]] - xP[v[f][1]] * zP[v[f][2]])
+			//					  + s0.z*(xP[v[f][1]] * yP[v[f][2]] - xP[v[f][2]] * yP[v[f][1]])), "c1");
 
-			model.addQConstr((s3.x*((yP[v[f][1]] - yP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]) - (zP[v[f][1]] - zP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]))
-							+ s3.y*((zP[v[f][1]] - zP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]]) - (xP[v[f][1]] - xP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]))
-							+ s3.z*((xP[v[f][1]] - xP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]) - (yP[v[f][1]] - yP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]])))
-								>= (s0.x*(yP[v[f][1]] * zP[v[f][2]] - yP[v[f][2]] * zP[v[f][1]])
-								  + s0.y*(xP[v[f][2]] * zP[v[f][1]] - xP[v[f][1]] * zP[v[f][2]])
-							 	  + s0.z*(xP[v[f][1]] * yP[v[f][2]] - xP[v[f][2]] * yP[v[f][1]])), "c2");*/
+			//model.addQConstr((s3.x*((yP[v[f][1]] - yP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]) - (zP[v[f][1]] - zP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]))
+			//				+ s3.y*((zP[v[f][1]] - zP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]]) - (xP[v[f][1]] - xP[v[f][0]])*(zP[v[f][2]] - zP[v[f][0]]))
+			//				+ s3.z*((xP[v[f][1]] - xP[v[f][0]])*(yP[v[f][2]] - yP[v[f][0]]) - (yP[v[f][1]] - yP[v[f][0]])*(xP[v[f][2]] - xP[v[f][0]])))
+			//					>= (s0.x*(yP[v[f][1]] * zP[v[f][2]] - yP[v[f][2]] * zP[v[f][1]])
+			//					  + s0.y*(xP[v[f][2]] * zP[v[f][1]] - xP[v[f][1]] * zP[v[f][2]])
+			//				 	  + s0.z*(xP[v[f][1]] * yP[v[f][2]] - xP[v[f][2]] * yP[v[f][1]])), "c2");
 			model.optimize();
 			metricValue[i]= model.get(GRB_DoubleAttr_ObjVal);
 			time[i]= model.get(GRB_DoubleAttr_Runtime);
@@ -296,8 +421,8 @@ void optDeformFace(int f, tet sTet, tet rTet, vec3 rSum, float rConstant, tet *p
 			{
 				p[i][vtx] = vec3(xP[vtx].get(GRB_DoubleAttr_X), yP[vtx].get(GRB_DoubleAttr_X), zP[vtx].get(GRB_DoubleAttr_X));
 			}
-			/*cout << "Obj: " << model.get(GRB_DoubleAttr_ObjVal) << endl;
-			cout << "Time:" << model.get( << endl;*/
+			//cout << "Obj: " << model.get(GRB_DoubleAttr_ObjVal) << endl;
+			//cout << "Time:" << model.get( << endl;
 
 		}
 		catch (GRBException e) {
@@ -326,6 +451,7 @@ void optDeformFace(int f, tet sTet, tet rTet, vec3 rSum, float rConstant, tet *p
 	initTet(pTet,p[*contactVertex][0], p[*contactVertex][1], p[*contactVertex][2], p[*contactVertex][3]);
 
 }
+*/
 void optEdgeEdge(int e1,int e2, tet sTet, tet rTet, vec3 rSum, float rConstant, tet *pTet, double *optValue, double *optTime) {
 	//e1:static edge index, e2:deforming edge index
 	int e[6][2] = { { 0,1 },{ 0,2 },{ 0,3 },{ 1,2 },{ 1,3 },{ 2,3 } };  // e[edgeIndex] = {first vertex Index, second vertex Index}
@@ -432,15 +558,15 @@ void resolvePenetration(vec3 rSum,float rConstant, tet sTet, tet rTet, tet *pTet
 	}
 
 	//4 deforming faces and 4 vertices for each case
-	/*for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++) {
 		int index = i + 4;
-		optDeformFace(i,sTet,rTet,rSum,rConstant,pTet,&optValue[index],&optTime[index],&contactVertex[i]);
+		optDeformingFace(i, sTet, rTet, rSum, rConstant, pTet, &optValue[index], &optTime[index]);// , &contactVertex[i]);
 		(*totalOptTime) += optTime[index];
 		if ((*minOptValue) > optValue[index]) {
 			*minOptValue = optValue[index];
 			*minOptIndex = index;
 		}
-	}*/
+	}
 
 	//36 deforming faces from edge-edge case
 	//for (int s = 0; s < 6; s++) { // static edge
