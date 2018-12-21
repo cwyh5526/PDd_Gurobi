@@ -1,0 +1,3962 @@
+﻿
+ =========optStaticFace Face 0
+Academic license - for non-commercial use only
+v01: (-1,1,0)
+v02: (-1,0,1)
+Optimize a model with 4 rows, 12 columns and 12 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [6e-01, 6e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-01, 6e-01]
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 12 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.600e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999833e+00  9.69999981e+00  1.15e+00 3.50e+00  9.99e+05     0s
+   1   2.24693944e+05 -2.25730455e+05  7.28e-08 8.50e-05  1.13e+05     0s
+   2   3.27983107e+04 -3.31940132e+04  4.56e-08 4.96e-05  1.65e+04     0s
+   3   4.75898648e+03 -4.90938013e+03  2.86e-09 3.59e-06  2.42e+03     0s
+   4   6.79906745e+02 -7.36400464e+02  5.33e-15 4.43e-12  3.54e+02     0s
+   5   9.33638939e+01 -1.13928740e+02  2.66e-15 3.38e-13  5.18e+01     0s
+   6   1.16511559e+01 -1.85061316e+01  1.33e-15 1.38e-13  7.54e+00     0s
+   7   1.23859932e+00 -2.96526725e+00  6.66e-16 5.82e-14  1.05e+00     0s
+   8   1.72474197e-01 -2.66049397e-01  2.22e-16 2.89e-14  1.10e-01     0s
+   9   5.11172104e-02  5.84461578e-03  1.11e-16 8.08e-14  1.13e-02     0s
+  10   3.42096208e-02  3.32609213e-02  5.52e-13 4.20e-09  2.37e-04     0s
+  11   3.33329019e-02  3.33319631e-02  7.71e-13 1.74e-09  2.35e-07     0s
+  12   3.33320309e-02  3.33320299e-02  6.66e-16 1.74e-12  2.35e-10     0s
+
+Barrier solved model in 12 iterations and 0.01 seconds
+Optimal objective 3.33320309e-02
+
+
+ =========optStaticFace Face 1
+Academic license - for non-commercial use only
+v01: (0,0,1)
+v02: (0,1,0)
+Optimize a model with 4 rows, 12 columns and 4 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [0e+00, 0e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 0 rows, 12 columns, 0 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 9.000e+00
+ Factor NZ  : 1.800e+01
+ Factor Ops : 4.200e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 1.00e+03  1.00e+06     0s
+   1   2.26435668e+05 -2.24680702e+05  5.15e-10 1.00e-03  1.13e+05     0s
+   2   3.33835122e+04 -3.27097329e+04  2.84e-14 1.00e-09  1.65e+04     0s
+   3   4.97146729e+03 -4.71131763e+03  5.68e-14 2.84e-14  2.42e+03     0s
+   4   7.60001916e+02 -6.58075841e+02  7.11e-15 2.84e-14  3.55e+02     0s
+   5   1.24337645e+02 -8.28861366e+01  2.66e-15 3.55e-15  5.18e+01     0s
+   6   2.41505845e+01 -5.68458098e+00  8.88e-16 2.66e-15  7.46e+00     0s
+   7   6.96768341e+00  3.07437139e+00  2.22e-16 4.44e-16  9.73e-01     0s
+   8   3.91877079e+00  3.64441228e+00  2.22e-16 1.33e-15  6.86e-02     0s
+   9   3.65081979e+00  3.64999920e+00  1.11e-16 4.44e-16  2.05e-04     0s
+  10   3.65000008e+00  3.64999926e+00  1.11e-16 4.44e-16  2.05e-07     0s
+  11   3.64999926e+00  3.64999926e+00  2.22e-16 4.44e-16  2.05e-10     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.64999926e+00
+
+
+ =========optStaticFace Face 2
+Academic license - for non-commercial use only
+v01: (0,1,0)
+v02: (1,0,0)
+Optimize a model with 4 rows, 12 columns and 4 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [0e+00, 0e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 0 rows, 12 columns, 0 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 9.000e+00
+ Factor NZ  : 1.800e+01
+ Factor Ops : 4.200e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 1.00e+03  1.00e+06     0s
+   1   2.26095244e+05 -2.24754095e+05  3.65e-10 1.00e-03  1.13e+05     0s
+   2   3.32848866e+04 -3.27696561e+04  2.84e-14 1.00e-09  1.65e+04     0s
+   3   4.93817617e+03 -4.73922107e+03  2.84e-14 2.84e-14  2.42e+03     0s
+   4   7.47687388e+02 -6.69832578e+02  1.42e-14 1.42e-14  3.54e+02     0s
+   5   1.19434218e+02 -8.79203072e+01  8.88e-16 7.11e-15  5.18e+01     0s
+   6   2.19533280e+01 -8.10391579e+00  1.33e-15 1.55e-15  7.51e+00     0s
+   7   5.69214968e+00  1.58606424e+00  2.22e-16 1.78e-15  1.03e+00     0s
+   8   2.77130180e+00  2.38233699e+00  2.22e-16 4.44e-16  9.72e-02     0s
+   9   2.40491415e+00  2.39999503e+00  1.11e-16 8.88e-16  1.23e-03     0s
+  10   2.40000363e+00  2.39999871e+00  1.11e-16 4.44e-16  1.23e-06     0s
+  11   2.39999872e+00  2.39999871e+00  2.22e-16 4.44e-16  1.23e-09     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 2.39999872e+00
+
+
+ =========optStaticFace Face 3
+Academic license - for non-commercial use only
+v01: (1,0,0)
+v02: (0,0,1)
+Optimize a model with 4 rows, 12 columns and 4 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [0e+00, 0e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 0 rows, 12 columns, 0 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 9.000e+00
+ Factor NZ  : 1.800e+01
+ Factor Ops : 4.200e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 1.00e+03  1.00e+06     0s
+   1   2.26347064e+05 -2.24634915e+05  5.15e-10 1.00e-03  1.13e+05     0s
+   2   3.33659660e+04 -3.27078583e+04  4.26e-14 1.00e-09  1.65e+04     0s
+   3   4.96725064e+03 -4.71279567e+03  2.13e-14 2.13e-14  2.42e+03     0s
+   4   7.58810072e+02 -6.58913322e+02  3.55e-15 1.42e-14  3.54e+02     0s
+   5   1.23982192e+02 -8.32148880e+01  5.33e-15 1.42e-14  5.18e+01     0s
+   6   2.40613263e+01 -5.78828579e+00  2.00e-15 1.78e-15  7.46e+00     0s
+   7   6.96588880e+00  3.05377998e+00  2.22e-16 1.78e-15  9.78e-01     0s
+   8   3.92873433e+00  3.64363337e+00  2.22e-16 4.44e-16  7.13e-02     0s
+   9   3.65101497e+00  3.64999916e+00  1.11e-16 8.88e-16  2.54e-04     0s
+  10   3.65000028e+00  3.64999926e+00  1.11e-16 4.44e-16  2.54e-07     0s
+  11   3.64999926e+00  3.64999926e+00  2.22e-16 8.88e-16  2.54e-10     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.64999926e+00
+
+
+ =========optDeforming Face 0
+Academic license - for non-commercial use only
+v01: (-1,1,0)
+v02: (-0.5,0.5,1)
+Optimize a model with 8 rows, 12 columns and 36 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-08, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-08, 7e-01]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   5.61806494e+04 -5.54665576e+04  1.68e+01 6.22e-02  7.20e+04     0s
+   2   1.07146657e+04 -1.03321864e+04  3.68e-08 1.12e-04  1.05e+04     0s
+   3   1.61979575e+03 -1.46505895e+03  8.16e-09 8.65e-06  1.54e+03     0s
+   4   2.59034616e+02 -1.92853330e+02  1.36e-14 1.26e-11  2.26e+02     0s
+   5   4.88238873e+01 -1.69563154e+01  1.33e-15 1.44e-12  3.29e+01     0s
+   6   1.39839416e+01  4.84905270e+00  7.77e-16 4.77e-13  4.57e+00     0s
+   7   7.67959073e+00  6.75003726e+00  3.33e-16 1.15e-13  4.65e-01     0s
+   8   6.81553504e+00  6.79998203e+00  2.22e-16 7.11e-15  7.78e-03     0s
+   9   6.80001564e+00  6.80000013e+00  3.63e-12 2.93e-09  7.76e-06     0s
+  10   6.80000014e+00  6.80000013e+00  5.33e-15 2.94e-12  7.77e-09     0s
+
+Barrier solved model in 10 iterations and 0.02 seconds
+Optimal objective 6.80000014e+00
+
+
+ =========optDeforming Face 1
+Academic license - for non-commercial use only
+v01: (0.5,0.5,1)
+v02: (0,1,0)
+Optimize a model with 8 rows, 12 columns and 24 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999975e+00  9.69999981e+00  8.94e-01 3.50e+00  9.99e+05     0s
+   1   5.61252363e+04 -5.56946889e+04  1.66e+01 6.17e-02  7.19e+04     0s
+   2   1.06370344e+04 -1.03940003e+04  6.98e-08 1.42e-04  1.05e+04     0s
+   3   1.59050124e+03 -1.49213236e+03  7.80e-09 1.09e-05  1.54e+03     0s
+   4   2.46837200e+02 -2.04974020e+02  1.34e-14 1.60e-11  2.26e+02     0s
+   5   4.29561327e+01 -2.31111029e+01  1.40e-15 1.86e-12  3.30e+01     0s
+   6   1.04125392e+01  9.40808777e-01  1.78e-15 6.49e-13  4.74e+00     0s
+   7   4.72533022e+00  3.53671744e+00  4.44e-16 1.94e-13  5.94e-01     0s
+   8   3.74524023e+00  3.67923515e+00  2.22e-16 2.93e-14  3.30e-02     0s
+   9   3.68006588e+00  3.67999822e+00  4.03e-13 5.37e-10  3.38e-05     0s
+  10   3.67999828e+00  3.67999822e+00  4.62e-14 2.53e-11  3.39e-08     0s
+  11   3.67999822e+00  3.67999822e+00  4.44e-16 2.58e-14  3.39e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.67999822e+00
+
+
+ =========optDeforming Face 2
+Academic license - for non-commercial use only
+v01: (0,1,0)
+v02: (1,0,0)
+Optimize a model with 8 rows, 12 columns and 12 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 5 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   1.48259700e+05 -1.55625536e+05  2.25e+03 3.50e+00  9.97e+05     0s
+   1   2.84255104e+05 -2.82635065e+05  2.25e-03 4.70e-06  1.13e+05     0s
+   2   4.18396298e+04 -4.12162244e+04  2.25e-09 6.68e-12  1.66e+04     0s
+   3   6.20486091e+03 -5.96338806e+03  2.80e-14 4.26e-14  2.43e+03     0s
+   4   9.38764510e+02 -8.43634526e+02  7.77e-15 2.84e-14  3.56e+02     0s
+   5   1.49916673e+02 -1.10823420e+02  6.44e-15 7.11e-15  5.21e+01     0s
+   6   2.77633932e+01 -1.00397357e+01  2.44e-15 4.77e-15  7.56e+00     0s
+   7   7.47776318e+00  2.30249427e+00  8.88e-16 1.78e-15  1.04e+00     0s
+   8   3.86326871e+00  3.35569819e+00  2.22e-16 8.88e-16  1.02e-01     0s
+   9   3.40671218e+00  3.38576194e+00  2.22e-16 8.88e-16  4.19e-03     0s
+  10   3.40225782e+00  3.39868453e+00  4.44e-16 2.22e-16  7.15e-04     0s
+  11   3.40002284e+00  3.39997309e+00  0.00e+00 3.55e-15  9.95e-06     0s
+  12   3.39999874e+00  3.39999869e+00  0.00e+00 1.11e-16  1.01e-08     0s
+  13   3.39999871e+00  3.39999871e+00  4.44e-16 3.55e-15  1.01e-11     0s
+
+Barrier solved model in 13 iterations and 0.02 seconds
+Optimal objective 3.39999871e+00
+
+
+ =========optDeforming Face 3
+Academic license - for non-commercial use only
+v01: (1,0,0)
+v02: (0.5,0.5,1)
+Optimize a model with 8 rows, 12 columns and 24 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999975e+00  9.69999981e+00  8.94e-01 3.50e+00  9.99e+05     0s
+   1   5.61252363e+04 -5.56946889e+04  1.66e+01 6.17e-02  7.19e+04     0s
+   2   1.06370344e+04 -1.03940003e+04  6.44e-08 1.42e-04  1.05e+04     0s
+   3   1.59050124e+03 -1.49213236e+03  4.62e-09 1.09e-05  1.54e+03     0s
+   4   2.46837200e+02 -2.04974020e+02  8.74e-15 1.60e-11  2.26e+02     0s
+   5   4.29561327e+01 -2.31111029e+01  1.22e-15 1.86e-12  3.30e+01     0s
+   6   1.04125392e+01  9.40808777e-01  8.88e-16 6.49e-13  4.74e+00     0s
+   7   4.72533022e+00  3.53671744e+00  1.25e-16 1.94e-13  5.94e-01     0s
+   8   3.74524023e+00  3.67923515e+00  2.22e-16 2.89e-14  3.30e-02     0s
+   9   3.68006588e+00  3.67999822e+00  5.16e-13 5.37e-10  3.38e-05     0s
+  10   3.67999828e+00  3.67999822e+00  2.98e-14 2.53e-11  3.39e-08     0s
+  11   3.67999822e+00  3.67999822e+00  4.44e-16 2.49e-14  3.39e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.67999822e+00
+
+
+ =========optEdgEdge staticEdge 0deforming Edge0
+r01 = (1, 0,0)
+s01 = (1, 0,0)
+s02 = (0, 0,1)
+s03 = (0, 1,0)
+r0s0 = (-0.2, -0.2,-0.2)
+s01_length = (1)
+WHAT IS GOING ON
+n = (0, -0.707107,-0.707107)
+n_cross = (0, 0,0)
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.24727793e+04 -7.13623793e+04  7.49e+01 2.66e-01  1.18e+05     0s
+   2   2.47192138e+04 -2.39797160e+04  4.41e-08 7.46e-05  1.62e+04     0s
+   3   3.71065696e+03 -3.42376144e+03  1.35e-08 7.53e-06  2.38e+03     0s
+   4   5.79023741e+02 -4.65474552e+02  1.24e-14 9.92e-12  3.48e+02     0s
+   5   9.97388735e+01 -5.24697956e+01  2.22e-15 8.76e-13  5.07e+01     0s
+   6   2.18459728e+01  3.62013214e-01  8.88e-16 3.03e-13  7.16e+00     0s
+   7   7.92907829e+00  5.48292363e+00  4.44e-16 8.26e-14  8.15e-01     0s
+   8   5.74893756e+00  5.67475144e+00  2.22e-16 7.99e-15  2.47e-02     0s
+   9   5.67507296e+00  5.67499920e+00  3.57e-14 4.30e-11  2.46e-05     0s
+  10   5.67499928e+00  5.67499920e+00  1.17e-14 6.98e-12  2.46e-08     0s
+  11   5.67499920e+00  5.67499920e+00  1.11e-16 7.11e-15  2.46e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 5.67499920e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999966e+00  9.69999981e+00  7.07e-01 3.50e+00  1.00e+06     0s
+   1   7.20209898e+04 -7.22780412e+04  7.46e+01 2.65e-01  1.18e+05     0s
+   2   2.43640772e+04 -2.44573451e+04  2.23e-08 7.42e-05  1.63e+04     0s
+   3   3.55920308e+03 -3.59407592e+03  9.61e-09 7.54e-06  2.38e+03     0s
+   4   5.17683338e+02 -5.30438177e+02  1.42e-14 9.99e-12  3.49e+02     0s
+   5   7.46006638e+01 -7.89753763e+01  8.88e-16 9.34e-13  5.12e+01     0s
+   6   1.06468808e+01 -1.18464337e+01  4.44e-16 3.61e-13  7.50e+00     0s
+   7   1.64070179e+00 -1.63982075e+00  4.44e-16 1.43e-13  1.09e+00     0s
+   8   4.54370779e-01 -8.11731911e-03  2.22e-16 5.95e-14  1.54e-01     0s
+   9   3.19464782e-01  2.68547019e-01  4.44e-16 2.40e-14  1.70e-02     0s
+  10   3.02166861e-01  2.98144625e-01  1.14e-12 3.48e-09  1.34e-03     0s
+  11   3.00282282e-01  2.99715604e-01  1.28e-12 4.26e-09  1.89e-04     0s
+  12   3.00038295e-01  2.99959052e-01  1.60e-12 1.62e-09  2.64e-05     0s
+  13   3.00004297e-01  2.99993031e-01  1.20e-12 3.10e-09  3.76e-06     0s
+  14   2.99999466e-01  2.99997863e-01  3.86e-13 1.17e-09  5.34e-07     0s
+  15   2.99998779e-01  2.99998551e-01  2.41e-13 4.41e-10  7.60e-08     0s
+  16   2.99998681e-01  2.99998649e-01  6.99e-14 1.66e-10  1.08e-08     0s
+  17   2.99998667e-01  2.99998663e-01  1.29e-14 6.28e-11  1.54e-09     0s
+
+Barrier solved model in 17 iterations and 0.02 seconds
+Optimal objective 2.99998667e-01
+
+
+ =========optEdgEdge staticEdge 0deforming Edge1
+r01 = (0.5, 0.5,1)
+s01 = (1, 0,0)
+s02 = (0, 0,1)
+s03 = (0, 1,0)
+
+
+
+
+[FASLE]: 1. Normal not decided
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999974e+00  9.69999981e+00  8.94e-01 3.50e+00  1.00e+06     0s
+   1   7.21020027e+04 -7.15218607e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.46181892e+04 -2.41265450e+04  4.13e-08 9.37e-05  1.62e+04     0s
+   3   3.66685276e+03 -3.47500291e+03  1.01e-08 9.53e-06  2.38e+03     0s
+   4   5.61399839e+02 -4.84734679e+02  1.24e-14 1.26e-11  3.49e+02     0s
+   5   9.26892360e+01 -6.02377564e+01  1.78e-15 1.14e-12  5.10e+01     0s
+   6   1.88041635e+01 -3.22665689e+00  8.88e-16 4.20e-13  7.34e+00     0s
+   7   6.12632422e+00  3.25034454e+00  2.22e-16 1.42e-13  9.59e-01     0s
+   8   3.88020509e+00  3.67552283e+00  4.44e-16 3.06e-14  6.82e-02     0s
+   9   3.68071574e+00  3.67999814e+00  1.19e-12 2.03e-09  2.39e-04     0s
+  10   3.67999893e+00  3.67999822e+00  7.42e-14 2.14e-10  2.39e-07     0s
+  11   3.67999822e+00  3.67999822e+00  4.44e-16 2.14e-13  2.40e-10     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.67999822e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999985e+00  9.69999981e+00  4.47e-01 3.50e+00  1.00e+06     0s
+   1   7.23357440e+04 -7.13002673e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.47185473e+04 -2.39846050e+04  1.80e-08 9.42e-05  1.62e+04     0s
+   3   3.71032904e+03 -3.42483601e+03  1.18e-08 9.52e-06  2.38e+03     0s
+   4   5.79121539e+02 -4.65527946e+02  7.11e-15 1.26e-11  3.48e+02     0s
+   5   1.00029490e+02 -5.22124802e+01  1.78e-15 1.13e-12  5.07e+01     0s
+   6   2.22151770e+01  7.22920657e-01  6.66e-16 3.97e-13  7.16e+00     0s
+   7   8.33577154e+00  5.88066948e+00  4.44e-16 1.16e-13  8.18e-01     0s
+   8   6.15823710e+00  6.07969359e+00  4.44e-16 1.38e-14  2.62e-02     0s
+   9   6.08007745e+00  6.07999936e+00  2.46e-14 9.08e-11  2.60e-05     0s
+  10   6.07999944e+00  6.07999936e+00  2.04e-14 1.14e-11  2.61e-08     0s
+  11   6.07999936e+00  6.07999936e+00  2.22e-16 1.15e-14  2.61e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 6.07999936e+00
+
+
+ =========optEdgEdge staticEdge 0deforming Edge2
+r01 = (0, 1,0)
+s01 = (1, 0,0)
+s02 = (0, 0,1)
+s03 = (0, 1,0)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69533381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.45876188e+05 -3.44155127e+05  5.30e-10 1.00e-03  1.15e+05     0s
+   2   5.08788665e+04 -5.02184672e+04  1.14e-13 1.00e-09  1.68e+04     0s
+   3   7.53293225e+03 -7.27855591e+03  7.11e-15 4.35e-14  2.47e+03     0s
+   4   1.13432713e+03 -1.03536619e+03  1.78e-14 2.49e-14  3.62e+02     0s
+   5   1.78515455e+02 -1.39021169e+02  6.22e-15 7.11e-15  5.29e+01     0s
+   6   3.14885604e+01 -1.46913318e+01  2.66e-15 1.05e-15  7.70e+00     0s
+   7   7.35753114e+00  9.17427886e-01  5.55e-16 8.88e-16  1.07e+00     0s
+   8   3.03556687e+00  2.34766574e+00  1.39e-16 4.44e-16  1.15e-01     0s
+   9   2.41151503e+00  2.39378158e+00  6.07e-17 4.44e-16  2.96e-03     0s
+  10   2.40125048e+00  2.39861368e+00  1.41e-18 1.78e-15  4.39e-04     0s
+  11   2.40007368e+00  2.39996804e+00  1.36e-19 1.78e-15  1.76e-05     0s
+  12   2.39999879e+00  2.39999868e+00  2.08e-19 1.78e-15  1.81e-08     0s
+  13   2.39999871e+00  2.39999871e+00  5.04e-20 1.78e-15  1.82e-11     0s
+
+Barrier solved model in 13 iterations and 0.02 seconds
+Optimal objective 2.39999871e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 0deforming Edge3
+r01 = (-0.5, 0.5,1)
+s01 = (1, 0,0)
+s02 = (0, 0,1)
+s03 = (0, 1,0)
+
+
+
+
+[FASLE]: 1. Normal not decided
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999974e+00  9.69999981e+00  8.94e-01 3.50e+00  1.00e+06     0s
+   1   7.21020027e+04 -7.15218607e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.46181892e+04 -2.41265450e+04  4.13e-08 9.37e-05  1.62e+04     0s
+   3   3.66685276e+03 -3.47500291e+03  1.01e-08 9.53e-06  2.38e+03     0s
+   4   5.61399839e+02 -4.84734679e+02  1.24e-14 1.26e-11  3.49e+02     0s
+   5   9.26892360e+01 -6.02377564e+01  1.78e-15 1.14e-12  5.10e+01     0s
+   6   1.88041635e+01 -3.22665689e+00  8.88e-16 4.20e-13  7.34e+00     0s
+   7   6.12632422e+00  3.25034454e+00  2.22e-16 1.42e-13  9.59e-01     0s
+   8   3.88020509e+00  3.67552283e+00  4.44e-16 3.06e-14  6.82e-02     0s
+   9   3.68071574e+00  3.67999814e+00  1.19e-12 2.03e-09  2.39e-04     0s
+  10   3.67999893e+00  3.67999822e+00  7.42e-14 2.14e-10  2.39e-07     0s
+  11   3.67999822e+00  3.67999822e+00  4.44e-16 2.14e-13  2.40e-10     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.67999822e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999985e+00  9.69999981e+00  4.47e-01 3.50e+00  1.00e+06     0s
+   1   7.23357440e+04 -7.13002673e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.47185473e+04 -2.39846050e+04  1.80e-08 9.42e-05  1.62e+04     0s
+   3   3.71032904e+03 -3.42483601e+03  1.18e-08 9.52e-06  2.38e+03     0s
+   4   5.79121539e+02 -4.65527946e+02  7.11e-15 1.26e-11  3.48e+02     0s
+   5   1.00029490e+02 -5.22124802e+01  1.78e-15 1.13e-12  5.07e+01     0s
+   6   2.22151770e+01  7.22920657e-01  6.66e-16 3.97e-13  7.16e+00     0s
+   7   8.33577154e+00  5.88066948e+00  4.44e-16 1.16e-13  8.18e-01     0s
+   8   6.15823710e+00  6.07969359e+00  4.44e-16 1.38e-14  2.62e-02     0s
+   9   6.08007745e+00  6.07999936e+00  2.46e-14 9.08e-11  2.60e-05     0s
+  10   6.07999944e+00  6.07999936e+00  2.04e-14 1.14e-11  2.61e-08     0s
+  11   6.07999936e+00  6.07999936e+00  2.22e-16 1.15e-14  2.61e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 6.07999936e+00
+
+
+ =========optEdgEdge staticEdge 0deforming Edge4
+r01 = (-1, 1,0)
+s01 = (1, 0,0)
+s02 = (0, 0,1)
+s03 = (0, 1,0)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69533381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.45876188e+05 -3.44155127e+05  5.30e-10 1.00e-03  1.15e+05     0s
+   2   5.08788665e+04 -5.02184672e+04  1.14e-13 1.00e-09  1.68e+04     0s
+   3   7.53293225e+03 -7.27855591e+03  7.11e-15 4.35e-14  2.47e+03     0s
+   4   1.13432713e+03 -1.03536619e+03  1.78e-14 2.49e-14  3.62e+02     0s
+   5   1.78515455e+02 -1.39021169e+02  6.22e-15 7.11e-15  5.29e+01     0s
+   6   3.14885604e+01 -1.46913318e+01  2.66e-15 1.05e-15  7.70e+00     0s
+   7   7.35753114e+00  9.17427886e-01  5.55e-16 8.88e-16  1.07e+00     0s
+   8   3.03556687e+00  2.34766574e+00  1.39e-16 4.44e-16  1.15e-01     0s
+   9   2.41151503e+00  2.39378158e+00  6.07e-17 4.44e-16  2.96e-03     0s
+  10   2.40125048e+00  2.39861368e+00  1.41e-18 1.78e-15  4.39e-04     0s
+  11   2.40007368e+00  2.39996804e+00  1.36e-19 1.78e-15  1.76e-05     0s
+  12   2.39999879e+00  2.39999868e+00  2.08e-19 1.78e-15  1.81e-08     0s
+  13   2.39999871e+00  2.39999871e+00  5.04e-20 1.78e-15  1.82e-11     0s
+
+Barrier solved model in 13 iterations and 0.02 seconds
+Optimal objective 2.39999871e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 0deforming Edge5
+r01 = (-0.5, 0.5,-1)
+s01 = (1, 0,0)
+s02 = (0, 0,1)
+s03 = (0, 1,0)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.21183747e+04 -7.14969906e+04  7.51e+01 2.66e-01  1.18e+05     0s
+   2   2.46692134e+04 -2.40925327e+04  3.68e-08 9.42e-05  1.63e+04     0s
+   3   3.68544921e+03 -3.45896826e+03  5.37e-09 9.53e-06  2.38e+03     0s
+   4   5.69129685e+02 -4.77326564e+02  7.99e-15 1.26e-11  3.49e+02     0s
+   5   9.64699568e+01 -5.64042769e+01  2.66e-15 1.13e-12  5.10e+01     0s
+   6   2.11171014e+01 -7.89563764e-01  1.33e-15 3.98e-13  7.30e+00     0s
+   7   7.94564371e+00  5.19691382e+00  3.33e-16 1.17e-13  9.16e-01     0s
+   8   5.66570107e+00  5.51847266e+00  1.39e-16 1.64e-14  4.91e-02     0s
+   9   5.52014362e+00  5.51999944e+00  5.67e-13 3.85e-10  4.81e-05     0s
+  10   5.51999958e+00  5.51999944e+00  2.81e-14 1.97e-11  4.81e-08     0s
+  11   5.51999944e+00  5.51999944e+00  1.11e-16 2.00e-14  4.82e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 5.51999944e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 1deforming Edge0
+r01 = (1, 0,0)
+s01 = (0, 0,1)
+s02 = (1, 0,0)
+s03 = (0, 1,0)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69408381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.46158793e+05 -3.43932587e+05  5.15e-10 1.00e-03  1.15e+05     0s
+   2   5.09801535e+04 -5.01257516e+04  8.53e-14 1.00e-09  1.69e+04     0s
+   3   7.57092659e+03 -7.24160688e+03  2.13e-14 5.68e-14  2.47e+03     0s
+   4   1.14899762e+03 -1.02064489e+03  1.42e-14 7.11e-15  3.62e+02     0s
+   5   1.84401858e+02 -1.32925521e+02  3.55e-15 7.11e-15  5.29e+01     0s
+   6   3.40610089e+01 -1.18879571e+01  1.78e-15 4.27e-15  7.66e+00     0s
+   7   8.74245428e+00  2.52492685e+00  8.88e-16 1.44e-15  1.04e+00     0s
+   8   4.16345628e+00  3.62383904e+00  2.22e-16 8.12e-16  8.99e-02     0s
+   9   3.65325115e+00  3.64233276e+00  1.11e-16 8.88e-16  1.82e-03     0s
+  10   3.65111937e+00  3.64931392e+00  1.11e-16 1.78e-15  3.01e-04     0s
+  11   3.65000143e+00  3.64999522e+00  2.22e-16 4.44e-16  1.03e-06     0s
+  12   3.64999926e+00  3.64999926e+00  2.22e-16 1.78e-15  1.04e-09     0s
+
+Barrier solved model in 12 iterations and 0.03 seconds
+Optimal objective 3.64999926e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 1deforming Edge1
+r01 = (0.5, 0.5,1)
+s01 = (0, 0,1)
+s02 = (1, 0,0)
+s03 = (0, 1,0)
+
+
+
+
+[FASLE]: 1. Normal not decided
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  7.07e-01 3.50e+00  1.00e+06     0s
+   1   7.22157327e+04 -7.13641408e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.46830545e+04 -2.40366483e+04  4.35e-08 7.46e-05  1.62e+04     0s
+   3   3.69495608e+03 -3.44287714e+03  1.15e-08 7.53e-06  2.38e+03     0s
+   4   5.73007143e+02 -4.72218518e+02  1.07e-14 9.95e-12  3.48e+02     0s
+   5   9.76639256e+01 -5.48272885e+01  2.66e-15 9.04e-13  5.08e+01     0s
+   6   2.12752792e+01 -4.09982057e-01  8.88e-16 3.28e-13  7.23e+00     0s
+   7   7.83659157e+00  5.22469145e+00  4.44e-16 1.06e-13  8.71e-01     0s
+   8   5.62007197e+00  5.49890754e+00  8.88e-16 1.82e-14  4.04e-02     0s
+   9   5.50011798e+00  5.49999871e+00  5.78e-13 3.87e-10  3.98e-05     0s
+  10   5.49999883e+00  5.49999871e+00  1.45e-14 1.90e-11  3.98e-08     0s
+  11   5.49999871e+00  5.49999871e+00  4.44e-16 2.00e-14  3.98e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 5.49999871e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  7.07e-01 3.50e+00  1.00e+06     0s
+   1   7.22157327e+04 -7.13641408e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.46830545e+04 -2.40366483e+04  4.37e-08 7.46e-05  1.62e+04     0s
+   3   3.69495608e+03 -3.44287714e+03  1.67e-08 7.53e-06  2.38e+03     0s
+   4   5.73007143e+02 -4.72218518e+02  2.13e-14 9.97e-12  3.48e+02     0s
+   5   9.76639256e+01 -5.48272885e+01  1.78e-15 9.04e-13  5.08e+01     0s
+   6   2.12752792e+01 -4.09982057e-01  4.44e-16 3.28e-13  7.23e+00     0s
+   7   7.83659157e+00  5.22469145e+00  2.50e-16 1.06e-13  8.71e-01     0s
+   8   5.62007197e+00  5.49890754e+00  1.11e-16 1.78e-14  4.04e-02     0s
+   9   5.50011798e+00  5.49999871e+00  5.22e-13 3.87e-10  3.98e-05     0s
+  10   5.49999883e+00  5.49999871e+00  1.45e-14 1.90e-11  3.98e-08     0s
+  11   5.49999871e+00  5.49999871e+00  2.22e-16 1.91e-14  3.98e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 5.49999871e+00
+
+
+ =========optEdgEdge staticEdge 1deforming Edge2
+r01 = (0, 1,0)
+s01 = (0, 0,1)
+s02 = (1, 0,0)
+s03 = (0, 1,0)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69408381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.46158793e+05 -3.43932587e+05  5.30e-10 1.00e-03  1.15e+05     0s
+   2   5.09801535e+04 -5.01257516e+04  2.84e-14 1.00e-09  1.69e+04     0s
+   3   7.57092659e+03 -7.24160688e+03  4.26e-14 8.53e-14  2.47e+03     0s
+   4   1.14899762e+03 -1.02064489e+03  1.42e-14 1.42e-14  3.62e+02     0s
+   5   1.84401858e+02 -1.32925521e+02  4.44e-15 6.66e-15  5.29e+01     0s
+   6   3.40610089e+01 -1.18879571e+01  8.88e-16 3.55e-15  7.66e+00     0s
+   7   8.74245428e+00  2.52492685e+00  1.55e-15 8.88e-16  1.04e+00     0s
+   8   4.16345628e+00  3.62383904e+00  1.39e-16 4.44e-16  8.99e-02     0s
+   9   3.65325115e+00  3.64233276e+00  4.22e-17 4.44e-16  1.82e-03     0s
+  10   3.65111937e+00  3.64931392e+00  2.17e-19 1.78e-15  3.01e-04     0s
+  11   3.65000143e+00  3.64999522e+00  2.03e-19 1.78e-15  1.03e-06     0s
+  12   3.64999926e+00  3.64999926e+00  3.03e-19 3.55e-15  1.04e-09     0s
+
+Barrier solved model in 12 iterations and 0.02 seconds
+Optimal objective 3.64999926e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 1deforming Edge3
+r01 = (-0.5, 0.5,1)
+s01 = (0, 0,1)
+s02 = (1, 0,0)
+s03 = (0, 1,0)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.22285679e+04 -7.13447839e+04  7.51e+01 2.66e-01  1.18e+05     0s
+   2   2.47231936e+04 -2.40099178e+04  5.85e-08 7.46e-05  1.62e+04     0s
+   3   3.70946146e+03 -3.43038582e+03  9.66e-09 7.53e-06  2.38e+03     0s
+   4   5.78918568e+02 -4.66553696e+02  1.07e-14 9.92e-12  3.48e+02     0s
+   5   1.00450650e+02 -5.19896242e+01  2.22e-15 8.94e-13  5.08e+01     0s
+   6   2.29011209e+01  1.32734501e+00  6.66e-16 3.08e-13  7.19e+00     0s
+   7   9.08599110e+00  6.58858950e+00  3.33e-16 8.97e-14  8.32e-01     0s
+   8   6.88458607e+00  6.79963433e+00  2.22e-16 1.11e-14  2.83e-02     0s
+   9   6.80008419e+00  6.79999981e+00  5.55e-14 8.36e-11  2.81e-05     0s
+  10   6.79999989e+00  6.79999981e+00  6.35e-15 9.51e-12  2.82e-08     0s
+  11   6.79999981e+00  6.79999981e+00  5.55e-17 9.77e-15  2.82e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 6.79999981e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 1deforming Edge4
+r01 = (-1, 1,0)
+s01 = (0, 0,1)
+s02 = (1, 0,0)
+s03 = (0, 1,0)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.22285700e+04 -7.13447860e+04  7.51e+01 2.66e-01  1.18e+05     0s
+   2   2.47231938e+04 -2.40099180e+04  3.35e-08 7.45e-05  1.62e+04     0s
+   3   3.70946151e+03 -3.43038586e+03  2.38e-08 7.53e-06  2.38e+03     0s
+   4   5.78918574e+02 -4.66553701e+02  2.63e-14 9.93e-12  3.48e+02     0s
+   5   1.00450651e+02 -5.19896249e+01  2.22e-15 8.88e-13  5.08e+01     0s
+   6   2.29011211e+01  1.32734492e+00  8.88e-16 3.12e-13  7.19e+00     0s
+   7   9.08599114e+00  6.58858949e+00  1.67e-16 9.10e-14  8.32e-01     0s
+   8   6.88458607e+00  6.79963433e+00  1.11e-16 1.07e-14  2.83e-02     0s
+   9   6.80008419e+00  6.79999981e+00  1.43e-13 8.36e-11  2.81e-05     0s
+  10   6.79999989e+00  6.79999981e+00  3.75e-15 9.51e-12  2.82e-08     0s
+  11   6.79999981e+00  6.79999981e+00  5.55e-17 9.33e-15  2.82e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 6.79999981e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 1deforming Edge5
+r01 = (-0.5, 0.5,-1)
+s01 = (0, 0,1)
+s02 = (1, 0,0)
+s03 = (0, 1,0)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.22285679e+04 -7.13447839e+04  7.51e+01 2.66e-01  1.18e+05     0s
+   2   2.47231936e+04 -2.40099178e+04  2.38e-08 7.46e-05  1.62e+04     0s
+   3   3.70946146e+03 -3.43038581e+03  2.13e-08 7.53e-06  2.38e+03     0s
+   4   5.78918568e+02 -4.66553696e+02  1.78e-14 9.94e-12  3.48e+02     0s
+   5   1.00450650e+02 -5.19896242e+01  1.33e-15 8.88e-13  5.08e+01     0s
+   6   2.29011209e+01  1.32734501e+00  6.66e-16 3.09e-13  7.19e+00     0s
+   7   9.08599110e+00  6.58858950e+00  2.22e-16 8.97e-14  8.32e-01     0s
+   8   6.88458607e+00  6.79963433e+00  1.11e-16 1.07e-14  2.83e-02     0s
+   9   6.80008419e+00  6.79999981e+00  7.33e-14 8.36e-11  2.81e-05     0s
+  10   6.79999989e+00  6.79999981e+00  1.07e-14 9.51e-12  2.82e-08     0s
+  11   6.79999981e+00  6.79999981e+00  5.55e-17 9.33e-15  2.82e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 6.79999981e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 2deforming Edge0
+r01 = (1, 0,0)
+s01 = (0, 1,0)
+s02 = (1, 0,0)
+s03 = (0, 0,1)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69533381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.45876188e+05 -3.44155127e+05  3.65e-10 1.00e-03  1.15e+05     0s
+   2   5.08788665e+04 -5.02184672e+04  8.53e-14 1.00e-09  1.68e+04     0s
+   3   7.53293225e+03 -7.27855591e+03  4.26e-14 7.11e-14  2.47e+03     0s
+   4   1.13432713e+03 -1.03536619e+03  2.13e-14 2.84e-14  3.62e+02     0s
+   5   1.78515455e+02 -1.39021169e+02  8.88e-15 7.11e-15  5.29e+01     0s
+   6   3.14885604e+01 -1.46913318e+01  8.88e-16 2.66e-15  7.70e+00     0s
+   7   7.35753114e+00  9.17427886e-01  6.66e-16 3.55e-15  1.07e+00     0s
+   8   3.03556687e+00  2.34766574e+00  2.22e-16 5.41e-16  1.15e-01     0s
+   9   2.41151503e+00  2.39378158e+00  1.11e-16 4.44e-16  2.96e-03     0s
+  10   2.40125048e+00  2.39861368e+00  1.11e-16 4.44e-16  4.39e-04     0s
+  11   2.40007368e+00  2.39996804e+00  2.22e-16 4.44e-16  1.76e-05     0s
+  12   2.39999879e+00  2.39999868e+00  2.22e-16 1.78e-15  1.81e-08     0s
+  13   2.39999871e+00  2.39999871e+00  1.11e-16 1.78e-15  1.82e-11     0s
+
+Barrier solved model in 13 iterations and 0.02 seconds
+Optimal objective 2.39999871e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 2deforming Edge1
+r01 = (0.5, 0.5,1)
+s01 = (0, 1,0)
+s02 = (1, 0,0)
+s03 = (0, 0,1)
+
+
+
+
+[FASLE]: 1. Normal not decided
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999985e+00  9.69999981e+00  4.47e-01 3.50e+00  1.00e+06     0s
+   1   7.23357440e+04 -7.13002673e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.47185473e+04 -2.39846050e+04  1.43e-08 9.42e-05  1.62e+04     0s
+   3   3.71032904e+03 -3.42483601e+03  1.50e-08 9.52e-06  2.38e+03     0s
+   4   5.79121539e+02 -4.65527946e+02  1.45e-14 1.26e-11  3.48e+02     0s
+   5   1.00029490e+02 -5.22124802e+01  5.33e-15 1.11e-12  5.07e+01     0s
+   6   2.22151770e+01  7.22920658e-01  4.44e-16 3.93e-13  7.16e+00     0s
+   7   8.33577154e+00  5.88066948e+00  4.44e-16 1.15e-13  8.18e-01     0s
+   8   6.15823710e+00  6.07969359e+00  2.22e-16 1.38e-14  2.62e-02     0s
+   9   6.08007745e+00  6.07999936e+00  4.11e-14 9.08e-11  2.60e-05     0s
+  10   6.07999944e+00  6.07999936e+00  1.23e-14 1.14e-11  2.61e-08     0s
+  11   6.07999936e+00  6.07999936e+00  2.22e-16 1.20e-14  2.61e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 6.07999936e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999973e+00  9.69999981e+00  8.94e-01 3.50e+00  1.00e+06     0s
+   1   7.21020027e+04 -7.15218607e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.46181892e+04 -2.41265450e+04  5.17e-08 9.37e-05  1.62e+04     0s
+   3   3.66685276e+03 -3.47500291e+03  2.44e-08 9.53e-06  2.38e+03     0s
+   4   5.61399839e+02 -4.84734679e+02  2.44e-14 1.26e-11  3.49e+02     0s
+   5   9.26892360e+01 -6.02377564e+01  1.78e-15 1.15e-12  5.10e+01     0s
+   6   1.88041635e+01 -3.22665689e+00  4.44e-16 4.18e-13  7.34e+00     0s
+   7   6.12632422e+00  3.25034454e+00  4.44e-16 1.41e-13  9.59e-01     0s
+   8   3.88020509e+00  3.67552283e+00  4.44e-16 2.98e-14  6.82e-02     0s
+   9   3.68071574e+00  3.67999814e+00  1.33e-12 2.03e-09  2.39e-04     0s
+  10   3.67999893e+00  3.67999822e+00  8.82e-14 2.14e-10  2.39e-07     0s
+  11   3.67999822e+00  3.67999822e+00  4.44e-16 2.13e-13  2.40e-10     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.67999822e+00
+
+
+ =========optEdgEdge staticEdge 2deforming Edge2
+r01 = (0, 1,0)
+s01 = (0, 1,0)
+s02 = (1, 0,0)
+s03 = (0, 0,1)
+r0s0 = (-0.2, -0.2,-0.2)
+s01_length = (1)
+WHAT IS GOING ON
+n = (-0.707107, 0,-0.707107)
+n_cross = (0, 0,0)
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.24727793e+04 -7.13623793e+04  7.49e+01 2.66e-01  1.18e+05     0s
+   2   2.47192138e+04 -2.39797160e+04  1.65e-08 7.46e-05  1.62e+04     0s
+   3   3.71065696e+03 -3.42376144e+03  1.74e-08 7.53e-06  2.38e+03     0s
+   4   5.79023741e+02 -4.65474552e+02  1.71e-14 9.91e-12  3.48e+02     0s
+   5   9.97388735e+01 -5.24697956e+01  2.66e-15 8.85e-13  5.07e+01     0s
+   6   2.18459728e+01  3.62013215e-01  6.66e-16 3.05e-13  7.16e+00     0s
+   7   7.92907829e+00  5.48292363e+00  2.22e-16 8.35e-14  8.15e-01     0s
+   8   5.74893756e+00  5.67475144e+00  2.22e-16 7.99e-15  2.47e-02     0s
+   9   5.67507296e+00  5.67499920e+00  1.61e-13 4.30e-11  2.46e-05     0s
+  10   5.67499928e+00  5.67499920e+00  7.91e-15 6.98e-12  2.46e-08     0s
+  11   5.67499920e+00  5.67499920e+00  2.22e-16 6.66e-15  2.46e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 5.67499920e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999966e+00  9.69999981e+00  7.07e-01 3.50e+00  1.00e+06     0s
+   1   7.20209898e+04 -7.22780412e+04  7.46e+01 2.65e-01  1.18e+05     0s
+   2   2.43640772e+04 -2.44573451e+04  4.92e-08 7.42e-05  1.63e+04     0s
+   3   3.55920308e+03 -3.59407592e+03  9.50e-09 7.54e-06  2.38e+03     0s
+   4   5.17683338e+02 -5.30438177e+02  1.24e-14 9.99e-12  3.49e+02     0s
+   5   7.46006638e+01 -7.89753764e+01  2.66e-15 9.45e-13  5.12e+01     0s
+   6   1.06468808e+01 -1.18464337e+01  8.88e-16 3.63e-13  7.50e+00     0s
+   7   1.64070179e+00 -1.63982075e+00  4.44e-16 1.43e-13  1.09e+00     0s
+   8   4.54370779e-01 -8.11731913e-03  2.22e-16 5.91e-14  1.54e-01     0s
+   9   3.19464782e-01  2.68547019e-01  2.22e-16 2.44e-14  1.70e-02     0s
+  10   3.02166861e-01  2.98144625e-01  1.03e-12 3.48e-09  1.34e-03     0s
+  11   3.00282282e-01  2.99715604e-01  1.16e-12 4.26e-09  1.89e-04     0s
+  12   3.00038295e-01  2.99959052e-01  1.66e-12 1.62e-09  2.64e-05     0s
+  13   3.00004297e-01  2.99993031e-01  8.29e-13 3.10e-09  3.76e-06     0s
+  14   2.99999466e-01  2.99997863e-01  4.77e-13 1.17e-09  5.34e-07     0s
+  15   2.99998779e-01  2.99998551e-01  2.04e-13 4.41e-10  7.60e-08     0s
+  16   2.99998681e-01  2.99998649e-01  6.51e-14 1.66e-10  1.08e-08     0s
+  17   2.99998667e-01  2.99998663e-01  3.46e-14 6.09e-11  1.54e-09     0s
+
+Barrier solved model in 17 iterations and 0.02 seconds
+Optimal objective 2.99998667e-01
+
+
+ =========optEdgEdge staticEdge 2deforming Edge3
+r01 = (-0.5, 0.5,1)
+s01 = (0, 1,0)
+s02 = (1, 0,0)
+s03 = (0, 0,1)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.21183747e+04 -7.14969906e+04  7.51e+01 2.66e-01  1.18e+05     0s
+   2   2.46692134e+04 -2.40925327e+04  4.33e-08 9.42e-05  1.63e+04     0s
+   3   3.68544921e+03 -3.45896826e+03  1.56e-08 9.53e-06  2.38e+03     0s
+   4   5.69129685e+02 -4.77326564e+02  9.99e-15 1.26e-11  3.49e+02     0s
+   5   9.64699568e+01 -5.64042769e+01  1.78e-15 1.12e-12  5.10e+01     0s
+   6   2.11171014e+01 -7.89563764e-01  1.11e-15 3.99e-13  7.30e+00     0s
+   7   7.94564371e+00  5.19691382e+00  2.22e-16 1.18e-13  9.16e-01     0s
+   8   5.66570107e+00  5.51847266e+00  1.11e-16 1.60e-14  4.91e-02     0s
+   9   5.52014362e+00  5.51999944e+00  8.73e-13 3.85e-10  4.81e-05     0s
+  10   5.51999958e+00  5.51999944e+00  1.24e-14 1.97e-11  4.81e-08     0s
+  11   5.51999944e+00  5.51999944e+00  5.55e-17 2.00e-14  4.82e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 5.51999944e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 2deforming Edge4
+r01 = (-1, 1,0)
+s01 = (0, 1,0)
+s02 = (1, 0,0)
+s03 = (0, 0,1)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69533381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.45876188e+05 -3.44155127e+05  5.30e-10 1.00e-03  1.15e+05     0s
+   2   5.08788665e+04 -5.02184672e+04  1.14e-13 1.00e-09  1.68e+04     0s
+   3   7.53293225e+03 -7.27855591e+03  7.11e-15 4.35e-14  2.47e+03     0s
+   4   1.13432713e+03 -1.03536619e+03  1.78e-14 2.49e-14  3.62e+02     0s
+   5   1.78515455e+02 -1.39021169e+02  6.22e-15 7.11e-15  5.29e+01     0s
+   6   3.14885604e+01 -1.46913318e+01  2.66e-15 1.05e-15  7.70e+00     0s
+   7   7.35753114e+00  9.17427886e-01  5.55e-16 8.88e-16  1.07e+00     0s
+   8   3.03556687e+00  2.34766574e+00  1.39e-16 4.44e-16  1.15e-01     0s
+   9   2.41151503e+00  2.39378158e+00  6.07e-17 4.44e-16  2.96e-03     0s
+  10   2.40125048e+00  2.39861368e+00  1.41e-18 1.78e-15  4.39e-04     0s
+  11   2.40007368e+00  2.39996804e+00  1.36e-19 1.78e-15  1.76e-05     0s
+  12   2.39999879e+00  2.39999868e+00  2.08e-19 1.78e-15  1.81e-08     0s
+  13   2.39999871e+00  2.39999871e+00  5.04e-20 1.78e-15  1.82e-11     0s
+
+Barrier solved model in 13 iterations and 0.02 seconds
+Optimal objective 2.39999871e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 2deforming Edge5
+r01 = (-0.5, 0.5,-1)
+s01 = (0, 1,0)
+s02 = (1, 0,0)
+s03 = (0, 0,1)
+
+
+
+
+[FASLE]: 1. Normal not decided
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999974e+00  9.69999981e+00  8.94e-01 3.50e+00  1.00e+06     0s
+   1   7.21020027e+04 -7.15218607e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.46181892e+04 -2.41265450e+04  2.98e-08 9.37e-05  1.62e+04     0s
+   3   3.66685276e+03 -3.47500291e+03  8.44e-09 9.53e-06  2.38e+03     0s
+   4   5.61399839e+02 -4.84734679e+02  7.11e-15 1.26e-11  3.49e+02     0s
+   5   9.26892360e+01 -6.02377564e+01  2.66e-15 1.15e-12  5.10e+01     0s
+   6   1.88041635e+01 -3.22665689e+00  9.99e-16 4.17e-13  7.34e+00     0s
+   7   6.12632422e+00  3.25034454e+00  1.39e-16 1.39e-13  9.59e-01     0s
+   8   3.88020509e+00  3.67552283e+00  2.22e-16 3.06e-14  6.82e-02     0s
+   9   3.68071574e+00  3.67999814e+00  3.27e-12 2.03e-09  2.39e-04     0s
+  10   3.67999893e+00  3.67999822e+00  7.62e-14 2.14e-10  2.39e-07     0s
+  11   3.67999822e+00  3.67999822e+00  4.58e-16 2.14e-13  2.40e-10     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.67999822e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999985e+00  9.69999981e+00  4.47e-01 3.50e+00  1.00e+06     0s
+   1   7.23357440e+04 -7.13002673e+04  7.50e+01 2.66e-01  1.18e+05     0s
+   2   2.47185473e+04 -2.39846050e+04  3.18e-08 9.42e-05  1.62e+04     0s
+   3   3.71032904e+03 -3.42483601e+03  5.97e-09 9.52e-06  2.38e+03     0s
+   4   5.79121539e+02 -4.65527946e+02  1.07e-14 1.26e-11  3.48e+02     0s
+   5   1.00029490e+02 -5.22124802e+01  1.33e-15 1.13e-12  5.07e+01     0s
+   6   2.22151770e+01  7.22920657e-01  8.88e-16 3.95e-13  7.16e+00     0s
+   7   8.33577154e+00  5.88066948e+00  4.44e-16 1.15e-13  8.18e-01     0s
+   8   6.15823710e+00  6.07969359e+00  5.55e-17 1.33e-14  2.62e-02     0s
+   9   6.08007745e+00  6.07999936e+00  6.57e-14 9.08e-11  2.60e-05     0s
+  10   6.07999944e+00  6.07999936e+00  5.72e-15 1.14e-11  2.61e-08     0s
+  11   6.07999936e+00  6.07999936e+00  5.55e-17 1.15e-14  2.61e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 6.07999936e+00
+
+
+ =========optEdgEdge staticEdge 3deforming Edge0
+r01 = (1, 0,0)
+s01 = (-1, 0,1)
+s02 = (-1, 0,0)
+s03 = (-1, 1,0)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69408381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.46158793e+05 -3.43932587e+05  5.15e-10 1.00e-03  1.15e+05     0s
+   2   5.09801535e+04 -5.01257516e+04  8.53e-14 1.00e-09  1.69e+04     0s
+   3   7.57092659e+03 -7.24160688e+03  2.13e-14 5.68e-14  2.47e+03     0s
+   4   1.14899762e+03 -1.02064489e+03  1.42e-14 7.11e-15  3.62e+02     0s
+   5   1.84401858e+02 -1.32925521e+02  3.55e-15 7.11e-15  5.29e+01     0s
+   6   3.40610089e+01 -1.18879571e+01  1.78e-15 4.27e-15  7.66e+00     0s
+   7   8.74245428e+00  2.52492685e+00  8.88e-16 1.44e-15  1.04e+00     0s
+   8   4.16345628e+00  3.62383904e+00  2.22e-16 8.12e-16  8.99e-02     0s
+   9   3.65325115e+00  3.64233276e+00  1.11e-16 8.88e-16  1.82e-03     0s
+  10   3.65111937e+00  3.64931392e+00  1.11e-16 1.78e-15  3.01e-04     0s
+  11   3.65000143e+00  3.64999522e+00  2.22e-16 4.44e-16  1.03e-06     0s
+  12   3.64999926e+00  3.64999926e+00  2.22e-16 1.78e-15  1.04e-09     0s
+
+Barrier solved model in 12 iterations and 0.02 seconds
+Optimal objective 3.64999926e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 3deforming Edge1
+r01 = (0.5, 0.5,1)
+s01 = (-1, 0,1)
+s02 = (-1, 0,0)
+s03 = (-1, 1,0)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [3e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999983e+00  9.69999981e+00  3.02e-01 3.50e+00  1.00e+06     0s
+   1   7.23168227e+04 -7.16181248e+04  7.49e+01 2.66e-01  1.18e+05     0s
+   2   2.46146008e+04 -2.41207026e+04  2.32e-08 9.54e-05  1.62e+04     0s
+   3   3.66584713e+03 -3.47437334e+03  1.36e-08 9.64e-06  2.38e+03     0s
+   4   5.60664617e+02 -4.85128562e+02  1.07e-14 1.28e-11  3.49e+02     0s
+   5   9.19838932e+01 -6.08485155e+01  2.00e-15 1.17e-12  5.09e+01     0s
+   6   1.81176938e+01 -3.87855858e+00  1.33e-15 4.36e-13  7.33e+00     0s
+   7   5.46489348e+00  2.59979670e+00  4.44e-16 1.47e-13  9.55e-01     0s
+   8   3.23880593e+00  3.03131776e+00  1.11e-16 3.46e-14  6.92e-02     0s
+   9   3.03726342e+00  3.03636250e+00  4.12e-12 2.56e-09  3.00e-04     0s
+  10   3.03636354e+00  3.03636264e+00  2.21e-13 3.07e-10  3.00e-07     0s
+  11   3.03636264e+00  3.03636264e+00  2.22e-16 3.07e-13  3.01e-10     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.03636264e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 3deforming Edge2
+r01 = (0, 1,0)
+s01 = (-1, 0,1)
+s02 = (-1, 0,0)
+s03 = (-1, 1,0)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999966e+00  9.69999981e+00  7.07e-01 3.50e+00  1.00e+06     0s
+   1   7.20209898e+04 -7.22780412e+04  7.46e+01 2.65e-01  1.18e+05     0s
+   2   2.43640772e+04 -2.44573451e+04  4.92e-08 7.42e-05  1.63e+04     0s
+   3   3.55920308e+03 -3.59407592e+03  9.50e-09 7.54e-06  2.38e+03     0s
+   4   5.17683338e+02 -5.30438177e+02  1.24e-14 9.99e-12  3.49e+02     0s
+   5   7.46006638e+01 -7.89753764e+01  2.66e-15 9.45e-13  5.12e+01     0s
+   6   1.06468808e+01 -1.18464337e+01  8.88e-16 3.63e-13  7.50e+00     0s
+   7   1.64070179e+00 -1.63982075e+00  4.44e-16 1.43e-13  1.09e+00     0s
+   8   4.54370779e-01 -8.11731913e-03  2.22e-16 5.91e-14  1.54e-01     0s
+   9   3.19464782e-01  2.68547019e-01  2.22e-16 2.44e-14  1.70e-02     0s
+  10   3.02166861e-01  2.98144625e-01  1.03e-12 3.48e-09  1.34e-03     0s
+  11   3.00282282e-01  2.99715604e-01  1.16e-12 4.26e-09  1.89e-04     0s
+  12   3.00038295e-01  2.99959052e-01  1.66e-12 1.62e-09  2.64e-05     0s
+  13   3.00004297e-01  2.99993031e-01  8.29e-13 3.10e-09  3.76e-06     0s
+  14   2.99999466e-01  2.99997863e-01  4.77e-13 1.17e-09  5.34e-07     0s
+  15   2.99998779e-01  2.99998551e-01  2.04e-13 4.41e-10  7.60e-08     0s
+  16   2.99998681e-01  2.99998649e-01  6.51e-14 1.66e-10  1.08e-08     0s
+  17   2.99998667e-01  2.99998663e-01  3.46e-14 6.09e-11  1.54e-09     0s
+
+Barrier solved model in 17 iterations and 0.02 seconds
+Optimal objective 2.99998667e-01
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 3deforming Edge3
+r01 = (-0.5, 0.5,1)
+s01 = (-1, 0,1)
+s02 = (-1, 0,0)
+s03 = (-1, 1,0)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [6e-01, 6e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-01, 6e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999966e+00  9.69999981e+00  5.77e-01 3.50e+00  1.00e+06     0s
+   1   7.23931379e+04 -7.17767484e+04  7.47e+01 2.65e-01  1.18e+05     0s
+   2   2.45478142e+04 -2.41825423e+04  5.16e-08 6.10e-05  1.62e+04     0s
+   3   3.64005293e+03 -3.49939396e+03  7.79e-09 6.15e-06  2.38e+03     0s
+   4   5.50275088e+02 -4.95515965e+02  7.99e-15 8.13e-12  3.49e+02     0s
+   5   8.74617924e+01 -6.55381379e+01  8.88e-16 7.41e-13  5.10e+01     0s
+   6   1.58066775e+01 -6.39557970e+00  6.66e-16 2.73e-13  7.40e+00     0s
+   7   3.89556482e+00  8.43298036e-01  3.33e-16 9.41e-14  1.02e+00     0s
+   8   1.74924800e+00  1.45217624e+00  4.44e-16 2.53e-14  9.90e-02     0s
+   9   1.47090721e+00  1.46666115e+00  6.53e-12 3.86e-09  1.42e-03     0s
+  10   1.46666947e+00  1.46666523e+00  1.91e-12 9.11e-10  1.41e-06     0s
+  11   1.46666524e+00  1.46666523e+00  1.78e-15 9.13e-13  1.41e-09     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 1.46666524e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 3deforming Edge4
+r01 = (-1, 1,0)
+s01 = (-1, 0,1)
+s02 = (-1, 0,0)
+s03 = (-1, 1,0)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [6e-01, 6e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-01, 6e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999956e+00  9.69999981e+00  5.77e-01 3.50e+00  1.00e+06     0s
+   1   7.22038517e+04 -7.26179403e+04  7.43e+01 2.64e-01  1.18e+05     0s
+   2   2.42560521e+04 -2.45680487e+04  6.12e-08 6.06e-05  1.63e+04     0s
+   3   3.51727132e+03 -3.63582346e+03  3.72e-08 6.16e-06  2.38e+03     0s
+   4   5.01721872e+02 -5.46051952e+02  3.22e-14 8.19e-12  3.49e+02     0s
+   5   6.87115361e+01 -8.45843197e+01  1.33e-15 7.85e-13  5.11e+01     0s
+   6   8.62467429e+00 -1.36296392e+01  4.44e-16 3.16e-13  7.42e+00     0s
+   7   1.04752245e+00 -2.01314929e+00  4.44e-16 1.31e-13  1.02e+00     0s
+   8   2.75933639e-01 -2.04472876e-02  2.22e-16 5.46e-14  9.88e-02     0s
+   9   1.27909082e-01  6.62271556e-02  2.22e-16 2.49e-14  2.06e-02     0s
+  10   1.11576807e-01  1.11051150e-01  8.65e-13 1.96e-09  1.75e-04     0s
+  11   1.11110290e-01  1.11109765e-01  2.43e-13 4.70e-10  1.75e-07     0s
+  12   1.11109824e-01  1.11109824e-01  2.22e-16 4.70e-13  1.75e-10     0s
+
+Barrier solved model in 12 iterations and 0.02 seconds
+Optimal objective 1.11109824e-01
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 3deforming Edge5
+r01 = (-0.5, 0.5,-1)
+s01 = (-1, 0,1)
+s02 = (-1, 0,0)
+s03 = (-1, 1,0)
+
+
+
+
+[FASLE]: 1. Normal not decided
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [3e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999935e+00  9.69999981e+00  9.05e-01 3.50e+00  9.99e+05     0s
+   1   7.23275924e+04 -7.20323847e+04  7.45e+01 2.64e-01  1.18e+05     0s
+   2   2.44438050e+04 -2.43085767e+04  5.57e-08 9.49e-05  1.63e+04     0s
+   3   3.59729393e+03 -3.54546949e+03  1.19e-08 9.63e-06  2.38e+03     0s
+   4   5.33247325e+02 -5.13179343e+02  1.03e-14 1.28e-11  3.49e+02     0s
+   5   8.06196528e+01 -7.26439421e+01  8.88e-16 1.17e-12  5.11e+01     0s
+   6   1.28949198e+01 -9.52180461e+00  8.88e-16 4.38e-13  7.47e+00     0s
+   7   2.43942593e+00 -8.12215892e-01  4.44e-16 1.62e-13  1.08e+00     0s
+   8   7.13627421e-01  2.65663594e-01  4.44e-16 5.73e-14  1.49e-01     0s
+   9   4.06428218e-01  3.60801869e-01  2.22e-16 1.60e-14  1.52e-02     0s
+  10   3.64615592e-01  3.63632807e-01  3.62e-12 3.16e-09  3.28e-04     0s
+  11   3.63635921e-01  3.63634939e-01  7.28e-13 9.79e-10  3.27e-07     0s
+  12   3.63634941e-01  3.63634940e-01  8.88e-16 9.82e-13  3.27e-10     0s
+
+Barrier solved model in 12 iterations and 0.02 seconds
+Optimal objective 3.63634941e-01
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [3e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.21494237e+04 -7.13537286e+04  7.52e+01 2.67e-01  1.18e+05     0s
+   2   2.47195586e+04 -2.40258918e+04  2.76e-08 9.53e-05  1.62e+04     0s
+   3   3.70712684e+03 -3.43469545e+03  8.48e-09 9.63e-06  2.38e+03     0s
+   4   5.78203749e+02 -4.67650192e+02  6.22e-15 1.27e-11  3.49e+02     0s
+   5   1.00499124e+02 -5.20605317e+01  1.78e-15 1.12e-12  5.09e+01     0s
+   6   2.32404247e+01  1.59992239e+00  1.11e-15 3.92e-13  7.21e+00     0s
+   7   9.49630283e+00  6.95892490e+00  2.71e-16 1.09e-13  8.46e-01     0s
+   8   7.27241779e+00  7.18139819e+00  3.33e-16 1.20e-14  3.03e-02     0s
+   9   7.18190839e+00  7.18181811e+00  1.14e-13 1.03e-10  3.01e-05     0s
+  10   7.18181820e+00  7.18181811e+00  6.11e-15 1.16e-11  3.01e-08     0s
+  11   7.18181811e+00  7.18181811e+00  1.11e-16 1.15e-14  3.02e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 7.18181811e+00
+
+
+ =========optEdgEdge staticEdge 4deforming Edge0
+r01 = (1, 0,0)
+s01 = (-1, 1,0)
+s02 = (-1, 0,0)
+s03 = (-1, 0,1)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69533381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.45876188e+05 -3.44155127e+05  3.65e-10 1.00e-03  1.15e+05     0s
+   2   5.08788665e+04 -5.02184672e+04  8.53e-14 1.00e-09  1.68e+04     0s
+   3   7.53293225e+03 -7.27855591e+03  4.26e-14 7.11e-14  2.47e+03     0s
+   4   1.13432713e+03 -1.03536619e+03  2.13e-14 2.84e-14  3.62e+02     0s
+   5   1.78515455e+02 -1.39021169e+02  8.88e-15 7.11e-15  5.29e+01     0s
+   6   3.14885604e+01 -1.46913318e+01  8.88e-16 2.66e-15  7.70e+00     0s
+   7   7.35753114e+00  9.17427886e-01  6.66e-16 3.55e-15  1.07e+00     0s
+   8   3.03556687e+00  2.34766574e+00  2.22e-16 5.41e-16  1.15e-01     0s
+   9   2.41151503e+00  2.39378158e+00  1.11e-16 4.44e-16  2.96e-03     0s
+  10   2.40125048e+00  2.39861368e+00  1.11e-16 4.44e-16  4.39e-04     0s
+  11   2.40007368e+00  2.39996804e+00  2.22e-16 4.44e-16  1.76e-05     0s
+  12   2.39999879e+00  2.39999868e+00  2.22e-16 1.78e-15  1.81e-08     0s
+  13   2.39999871e+00  2.39999871e+00  1.11e-16 1.78e-15  1.82e-11     0s
+
+Barrier solved model in 13 iterations and 0.02 seconds
+Optimal objective 2.39999871e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 4deforming Edge1
+r01 = (0.5, 0.5,1)
+s01 = (-1, 1,0)
+s02 = (-1, 0,0)
+s03 = (-1, 0,1)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [6e-01, 6e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-01, 6e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999975e+00  9.69999981e+00  5.77e-01 3.50e+00  1.00e+06     0s
+   1   7.21015267e+04 -7.20471143e+04  7.47e+01 2.65e-01  1.18e+05     0s
+   2   2.44506589e+04 -2.43439028e+04  6.22e-08 6.09e-05  1.63e+04     0s
+   3   3.59556050e+03 -3.55379850e+03  4.35e-08 6.15e-06  2.38e+03     0s
+   4   5.32090383e+02 -5.15460751e+02  4.49e-14 8.15e-12  3.49e+02     0s
+   5   8.02042691e+01 -7.32880405e+01  1.78e-15 7.59e-13  5.12e+01     0s
+   6   1.28218993e+01 -9.65756451e+00  4.44e-16 2.82e-13  7.49e+00     0s
+   7   2.49764805e+00 -7.79263296e-01  4.44e-16 1.04e-13  1.09e+00     0s
+   8   8.15436973e-01  3.53620322e-01  4.44e-16 3.55e-14  1.54e-01     0s
+   9   5.14773648e-01  4.62631067e-01  2.22e-16 9.77e-15  1.74e-02     0s
+  10   4.68214163e-01  4.66660091e-01  9.45e-12 2.09e-09  5.18e-04     0s
+  11   4.66666733e-01  4.66665187e-01  3.59e-12 7.42e-10  5.15e-07     0s
+  12   4.66665190e-01  4.66665188e-01  3.22e-15 7.43e-13  5.15e-10     0s
+
+Barrier solved model in 12 iterations and 0.02 seconds
+Optimal objective 4.66665190e-01
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 4deforming Edge2
+r01 = (0, 1,0)
+s01 = (-1, 1,0)
+s02 = (-1, 0,0)
+s03 = (-1, 0,1)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69533381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.45876188e+05 -3.44155127e+05  5.30e-10 1.00e-03  1.15e+05     0s
+   2   5.08788665e+04 -5.02184672e+04  1.14e-13 1.00e-09  1.68e+04     0s
+   3   7.53293225e+03 -7.27855591e+03  7.11e-15 4.35e-14  2.47e+03     0s
+   4   1.13432713e+03 -1.03536619e+03  1.78e-14 2.49e-14  3.62e+02     0s
+   5   1.78515455e+02 -1.39021169e+02  6.22e-15 7.11e-15  5.29e+01     0s
+   6   3.14885604e+01 -1.46913318e+01  2.66e-15 1.05e-15  7.70e+00     0s
+   7   7.35753114e+00  9.17427886e-01  5.55e-16 8.88e-16  1.07e+00     0s
+   8   3.03556687e+00  2.34766574e+00  1.39e-16 4.44e-16  1.15e-01     0s
+   9   2.41151503e+00  2.39378158e+00  6.07e-17 4.44e-16  2.96e-03     0s
+  10   2.40125048e+00  2.39861368e+00  1.41e-18 1.78e-15  4.39e-04     0s
+  11   2.40007368e+00  2.39996804e+00  1.36e-19 1.78e-15  1.76e-05     0s
+  12   2.39999879e+00  2.39999868e+00  2.08e-19 1.78e-15  1.81e-08     0s
+  13   2.39999871e+00  2.39999871e+00  5.04e-20 1.78e-15  1.82e-11     0s
+
+Barrier solved model in 13 iterations and 0.02 seconds
+Optimal objective 2.39999871e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 4deforming Edge3
+r01 = (-0.5, 0.5,1)
+s01 = (-1, 1,0)
+s02 = (-1, 0,0)
+s03 = (-1, 0,1)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-08, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-08, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999950e+00  9.69999981e+00  7.07e-01 3.50e+00  1.00e+06     0s
+   1   7.22655568e+04 -7.22960785e+04  7.45e+01 2.64e-01  1.18e+05     0s
+   2   2.43612774e+04 -2.44256726e+04  4.79e-08 7.43e-05  1.63e+04     0s
+   3   3.56163232e+03 -3.58621914e+03  4.29e-09 7.54e-06  2.38e+03     0s
+   4   5.18995713e+02 -5.28191424e+02  7.11e-15 9.99e-12  3.49e+02     0s
+   5   7.50684806e+01 -7.83178615e+01  1.78e-15 9.47e-13  5.11e+01     0s
+   6   1.07445056e+01 -1.16995269e+01  4.44e-16 3.61e-13  7.48e+00     0s
+   7   1.59424120e+00 -1.66872155e+00  2.22e-16 1.46e-13  1.09e+00     0s
+   8   3.52627012e-01 -1.00606801e-01  4.44e-16 6.13e-14  1.51e-01     0s
+   9   1.94240282e-01  1.50023609e-01  2.22e-16 2.26e-14  1.47e-02     0s
+  10   1.66968335e-01  1.60993099e-01  2.22e-16 1.78e-14  1.99e-03     0s
+  11   1.66666283e-01  1.66622142e-01  7.56e-12 3.21e-09  1.47e-05     0s
+  12   1.66665390e-01  1.66665346e-01  1.91e-13 1.13e-10  1.47e-08     0s
+  13   1.66665389e-01  1.66665389e-01  2.22e-16 1.14e-13  1.47e-11     0s
+
+Barrier solved model in 13 iterations and 0.02 seconds
+Optimal objective 1.66665389e-01
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 4deforming Edge4
+r01 = (-1, 1,0)
+s01 = (-1, 1,0)
+s02 = (-1, 0,0)
+s03 = (-1, 0,1)
+r0s0 = (-0.2, -0.2,-0.2)
+s01_length = (1.41421)
+WHAT IS GOING ON
+n = (-0.57735, -0.57735,-0.57735)
+n_cross = (0, 0,0)
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [6e-01, 6e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-01, 6e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.23020014e+04 -7.11901342e+04  7.51e+01 2.67e-01  1.18e+05     0s
+   2   2.47779377e+04 -2.39316639e+04  5.02e-08 6.09e-05  1.62e+04     0s
+   3   3.73359036e+03 -3.40243837e+03  2.97e-08 6.15e-06  2.38e+03     0s
+   4   5.89050280e+02 -4.55513001e+02  3.03e-14 8.13e-12  3.48e+02     0s
+   5   1.04937982e+02 -4.70332303e+01  2.66e-15 7.25e-13  5.07e+01     0s
+   6   2.53006282e+01  4.10492226e+00  6.66e-16 2.52e-13  7.07e+00     0s
+   7   1.09665640e+01  8.72767346e+00  2.78e-16 6.97e-14  7.46e-01     0s
+   8   8.91401880e+00  8.86657749e+00  1.11e-16 6.66e-15  1.58e-02     0s
+   9   8.86671380e+00  8.86666648e+00  4.99e-12 4.19e-09  1.58e-05     0s
+  10   8.86666652e+00  8.86666648e+00  4.14e-15 4.19e-12  1.58e-08     0s
+  11   8.86666648e+00  8.86666648e+00  1.11e-16 4.44e-15  1.58e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 8.86666648e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [6e-01, 6e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-01, 6e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999956e+00  9.69999981e+00  5.77e-01 3.50e+00  1.00e+06     0s
+   1   7.22038552e+04 -7.26179437e+04  7.43e+01 2.64e-01  1.18e+05     0s
+   2   2.42560525e+04 -2.45680490e+04  2.36e-08 6.06e-05  1.63e+04     0s
+   3   3.51727139e+03 -3.63582350e+03  1.01e-08 6.16e-06  2.38e+03     0s
+   4   5.01721885e+02 -5.46051956e+02  1.07e-14 8.19e-12  3.49e+02     0s
+   5   6.87115390e+01 -8.45843193e+01  2.22e-15 7.87e-13  5.11e+01     0s
+   6   8.62467497e+00 -1.36296390e+01  4.44e-16 3.14e-13  7.42e+00     0s
+   7   1.04752257e+00 -2.01314931e+00  4.44e-16 1.31e-13  1.02e+00     0s
+   8   2.75933627e-01 -2.04473521e-02  2.22e-16 5.42e-14  9.88e-02     0s
+   9   1.27909116e-01  6.62273330e-02  2.22e-16 2.49e-14  2.06e-02     0s
+  10   1.11576813e-01  1.11051158e-01  6.11e-13 1.96e-09  1.75e-04     0s
+  11   1.11110298e-01  1.11109772e-01  1.22e-13 4.70e-10  1.75e-07     0s
+  12   1.11109832e-01  1.11109831e-01  4.44e-16 4.71e-13  1.75e-10     0s
+
+Barrier solved model in 12 iterations and 0.02 seconds
+Optimal objective 1.11109832e-01
+
+
+ =========optEdgEdge staticEdge 4deforming Edge5
+r01 = (-0.5, 0.5,-1)
+s01 = (-1, 1,0)
+s02 = (-1, 0,0)
+s03 = (-1, 0,1)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [4e-08, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e-08, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999950e+00  9.69999981e+00  7.07e-01 3.50e+00  1.00e+06     0s
+   1   7.22655568e+04 -7.22960785e+04  7.45e+01 2.64e-01  1.18e+05     0s
+   2   2.43612774e+04 -2.44256726e+04  6.08e-08 7.43e-05  1.63e+04     0s
+   3   3.56163232e+03 -3.58621914e+03  1.68e-08 7.54e-06  2.38e+03     0s
+   4   5.18995713e+02 -5.28191424e+02  1.87e-14 1.00e-11  3.49e+02     0s
+   5   7.50684806e+01 -7.83178615e+01  1.78e-15 9.47e-13  5.11e+01     0s
+   6   1.07445056e+01 -1.16995269e+01  4.44e-16 3.62e-13  7.48e+00     0s
+   7   1.59424120e+00 -1.66872155e+00  4.44e-16 1.45e-13  1.09e+00     0s
+   8   3.52627012e-01 -1.00606801e-01  1.11e-16 6.22e-14  1.51e-01     0s
+   9   1.94240282e-01  1.50023609e-01  2.22e-16 2.31e-14  1.47e-02     0s
+  10   1.66968335e-01  1.60993099e-01  2.22e-16 1.73e-14  1.99e-03     0s
+  11   1.66666283e-01  1.66622142e-01  2.35e-12 3.21e-09  1.47e-05     0s
+  12   1.66665390e-01  1.66665346e-01  2.85e-13 1.13e-10  1.47e-08     0s
+  13   1.66665389e-01  1.66665389e-01  2.22e-16 1.14e-13  1.47e-11     0s
+
+Barrier solved model in 13 iterations and 0.02 seconds
+Optimal objective 1.66665389e-01
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 5deforming Edge0
+r01 = (1, 0,0)
+s01 = (0, 1,-1)
+s02 = (0, 0,-1)
+s03 = (1, 0,-1)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 20 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [7e-01, 7e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-01, 7e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 14 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 3.300e+01
+ Factor NZ  : 6.100e+01
+ Factor Ops : 3.990e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999966e+00  9.69999981e+00  7.07e-01 3.50e+00  1.00e+06     0s
+   1   7.20209898e+04 -7.22780412e+04  7.46e+01 2.65e-01  1.18e+05     0s
+   2   2.43640772e+04 -2.44573451e+04  2.23e-08 7.42e-05  1.63e+04     0s
+   3   3.55920308e+03 -3.59407592e+03  9.61e-09 7.54e-06  2.38e+03     0s
+   4   5.17683338e+02 -5.30438177e+02  1.42e-14 9.99e-12  3.49e+02     0s
+   5   7.46006638e+01 -7.89753763e+01  8.88e-16 9.34e-13  5.12e+01     0s
+   6   1.06468808e+01 -1.18464337e+01  4.44e-16 3.61e-13  7.50e+00     0s
+   7   1.64070179e+00 -1.63982075e+00  4.44e-16 1.43e-13  1.09e+00     0s
+   8   4.54370779e-01 -8.11731911e-03  2.22e-16 5.95e-14  1.54e-01     0s
+   9   3.19464782e-01  2.68547019e-01  4.44e-16 2.40e-14  1.70e-02     0s
+  10   3.02166861e-01  2.98144625e-01  1.14e-12 3.48e-09  1.34e-03     0s
+  11   3.00282282e-01  2.99715604e-01  1.28e-12 4.26e-09  1.89e-04     0s
+  12   3.00038295e-01  2.99959052e-01  1.60e-12 1.62e-09  2.64e-05     0s
+  13   3.00004297e-01  2.99993031e-01  1.20e-12 3.10e-09  3.76e-06     0s
+  14   2.99999466e-01  2.99997863e-01  3.86e-13 1.17e-09  5.34e-07     0s
+  15   2.99998779e-01  2.99998551e-01  2.41e-13 4.41e-10  7.60e-08     0s
+  16   2.99998681e-01  2.99998649e-01  6.99e-14 1.66e-10  1.08e-08     0s
+  17   2.99998667e-01  2.99998663e-01  1.29e-14 6.28e-11  1.54e-09     0s
+
+Barrier solved model in 17 iterations and 0.02 seconds
+Optimal objective 2.99998667e-01
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 5deforming Edge1
+r01 = (0.5, 0.5,1)
+s01 = (0, 1,-1)
+s02 = (0, 0,-1)
+s03 = (1, 0,-1)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [3e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999983e+00  9.69999981e+00  3.02e-01 3.50e+00  1.00e+06     0s
+   1   7.23168227e+04 -7.16181248e+04  7.49e+01 2.66e-01  1.18e+05     0s
+   2   2.46146008e+04 -2.41207026e+04  5.35e-08 9.54e-05  1.62e+04     0s
+   3   3.66584713e+03 -3.47437334e+03  1.24e-08 9.64e-06  2.38e+03     0s
+   4   5.60664617e+02 -4.85128562e+02  1.78e-14 1.28e-11  3.49e+02     0s
+   5   9.19838932e+01 -6.08485155e+01  2.66e-15 1.16e-12  5.09e+01     0s
+   6   1.81176938e+01 -3.87855858e+00  1.55e-15 4.32e-13  7.33e+00     0s
+   7   5.46489348e+00  2.59979670e+00  4.44e-16 1.46e-13  9.55e-01     0s
+   8   3.23880593e+00  3.03131776e+00  2.22e-16 3.46e-14  6.92e-02     0s
+   9   3.03726342e+00  3.03636250e+00  3.55e-12 2.56e-09  3.00e-04     0s
+  10   3.03636354e+00  3.03636264e+00  2.36e-13 3.07e-10  3.00e-07     0s
+  11   3.03636264e+00  3.03636264e+00  5.27e-16 3.07e-13  3.01e-10     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 3.03636264e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 5deforming Edge2
+r01 = (0, 1,0)
+s01 = (0, 1,-1)
+s02 = (0, 0,-1)
+s03 = (1, 0,-1)
+
+
+
+
+[true]: 3. normal unchanged
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 10 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 3 rows, 12 columns, 6 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 17
+ AA' NZ     : 2.000e+01
+ Factor NZ  : 3.300e+01
+ Factor Ops : 1.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  5.69408381e+00  6.18e-10 1.00e+03  1.00e+06     0s
+   1   3.46158793e+05 -3.43932587e+05  5.30e-10 1.00e-03  1.15e+05     0s
+   2   5.09801535e+04 -5.01257516e+04  2.84e-14 1.00e-09  1.69e+04     0s
+   3   7.57092659e+03 -7.24160688e+03  4.26e-14 8.53e-14  2.47e+03     0s
+   4   1.14899762e+03 -1.02064489e+03  1.42e-14 1.42e-14  3.62e+02     0s
+   5   1.84401858e+02 -1.32925521e+02  4.44e-15 6.66e-15  5.29e+01     0s
+   6   3.40610089e+01 -1.18879571e+01  8.88e-16 3.55e-15  7.66e+00     0s
+   7   8.74245428e+00  2.52492685e+00  1.55e-15 8.88e-16  1.04e+00     0s
+   8   4.16345628e+00  3.62383904e+00  1.39e-16 4.44e-16  8.99e-02     0s
+   9   3.65325115e+00  3.64233276e+00  4.22e-17 4.44e-16  1.82e-03     0s
+  10   3.65111937e+00  3.64931392e+00  2.17e-19 1.78e-15  3.01e-04     0s
+  11   3.65000143e+00  3.64999522e+00  2.03e-19 1.78e-15  1.03e-06     0s
+  12   3.64999926e+00  3.64999926e+00  3.03e-19 3.55e-15  1.04e-09     0s
+
+Barrier solved model in 12 iterations and 0.02 seconds
+Optimal objective 3.64999926e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 5deforming Edge3
+r01 = (-0.5, 0.5,1)
+s01 = (0, 1,-1)
+s02 = (0, 0,-1)
+s03 = (1, 0,-1)
+
+
+
+
+[FASLE]: 1. Normal not decided
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [3e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.01s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999981e+00  9.69999981e+00  0.00e+00 3.50e+00  1.00e+06     0s
+   1   7.21494238e+04 -7.13537286e+04  7.52e+01 2.67e-01  1.18e+05     0s
+   2   2.47195586e+04 -2.40258918e+04  3.35e-08 9.53e-05  1.62e+04     0s
+   3   3.70712684e+03 -3.43469545e+03  1.93e-08 9.63e-06  2.38e+03     0s
+   4   5.78203749e+02 -4.67650192e+02  1.88e-14 1.27e-11  3.49e+02     0s
+   5   1.00499124e+02 -5.20605317e+01  3.55e-15 1.13e-12  5.09e+01     0s
+   6   2.32404247e+01  1.59992239e+00  6.66e-16 3.88e-13  7.21e+00     0s
+   7   9.49630283e+00  6.95892490e+00  2.22e-16 1.10e-13  8.46e-01     0s
+   8   7.27241779e+00  7.18139819e+00  2.22e-16 1.15e-14  3.03e-02     0s
+   9   7.18190839e+00  7.18181811e+00  1.49e-13 1.03e-10  3.01e-05     0s
+  10   7.18181820e+00  7.18181811e+00  1.70e-14 1.16e-11  3.01e-08     0s
+  11   7.18181811e+00  7.18181811e+00  1.11e-16 1.15e-14  3.02e-11     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 7.18181811e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+-----------------seconde case----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [3e-01, 9e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 9e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999935e+00  9.69999981e+00  9.05e-01 3.50e+00  9.99e+05     0s
+   1   7.23275924e+04 -7.20323847e+04  7.45e+01 2.64e-01  1.18e+05     0s
+   2   2.44438050e+04 -2.43085767e+04  9.42e-08 9.49e-05  1.63e+04     0s
+   3   3.59729393e+03 -3.54546949e+03  1.13e-08 9.63e-06  2.38e+03     0s
+   4   5.33247325e+02 -5.13179343e+02  1.60e-14 1.27e-11  3.49e+02     0s
+   5   8.06196528e+01 -7.26439421e+01  1.78e-15 1.17e-12  5.11e+01     0s
+   6   1.28949198e+01 -9.52180461e+00  8.88e-16 4.37e-13  7.47e+00     0s
+   7   2.43942593e+00 -8.12215892e-01  4.44e-16 1.62e-13  1.08e+00     0s
+   8   7.13627421e-01  2.65663594e-01  2.22e-16 5.68e-14  1.49e-01     0s
+   9   4.06428218e-01  3.60801869e-01  2.22e-16 1.64e-14  1.52e-02     0s
+  10   3.64615592e-01  3.63632807e-01  5.72e-12 3.16e-09  3.28e-04     0s
+  11   3.63635921e-01  3.63634939e-01  1.77e-12 9.79e-10  3.27e-07     0s
+  12   3.63634941e-01  3.63634940e-01  1.22e-15 9.81e-13  3.27e-10     0s
+
+Barrier solved model in 12 iterations and 0.02 seconds
+Optimal objective 3.63634941e-01
+
+
+ =========optEdgEdge staticEdge 5deforming Edge4
+r01 = (-1, 1,0)
+s01 = (0, 1,-1)
+s02 = (0, 0,-1)
+s03 = (1, 0,-1)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [6e-01, 6e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-01, 6e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999956e+00  9.69999981e+00  5.77e-01 3.50e+00  1.00e+06     0s
+   1   7.22038517e+04 -7.26179403e+04  7.43e+01 2.64e-01  1.18e+05     0s
+   2   2.42560521e+04 -2.45680487e+04  6.12e-08 6.06e-05  1.63e+04     0s
+   3   3.51727132e+03 -3.63582346e+03  3.72e-08 6.16e-06  2.38e+03     0s
+   4   5.01721872e+02 -5.46051952e+02  3.22e-14 8.19e-12  3.49e+02     0s
+   5   6.87115361e+01 -8.45843197e+01  1.33e-15 7.85e-13  5.11e+01     0s
+   6   8.62467429e+00 -1.36296392e+01  4.44e-16 3.16e-13  7.42e+00     0s
+   7   1.04752245e+00 -2.01314929e+00  4.44e-16 1.31e-13  1.02e+00     0s
+   8   2.75933639e-01 -2.04472876e-02  2.22e-16 5.46e-14  9.88e-02     0s
+   9   1.27909082e-01  6.62271556e-02  2.22e-16 2.49e-14  2.06e-02     0s
+  10   1.11576807e-01  1.11051150e-01  8.65e-13 1.96e-09  1.75e-04     0s
+  11   1.11110290e-01  1.11109765e-01  2.43e-13 4.70e-10  1.75e-07     0s
+  12   1.11109824e-01  1.11109824e-01  2.22e-16 4.70e-13  1.75e-10     0s
+
+Barrier solved model in 12 iterations and 0.02 seconds
+Optimal objective 1.11109824e-01
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+
+ =========optEdgEdge staticEdge 5deforming Edge5
+r01 = (-0.5, 0.5,-1)
+s01 = (0, 1,-1)
+s02 = (0, 0,-1)
+s03 = (1, 0,-1)
+
+
+
+
+[true]: 2 . normal Inverted
+
+
+
+Academic license - for non-commercial use only
+-----------------0----------------------------------------------------------
+-----------------1----------------------------------------------------------
+----------------2----------------------------------------------------------
+-----------------3----------------------------------------------------------
+-----------------4----------------------------------------------------------
+Optimize a model with 7 rows, 12 columns and 30 nonzeros
+Model has 30 quadratic objective terms
+Coefficient statistics:
+  Matrix range     [6e-01, 6e-01]
+  Objective range  [2e+00, 4e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-01, 6e-01]
+Presolve removed 3 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 12 columns, 21 nonzeros
+Presolved model has 30 quadratic objective terms
+Ordering time: 0.00s
+
+Barrier statistics:
+ Free vars  : 21
+ AA' NZ     : 4.200e+01
+ Factor NZ  : 9.100e+01
+ Factor Ops : 8.190e+02 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.69999966e+00  9.69999981e+00  5.77e-01 3.50e+00  1.00e+06     0s
+   1   7.23931379e+04 -7.17767484e+04  7.47e+01 2.65e-01  1.18e+05     0s
+   2   2.45478142e+04 -2.41825423e+04  5.13e-08 6.10e-05  1.62e+04     0s
+   3   3.64005293e+03 -3.49939396e+03  1.37e-08 6.15e-06  2.38e+03     0s
+   4   5.50275087e+02 -4.95515965e+02  1.78e-14 8.12e-12  3.49e+02     0s
+   5   8.74617924e+01 -6.55381379e+01  2.22e-15 7.46e-13  5.10e+01     0s
+   6   1.58066775e+01 -6.39557969e+00  9.99e-16 2.77e-13  7.40e+00     0s
+   7   3.89556482e+00  8.43298036e-01  4.44e-16 9.41e-14  1.02e+00     0s
+   8   1.74924800e+00  1.45217624e+00  2.22e-16 2.49e-14  9.90e-02     0s
+   9   1.47090721e+00  1.46666115e+00  2.99e-12 3.86e-09  1.42e-03     0s
+  10   1.46666947e+00  1.46666523e+00  1.11e-12 9.11e-10  1.41e-06     0s
+  11   1.46666524e+00  1.46666523e+00  2.22e-15 9.13e-13  1.41e-09     0s
+
+Barrier solved model in 11 iterations and 0.02 seconds
+Optimal objective 1.46666524e+00
+
+-----------------5----------------------------------------------------------
+-----------------6----------------------------------------------------------
+-----------------7----------------------------------------------------------
+***************Index 0
+[Optimization Result]
+Minimum metric vale: 0.033332
+Total Optimization time: 0.0120029
+Separating plane from: 0
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.333333,0.333333,0.333333)
+tetDeformed: p1=(1.16667,0.166667,0.166667)
+tetDeformed: p2=(0.666667,0.666667,1.16667)
+tetDeformed: p3=(0.166667,1.16667,0.166667)
+Separating plane from static tetrahedron face 0:(1,0,0)
+(0,1,0)
+(0,0,1)
+***************Index 1
+[Optimization Result]
+Minimum metric vale: 3.65
+Total Optimization time: 0.0190048
+Separating plane from: 1
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-1.08276e-10,0.2,0.2)
+tetDeformed: p1=(-3.71474e-11,0.2,0.2)
+tetDeformed: p2=(-5.01568e-11,0.7,1.2)
+tetDeformed: p3=(-1.08276e-10,1.2,0.2)
+Separating plane from static tetrahedron face 1:(0,0,0)
+(0,0,1)
+(0,1,0)
+***************Index 2
+[Optimization Result]
+Minimum metric vale: 2.4
+Total Optimization time: 0.0190048
+Separating plane from: 2
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.2,-6.49746e-10)
+tetDeformed: p1=(1.2,0.2,-9.24624e-10)
+tetDeformed: p2=(0.7,0.7,-1.56622e-10)
+tetDeformed: p3=(0.2,1.2,-6.49746e-10)
+Separating plane from static tetrahedron face 2:(0,0,0)
+(0,1,0)
+(1,0,0)
+***************Index 3
+[Optimization Result]
+Minimum metric vale: 3.65
+Total Optimization time: 0.0220051
+Separating plane from: 3
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,-1.19571e-10,0.2)
+tetDeformed: p1=(1.2,-1.77643e-10,0.2)
+tetDeformed: p2=(0.7,-5.6212e-11,1.2)
+tetDeformed: p3=(0.2,-3.01645e-11,0.2)
+Separating plane from static tetrahedron face 3:(0,0,0)
+(1,0,0)
+(0,0,1)
+***************Index 4
+[Optimization Result]
+Minimum metric vale: 6.8
+Total Optimization time: 0.0180054
+Separating plane from: 4
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-8.9014e-09,-8.9014e-09,0.2)
+tetDeformed: p1=(0.5,-0.5,0.2)
+tetDeformed: p2=(-3.58089e-08,-3.58089e-08,1.2)
+tetDeformed: p3=(-0.5,0.5,0.2)
+Separating Plane from deforming tetrahedron face 0:(0.5,-0.5,0.2)
+(-0.5,0.5,0.2)
+(-3.58089e-08,-3.58089e-08,1.2)
+***************Index 5
+[Optimization Result]
+Minimum metric vale: 3.68
+Total Optimization time: 0.019001
+Separating plane from: 5
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.92,0.2,-0.16)
+tetDeformed: p1=(1.12,0.2,0.24)
+tetDeformed: p2=(1.42,0.7,0.84)
+tetDeformed: p3=(0.92,1.2,-0.16)
+Separating Plane from deforming tetrahedron face 1:(0.92,0.2,-0.16)
+(1.42,0.7,0.84)
+(0.92,1.2,-0.16)
+***************Index 6
+[Optimization Result]
+Minimum metric vale: 3.4
+Total Optimization time: 0.0200043
+Separating plane from: 6
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.2,1)
+tetDeformed: p1=(1.2,0.2,1)
+tetDeformed: p2=(0.7,0.7,1)
+tetDeformed: p3=(0.2,1.2,1)
+Separating Plane from deforming tetrahedron face 2:(0.2,0.2,1)
+(0.2,1.2,1)
+(1.2,0.2,1)
+***************Index 7
+[Optimization Result]
+Minimum metric vale: 3.68
+Total Optimization time: 0.0190048
+Separating plane from: 7
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.92,-0.16)
+tetDeformed: p1=(1.2,0.92,-0.16)
+tetDeformed: p2=(0.7,1.42,0.84)
+tetDeformed: p3=(0.2,1.12,0.24)
+Separating Plane from deforming tetrahedron face 3:(0.2,0.92,-0.16)
+(1.2,0.92,-0.16)
+(0.7,1.42,0.84)
+***************Index 8
+[Optimization Result]
+Minimum metric vale: 0.299999
+Total Optimization time: 0.0400105
+Separating plane from: 8
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.5,0.5)
+tetDeformed: p1=(1.2,0.5,0.5)
+tetDeformed: p2=(0.7,0.499981,0.999981)
+tetDeformed: p3=(0.2,1.00004,3.80271e-05)
+Separating Plane from static edge :0(0,0,0)
+(1,0,0)
+Separating Plane from deforming edge :0(0.2,0.5,0.5)
+(1.2,0.5,0.5)
+***************Index 9
+[Optimization Result]
+Minimum metric vale: 3.68
+Total Optimization time: 0.0360126
+Separating plane from: 9
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.92,-0.16)
+tetDeformed: p1=(1.2,0.92,-0.16)
+tetDeformed: p2=(0.7,1.42,0.84)
+tetDeformed: p3=(0.2,1.12,0.24)
+Separating Plane from static edge :0(0,0,0)
+(1,0,0)
+Separating Plane from deforming edge :1(0.2,0.92,-0.16)
+(0.7,1.42,0.84)
+***************Index 10
+[Optimization Result]
+Minimum metric vale: 2.4
+Total Optimization time: 0.0220051
+Separating plane from: 10
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.2,-2.60627e-12)
+tetDeformed: p1=(1.2,0.2,-1.82815e-11)
+tetDeformed: p2=(0.7,0.7,-1.02547e-11)
+tetDeformed: p3=(0.2,1.2,-2.60627e-12)
+Separating Plane from static edge :0(0,0,0)
+(1,0,0)
+Separating Plane from deforming edge :2(0.2,0.2,-2.60627e-12)
+(0.2,1.2,-2.60627e-12)
+***************Index 11
+[Optimization Result]
+Minimum metric vale: 3.68
+Total Optimization time: 0.0380096
+Separating plane from: 11
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.92,-0.16)
+tetDeformed: p1=(1.2,0.92,-0.16)
+tetDeformed: p2=(0.7,1.42,0.84)
+tetDeformed: p3=(0.2,1.12,0.24)
+Separating Plane from static edge :0(0,0,0)
+(1,0,0)
+Separating Plane from deforming edge :3(1.2,0.92,-0.16)
+(0.7,1.42,0.84)
+***************Index 12
+[Optimization Result]
+Minimum metric vale: 2.4
+Total Optimization time: 0.0200043
+Separating plane from: 12
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.2,-1.82815e-11)
+tetDeformed: p1=(1.2,0.2,-2.60627e-12)
+tetDeformed: p2=(0.7,0.7,-1.02547e-11)
+tetDeformed: p3=(0.2,1.2,-2.60627e-12)
+Separating Plane from static edge :0(0,0,0)
+(1,0,0)
+Separating Plane from deforming edge :4(1.2,0.2,-2.60627e-12)
+(0.2,1.2,-2.60627e-12)
+***************Index 13
+[Optimization Result]
+Minimum metric vale: 5.52
+Total Optimization time: 0.017004
+Separating plane from: 13
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,-0.04,0.08)
+tetDeformed: p1=(1.2,-0.04,0.08)
+tetDeformed: p2=(0.7,-0.34,0.68)
+tetDeformed: p3=(0.2,0.16,-0.32)
+Separating Plane from static edge :0(0,0,0)
+(1,0,0)
+Separating Plane from deforming edge :5(0.7,-0.34,0.68)
+(0.2,0.16,-0.32)
+***************Index 14
+[Optimization Result]
+Minimum metric vale: 3.65
+Total Optimization time: 0.029007
+Separating plane from: 14
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,-9.89599e-11,0.2)
+tetDeformed: p1=(1.2,-9.89599e-11,0.2)
+tetDeformed: p2=(0.7,-3.71974e-10,1.2)
+tetDeformed: p3=(0.2,-1.6071e-10,0.2)
+Separating Plane from static edge :1(0,0,0)
+(0,0,1)
+Separating Plane from deforming edge :0(0.2,-9.89599e-11,0.2)
+(1.2,-9.89599e-11,0.2)
+***************Index 15
+[Optimization Result]
+Minimum metric vale: 5.5
+Total Optimization time: 0.0380096
+Separating plane from: 15
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-0.3,0.7,0.2)
+tetDeformed: p1=(0.2,1.2,0.2)
+tetDeformed: p2=(0.2,1.2,1.2)
+tetDeformed: p3=(0.2,1.2,0.2)
+Separating Plane from static edge :1(0,0,0)
+(0,0,1)
+Separating Plane from deforming edge :1(-0.3,0.7,0.2)
+(0.2,1.2,1.2)
+***************Index 16
+[Optimization Result]
+Minimum metric vale: 3.65
+Total Optimization time: 0.0190048
+Separating plane from: 16
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-9.89599e-11,0.2,0.2)
+tetDeformed: p1=(-1.6071e-10,0.2,0.2)
+tetDeformed: p2=(-3.71974e-10,0.7,1.2)
+tetDeformed: p3=(-9.89599e-11,1.2,0.2)
+Separating Plane from static edge :1(0,0,0)
+(0,0,1)
+Separating Plane from deforming edge :2(-9.89599e-11,0.2,0.2)
+(-9.89599e-11,1.2,0.2)
+***************Index 17
+[Optimization Result]
+Minimum metric vale: 6.8
+Total Optimization time: 0.0180054
+Separating plane from: 17
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(8.41984e-09,-8.43891e-09,0.2)
+tetDeformed: p1=(0.5,-0.5,0.2)
+tetDeformed: p2=(2.95025e-08,-2.95031e-08,1.2)
+tetDeformed: p3=(-0.5,0.5,0.2)
+Separating Plane from static edge :1(0,0,0)
+(0,0,1)
+Separating Plane from deforming edge :3(0.5,-0.5,0.2)
+(2.95025e-08,-2.95031e-08,1.2)
+***************Index 18
+[Optimization Result]
+Minimum metric vale: 6.8
+Total Optimization time: 0.0190029
+Separating plane from: 18
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-9.5341e-12,-9.53424e-12,0.2)
+tetDeformed: p1=(0.5,-0.5,0.2)
+tetDeformed: p2=(-5.579e-12,-5.57898e-12,1.2)
+tetDeformed: p3=(-0.5,0.5,0.2)
+Separating Plane from static edge :1(0,0,0)
+(0,0,1)
+Separating Plane from deforming edge :4(0.5,-0.5,0.2)
+(-0.5,0.5,0.2)
+***************Index 19
+[Optimization Result]
+Minimum metric vale: 6.8
+Total Optimization time: 0.0180016
+Separating plane from: 19
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-8.43891e-09,8.41984e-09,0.2)
+tetDeformed: p1=(0.5,-0.5,0.2)
+tetDeformed: p2=(-2.95031e-08,2.95025e-08,1.2)
+tetDeformed: p3=(-0.5,0.5,0.2)
+Separating Plane from static edge :1(0,0,0)
+(0,0,1)
+Separating Plane from deforming edge :5(-2.95031e-08,2.95025e-08,1.2)
+(-0.5,0.5,0.2)
+***************Index 20
+[Optimization Result]
+Minimum metric vale: 2.4
+Total Optimization time: 0.0190048
+Separating plane from: 20
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.2,-2.60627e-12)
+tetDeformed: p1=(1.2,0.2,-2.60627e-12)
+tetDeformed: p2=(0.7,0.7,-1.02547e-11)
+tetDeformed: p3=(0.2,1.2,-1.82815e-11)
+Separating Plane from static edge :2(0,0,0)
+(0,1,0)
+Separating Plane from deforming edge :0(0.2,0.2,-2.60627e-12)
+(1.2,0.2,-2.60627e-12)
+***************Index 21
+[Optimization Result]
+Minimum metric vale: 3.68
+Total Optimization time: 0.0360069
+Separating plane from: 21
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.92,0.2,-0.16)
+tetDeformed: p1=(1.12,0.2,0.24)
+tetDeformed: p2=(1.42,0.7,0.84)
+tetDeformed: p3=(0.92,1.2,-0.16)
+Separating Plane from static edge :2(0,0,0)
+(0,1,0)
+Separating Plane from deforming edge :1(0.92,0.2,-0.16)
+(1.42,0.7,0.84)
+***************Index 22
+[Optimization Result]
+Minimum metric vale: 0.299999
+Total Optimization time: 0.0390091
+Separating plane from: 22
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.5,0.2,0.5)
+tetDeformed: p1=(1.00004,0.2,3.80271e-05)
+tetDeformed: p2=(0.499981,0.7,0.999981)
+tetDeformed: p3=(0.5,1.2,0.5)
+Separating Plane from static edge :2(0,0,0)
+(0,1,0)
+Separating Plane from deforming edge :2(0.5,0.2,0.5)
+(0.5,1.2,0.5)
+***************Index 23
+[Optimization Result]
+Minimum metric vale: 5.52
+Total Optimization time: 0.0180035
+Separating plane from: 23
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-0.04,0.2,0.08)
+tetDeformed: p1=(0.16,0.2,-0.32)
+tetDeformed: p2=(-0.34,0.7,0.68)
+tetDeformed: p3=(-0.04,1.2,0.08)
+Separating Plane from static edge :2(0,0,0)
+(0,1,0)
+Separating Plane from deforming edge :3(0.16,0.2,-0.32)
+(-0.34,0.7,0.68)
+***************Index 24
+[Optimization Result]
+Minimum metric vale: 2.4
+Total Optimization time: 0.0190048
+Separating plane from: 24
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.2,-1.82815e-11)
+tetDeformed: p1=(1.2,0.2,-2.60627e-12)
+tetDeformed: p2=(0.7,0.7,-1.02547e-11)
+tetDeformed: p3=(0.2,1.2,-2.60627e-12)
+Separating Plane from static edge :2(0,0,0)
+(0,1,0)
+Separating Plane from deforming edge :4(1.2,0.2,-2.60627e-12)
+(0.2,1.2,-2.60627e-12)
+***************Index 25
+[Optimization Result]
+Minimum metric vale: 3.68
+Total Optimization time: 0.0360069
+Separating plane from: 25
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.92,0.2,-0.16)
+tetDeformed: p1=(1.12,0.2,0.24)
+tetDeformed: p2=(1.42,0.7,0.84)
+tetDeformed: p3=(0.92,1.2,-0.16)
+Separating Plane from static edge :2(0,0,0)
+(0,1,0)
+Separating Plane from deforming edge :5(1.42,0.7,0.84)
+(0.92,1.2,-0.16)
+***************Index 26
+[Optimization Result]
+Minimum metric vale: 3.65
+Total Optimization time: 0.0250111
+Separating plane from: 26
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,-9.89599e-11,0.2)
+tetDeformed: p1=(1.2,-9.89599e-11,0.2)
+tetDeformed: p2=(0.7,-3.71974e-10,1.2)
+tetDeformed: p3=(0.2,-1.6071e-10,0.2)
+Separating Plane from static edge :3(1,0,0)
+(0,0,1)
+Separating Plane from deforming edge :0(0.2,-9.89599e-11,0.2)
+(1.2,-9.89599e-11,0.2)
+***************Index 27
+[Optimization Result]
+Minimum metric vale: 3.03636
+Total Optimization time: 0.0180035
+Separating plane from: 27
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.309091,-0.127273,0.309091)
+tetDeformed: p1=(1.21818,0.145455,0.218182)
+tetDeformed: p2=(0.809091,0.372727,1.30909)
+tetDeformed: p3=(0.581818,0.0545455,0.581818)
+Separating Plane from static edge :3(1,0,0)
+(0,0,1)
+Separating Plane from deforming edge :1(0.309091,-0.127273,0.309091)
+(0.809091,0.372727,1.30909)
+***************Index 28
+[Optimization Result]
+Minimum metric vale: 0.299999
+Total Optimization time: 0.0200043
+Separating plane from: 28
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.5,0.2,0.5)
+tetDeformed: p1=(1.00004,0.2,3.80271e-05)
+tetDeformed: p2=(0.499981,0.7,0.999981)
+tetDeformed: p3=(0.5,1.2,0.5)
+Separating Plane from static edge :3(1,0,0)
+(0,0,1)
+Separating Plane from deforming edge :2(0.5,0.2,0.5)
+(0.5,1.2,0.5)
+***************Index 29
+[Optimization Result]
+Minimum metric vale: 1.46667
+Total Optimization time: 0.0180054
+Separating plane from: 29
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.466667,-0.0666666,0.466667)
+tetDeformed: p1=(1.13333,0.266667,0.133333)
+tetDeformed: p2=(0.633333,0.766667,1.13333)
+tetDeformed: p3=(0.8,0.6,0.8)
+Separating Plane from static edge :3(1,0,0)
+(0,0,1)
+Separating Plane from deforming edge :3(1.13333,0.266667,0.133333)
+(0.633333,0.766667,1.13333)
+***************Index 30
+[Optimization Result]
+Minimum metric vale: 0.11111
+Total Optimization time: 0.0190048
+Separating plane from: 30
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.422222,0.422222,0.422222)
+tetDeformed: p1=(1.08889,0.0888889,0.0888889)
+tetDeformed: p2=(0.7,0.7,1.2)
+tetDeformed: p3=(0.0888889,1.08889,0.0888889)
+Separating Plane from static edge :3(1,0,0)
+(0,0,1)
+Separating Plane from deforming edge :4(1.08889,0.0888889,0.0888889)
+(0.0888889,1.08889,0.0888889)
+***************Index 31
+[Optimization Result]
+Minimum metric vale: 0.363635
+Total Optimization time: 0.0360088
+Separating plane from: 31
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.381818,0.745454,0.381818)
+tetDeformed: p1=(1.29091,0.472727,0.290909)
+tetDeformed: p2=(0.609091,0.427273,1.10909)
+tetDeformed: p3=(0.109091,0.927273,0.109091)
+Separating Plane from static edge :3(1,0,0)
+(0,0,1)
+Separating Plane from deforming edge :5(0.609091,0.427273,1.10909)
+(0.109091,0.927273,0.109091)
+***************Index 32
+[Optimization Result]
+Minimum metric vale: 2.4
+Total Optimization time: 0.0190048
+Separating plane from: 32
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.2,-2.60627e-12)
+tetDeformed: p1=(1.2,0.2,-2.60627e-12)
+tetDeformed: p2=(0.7,0.7,-1.02547e-11)
+tetDeformed: p3=(0.2,1.2,-1.82815e-11)
+Separating Plane from static edge :4(1,0,0)
+(0,1,0)
+Separating Plane from deforming edge :0(0.2,0.2,-2.60627e-12)
+(1.2,0.2,-2.60627e-12)
+***************Index 33
+[Optimization Result]
+Minimum metric vale: 0.466665
+Total Optimization time: 0.0180035
+Separating plane from: 33
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.466667,0.466667,-0.0666666)
+tetDeformed: p1=(1.13333,0.133333,0.266667)
+tetDeformed: p2=(0.966667,0.966667,0.933333)
+tetDeformed: p3=(0.133333,1.13333,0.266667)
+Separating Plane from static edge :4(1,0,0)
+(0,1,0)
+Separating Plane from deforming edge :1(0.466667,0.466667,-0.0666666)
+(0.966667,0.966667,0.933333)
+***************Index 34
+[Optimization Result]
+Minimum metric vale: 2.4
+Total Optimization time: 0.0190048
+Separating plane from: 34
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.2,-2.60627e-12)
+tetDeformed: p1=(1.2,0.2,-1.82815e-11)
+tetDeformed: p2=(0.7,0.7,-1.02547e-11)
+tetDeformed: p3=(0.2,1.2,-2.60627e-12)
+Separating Plane from static edge :4(1,0,0)
+(0,1,0)
+Separating Plane from deforming edge :2(0.2,0.2,-2.60627e-12)
+(0.2,1.2,-2.60627e-12)
+***************Index 35
+[Optimization Result]
+Minimum metric vale: 0.166665
+Total Optimization time: 0.0190048
+Separating plane from: 35
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.533333,0.533333,0.2)
+tetDeformed: p1=(1.03333,0.0333334,0.2)
+tetDeformed: p2=(0.533333,0.533333,1.2)
+tetDeformed: p3=(0.2,1.2,0.2)
+Separating Plane from static edge :4(1,0,0)
+(0,1,0)
+Separating Plane from deforming edge :3(1.03333,0.0333334,0.2)
+(0.533333,0.533333,1.2)
+***************Index 36
+[Optimization Result]
+Minimum metric vale: 0.11111
+Total Optimization time: 0.0410118
+Separating plane from: 36
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.422222,0.422222,0.422222)
+tetDeformed: p1=(1.08889,0.0888889,0.0888889)
+tetDeformed: p2=(0.7,0.7,1.2)
+tetDeformed: p3=(0.088889,1.08889,0.0888889)
+Separating Plane from static edge :4(1,0,0)
+(0,1,0)
+Separating Plane from deforming edge :4(1.08889,0.0888889,0.0888889)
+(0.088889,1.08889,0.0888889)
+***************Index 37
+[Optimization Result]
+Minimum metric vale: 0.166665
+Total Optimization time: 0.0210037
+Separating plane from: 37
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.533333,0.533333,0.2)
+tetDeformed: p1=(1.2,0.2,0.2)
+tetDeformed: p2=(0.533333,0.533333,1.2)
+tetDeformed: p3=(0.0333334,1.03333,0.2)
+Separating Plane from static edge :4(1,0,0)
+(0,1,0)
+Separating Plane from deforming edge :5(0.533333,0.533333,1.2)
+(0.0333334,1.03333,0.2)
+***************Index 38
+[Optimization Result]
+Minimum metric vale: 0.299999
+Total Optimization time: 0.0220051
+Separating plane from: 38
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.2,0.5,0.5)
+tetDeformed: p1=(1.2,0.5,0.5)
+tetDeformed: p2=(0.7,0.499981,0.999981)
+tetDeformed: p3=(0.2,1.00004,3.80271e-05)
+Separating Plane from static edge :5(0,0,1)
+(0,1,0)
+Separating Plane from deforming edge :0(0.2,0.5,0.5)
+(1.2,0.5,0.5)
+***************Index 39
+[Optimization Result]
+Minimum metric vale: 3.03636
+Total Optimization time: 0.0180035
+Separating plane from: 39
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-0.127273,0.309091,0.309091)
+tetDeformed: p1=(0.0545455,0.581818,0.581818)
+tetDeformed: p2=(0.372727,0.809091,1.30909)
+tetDeformed: p3=(0.145455,1.21818,0.218182)
+Separating Plane from static edge :5(0,0,1)
+(0,1,0)
+Separating Plane from deforming edge :1(-0.127273,0.309091,0.309091)
+(0.372727,0.809091,1.30909)
+***************Index 40
+[Optimization Result]
+Minimum metric vale: 3.65
+Total Optimization time: 0.0180035
+Separating plane from: 40
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-9.89599e-11,0.2,0.2)
+tetDeformed: p1=(-1.6071e-10,0.2,0.2)
+tetDeformed: p2=(-3.71974e-10,0.7,1.2)
+tetDeformed: p3=(-9.89599e-11,1.2,0.2)
+Separating Plane from static edge :5(0,0,1)
+(0,1,0)
+Separating Plane from deforming edge :2(-9.89599e-11,0.2,0.2)
+(-9.89599e-11,1.2,0.2)
+***************Index 41
+[Optimization Result]
+Minimum metric vale: 0.363635
+Total Optimization time: 0.0380096
+Separating plane from: 41
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.745454,0.381818,0.381818)
+tetDeformed: p1=(0.927273,0.109091,0.109091)
+tetDeformed: p2=(0.427273,0.609091,1.10909)
+tetDeformed: p3=(0.472727,1.29091,0.290909)
+Separating Plane from static edge :5(0,0,1)
+(0,1,0)
+Separating Plane from deforming edge :3(0.927273,0.109091,0.109091)
+(0.427273,0.609091,1.10909)
+***************Index 42
+[Optimization Result]
+Minimum metric vale: 0.11111
+Total Optimization time: 0.0190029
+Separating plane from: 42
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.422222,0.422222,0.422222)
+tetDeformed: p1=(1.08889,0.0888889,0.0888889)
+tetDeformed: p2=(0.7,0.7,1.2)
+tetDeformed: p3=(0.0888889,1.08889,0.0888889)
+Separating Plane from static edge :5(0,0,1)
+(0,1,0)
+Separating Plane from deforming edge :4(1.08889,0.0888889,0.0888889)
+(0.0888889,1.08889,0.0888889)
+***************Index 43
+[Optimization Result]
+Minimum metric vale: 1.46667
+Total Optimization time: 0.0190048
+Separating plane from: 43
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(-0.0666666,0.466667,0.466667)
+tetDeformed: p1=(0.6,0.8,0.8)
+tetDeformed: p2=(0.766667,0.633333,1.13333)
+tetDeformed: p3=(0.266667,1.13333,0.133333)
+Separating Plane from static edge :5(0,0,1)
+(0,1,0)
+Separating Plane from deforming edge :5(0.766667,0.633333,1.13333)
+(0.266667,1.13333,0.133333)
+[Optimization Result]
+Minimum metric vale: 0.033332
+Total Optimization time: 1.03625
+Separating plane from: 0
+tetStatic: s0=(0,0,0)
+tetStatic: s1=(1,0,0)
+tetStatic: s2=(0,0,1)
+tetStatic: s3=(0,1,0)
+tetRest: r0=(0.2,0.2,0.2)
+tetRest: r1=(1.2,0.2,0.2)
+tetRest: r2=(0.7,0.7,1.2)
+tetRest: r3=(0.2,1.2,0.2)
+tetDeformed: p0=(0.333333,0.333333,0.333333)
+tetDeformed: p1=(1.16667,0.166667,0.166667)
+tetDeformed: p2=(0.666667,0.666667,1.16667)
+tetDeformed: p3=(0.166667,1.16667,0.166667)
+Separating plane from static tetrahedron face 0:(1,0,0)
+(0,1,0)
+(0,0,1)
+계속하려면 아무 키나 누르십시오 . . .

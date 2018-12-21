@@ -70,7 +70,7 @@
 //{
 //	init();
 //
-//	glm::vec3 face[3] = { sT[1], sT[2], sT[3] };
+//	glm::vec3 face[3] = { sT[0], sT[1], sT[3] };
 //	glm::vec3 normal;
 //	double constraintValue[4] = { 0.0 };
 //
