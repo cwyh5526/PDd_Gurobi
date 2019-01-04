@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DefPD.cpp" />
     <ClCompile Include="FullTest_d++.cpp" />
     <ClCompile Include="FullTest_p++.cpp" />
     <ClCompile Include="main.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="STA_4con_d++.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DefPD.h" />
     <ClInclude Include="FullTest_p.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>

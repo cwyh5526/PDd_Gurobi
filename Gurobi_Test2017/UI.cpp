@@ -7,7 +7,7 @@
 //============================================================================
 
 #include "UI.h"
-#include "FullTest_p.h"
+#include "DefPD.h"
 
 #define OFF 0
 #define ON 1
@@ -25,6 +25,8 @@
 #define DEFORM_TET_RENDER	 303
 #define GROUND_RENDER		 304
 
+//optimization object;
+DefPD *defPD;
 
 /********** rendering variable **********/
 int   main_window;
@@ -81,18 +83,31 @@ GLfloat lights_rotation[16] = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }
 
 void control_cb(int control)
 {
+
 	if (control == OPTIMIZE_ID) {
-		
-		cout << staticTet.vertex[0].x << endl;
-		init(&staticTet, &restTet, &optimalTet);
+				
+		//optimize
+		cout << "default? Y/N" << endl;
+		char ans = 'Y';
+		cin >> ans;
+		if (ans == 'Y' || ans == 'y') {
+			defPD->initDefault();
+		}
+		else {
+			defPD->init(staticTet, restTet);
+		}
+		defPD->resolvePenetration();
 
-		/*initTet(&staticTet, staticTet.vertex[0], staticTet.vertex[1], staticTet.vertex[2], staticTet.vertex[3]);
-		initTet(&restTet, restTet.vertex[0], restTet.vertex[1], restTet.vertex[2], restTet.vertex[3]);		
-		initTet(&optimalTet, restTet.vertex[0], restTet.vertex[1], restTet.vertex[2], restTet.vertex[3]);*/
+		//results
+		staticTet = defPD->getSTet();
+		restTet = defPD->getRTet();
+		optimalTet = defPD->getPTet();
 
-		//init(&sTet, &rTet, &pTet);
+		minOptIndex = defPD->getMinOptIndex();
+		minOptValue = defPD->getPD();
+		totalOptTime = defPD->getOptTime();
+		allResults = defPD->getPTetAll();
 
-		resolvePenetration(staticTet, restTet, &optimalTet, &minOptValue, &minOptIndex, &totalOptTime, &allResults);
 		for (int v = 0; v < 4; v++) {
 			edit_sTet[v][0]->set_float_val(staticTet.vertex[v].x);
 			edit_sTet[v][1]->set_float_val(staticTet.vertex[v].y);
@@ -122,7 +137,8 @@ void control_cb(int control)
 		text_optValue->set_float_val(minOptValue);
 		text_optTime->set_float_val(totalOptTime);
 
-		printResult(staticTet, restTet, optimalTet, minOptValue, minOptIndex, totalOptTime);
+		defPD->printResult(minOptIndex);
+		glutPostRedisplay();
 
 
 	}
@@ -273,7 +289,7 @@ void drawTet(tet t, float r, float g, float b, float alpha) {
 	//glLoadIdentity();
 	glBegin(GL_TRIANGLES);
 	for (int f = 0; f < 4; f++) {
-		glColor4f(r*f/4.0f, g*f/4.0f, b*f/4.0f, alpha);
+		glColor4f(r/4.0f*(float)(3-f), g/4.0f*(float)(3-f), b/4.0f*(float)(3-f), alpha);
 		for (int e = 0; e < 3; e++) {
 			glVertex3f(t.face[f][e].x, t.face[f][e].y, t.face[f][e].z);
 		}
@@ -673,7 +689,7 @@ int main(int argc, char* argv[])
 #endif
 
 	/**** Regular GLUT main loop ****/
-
+	defPD = new DefPD();
 	glutMainLoop();
 
 	return EXIT_SUCCESS;
