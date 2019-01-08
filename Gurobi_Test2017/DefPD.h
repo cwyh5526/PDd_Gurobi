@@ -38,7 +38,10 @@ public:
 	// initialize optimization variables and geometries : it is the first function that should be called
 	void initDefault();
 	void init(tet tetS, tet tetR);
-	void resolvePenetration();
+	/* static-deformable PD */
+	void resolveStaticDefPenetration();
+	/* def-def PD*/
+	void resolveDefDefPenetration();
 
 	// getters
 	tet getSTet() { return sTet; };
@@ -53,17 +56,21 @@ public:
 
 protected:
 	
-	
+	/* static-deformable PD */
 	// substeps of optimization
 	void optStaticFace(int fIndex, int pairIndex);
 	void optDeformingFace(int fIndex, int pairIndex);
 	void optEdgeEdge(int sIndex, int dIndex, int pairIndex);
 
+	/* def-def PD*/	
+	void optDefDefFace(int fIndex, int pairIndex);
+	void optDefDefEdge(int sIndex, int dIndex, int pairIndex);
 
 	// simple calculation functions : should be called right after rTet and sTet is initialized
 	float calculateTetVolume(tet t); 
 	void rSumrConstantCalculation();
 	void separatingPlaneCalculation(vec3 faceVrtx[3], glm::vec3 *normal, double *d);//it can be called before optimization.... let me think how to move this. I need to make the data structures for this
+	void calculateMidPoint(); //calculate midpoint of two tets : it will be used as the position of separating plane.
 	
 	// setters for tetrahedra
 	void setSTet(tet t) { initTet(sTet, t.vertex[0], t.vertex[1], t.vertex[2], t.vertex[3]); };
@@ -82,11 +89,13 @@ private:
 	// optimization variables
 	GRBEnv* env = NULL;	
 
-	// input geometries
+	// input geometries and pre-calculated values
 	tet sTet, rTet;
 	vec3 rSum;
 	float rConstant;
 	float rVolume;
+
+	vec3 midPoint; //the mid point of two rest tetrahedron for Def-Def case.
 
 	//output geometries and values
 	tet pTet;

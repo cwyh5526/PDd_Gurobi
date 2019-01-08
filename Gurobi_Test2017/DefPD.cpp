@@ -18,7 +18,7 @@ DefPD::~DefPD() {
 }
 
 // given input sTet and rTet, find penetration depth and resolved position pTet
-void DefPD::resolvePenetration() {
+void DefPD::resolveStaticDefPenetration() {
 	
 	//4 Static faces and deforming vertex
 	for (int i = 0; i < 4; i++) {
@@ -107,6 +107,11 @@ void DefPD::initDefault(){
 		vec3(0.7, 0.7, 1.2),
 		vec3(0.2, 1.2, 0.2));
 
+	//2. Preprocessing
+	rVolume = calculateTetVolume(rTet);
+	rSumrConstantCalculation();
+	optimized = false;
+	totalOptTime = 0.f;
 	return;
 
 }
@@ -119,6 +124,8 @@ void DefPD::init(tet tetS, tet tetR) {
 	rVolume = calculateTetVolume(rTet);
 	rSumrConstantCalculation();	
 	optimized = false;
+	totalOptTime = 0.f;
+
 }
 
 void DefPD::optStaticFace(int fIndex, int pairIndex) {
@@ -348,16 +355,16 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 	float nDotS02 = dot(n, s02);// n¡¤(s2 - s0),
 	float nDotS03 = dot(n, s03);// n¡¤(s3 - s0), 
 
-								//cout << "r01 = (" << r01.x << ", " << r01.y << "," << r01.z << ")" << endl;
-								//cout << "s01 = (" << s01.x << ", " << s01.y << "," << s01.z << ")" << endl;
+	//cout << "r01 = (" << r01.x << ", " << r01.y << "," << r01.z << ")" << endl;
+	//cout << "s01 = (" << s01.x << ", " << s01.y << "," << s01.z << ")" << endl;
 
-								//cout << "s02 = (" << s02.x << ", " << s02.y << "," << s02.z << ")" << endl;
-								//cout << "s03 = (" << s03.x << ", " << s03.y << "," << s03.z << ")" << endl;
-								//cout << "n = (" << n.x << ", " << n.y << "," << n.z << ")" << endl;
-								//cout << "n_cross = (" << n_cross.x << ", " << n_cross.y << "," << n_cross.z << ")" << endl;
+	//cout << "s02 = (" << s02.x << ", " << s02.y << "," << s02.z << ")" << endl;
+	//cout << "s03 = (" << s03.x << ", " << s03.y << "," << s03.z << ")" << endl;
+	//cout << "n = (" << n.x << ", " << n.y << "," << n.z << ")" << endl;
+	//cout << "n_cross = (" << n_cross.x << ", " << n_cross.y << "," << n_cross.z << ")" << endl;
 
-								//cout << "n dot s02=" << nDotS02 << endl;
-								//cout << "n dot s03=" << nDotS03 << endl;
+	//cout << "n dot s02=" << nDotS02 << endl;
+	//cout << "n dot s03=" << nDotS03 << endl;
 	if (dot(n_cross, n_cross) == 0) {
 		//	when two edges are parallel
 		// separation direction should be calculated in different way
@@ -440,7 +447,7 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 				- zP2*(rSum.z + rTet.vertex[d2].z)
 				- zP3*(rSum.z + rTet.vertex[d3].z)
 
-				+ rConstant); (60.f*rVolume);
+				+ rConstant)/(60.f*rVolume);
 
 		model.setObjective(obj, GRB_MINIMIZE);
 		//cout << "-----------------1----------------------------------------------------------" << endl;
@@ -600,15 +607,89 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 	}
 
 }
+void DefPD::resolveDefDefPenetration() {
+	calculateMidPoint();
+
+	//4 Deforming faces from first tet
+	for (int i = 0; i < 4;i++) {
+		pTetAll.index[i] = i;
+		optDefDefFace(i, i);
+		totalOptTime += pTetAll.optTime[i];
+		if (minOptValue >pTetAll.optValue[i]) {
+			minOptValue = pTetAll.optValue[i];
+			minOptIndex = i;
+		}
+	}
+
+	//4 deforming faces from second tet
+	for (int i = 0; i < 4; i++) {
+		int index = i + 4;
+		pTetAll.index[index] = index;
+		optDefDefFace(i, index);
+		totalOptTime += pTetAll.optTime[index];
+		if (minOptValue > pTetAll.optValue[index]) {
+			minOptValue = pTetAll.optValue[index];
+			minOptIndex = index;
+		}
+
+	}
+
+	//36 deforming faces from edge-edge case
+	for (int s = 0; s < 6; s++) {
+		for (int d = 0; d < 6; d++) { //deforming edge
+			int index = s * 6 + d + 8;
+			pTetAll.index[index] = index;
+			optDefDefEdge(s, d, index);
+			totalOptTime += pTetAll.optTime[index];
+			if (minOptValue > pTetAll.optValue[index]) {
+				minOptValue = pTetAll.optValue[index];
+				minOptIndex = index;
+			}
+		}
+	}
+	//find minimum metric value and that case.
+	pTet = pTetAll.pTets[minOptIndex];
+	optimized = true;	
+	
+}
+
+
+
+
+void DefPD::optDefDefFace(int fIndex, int pairIndex) {
+	//calculate normal
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 void DefPD::printV3(vec3 v) {
 	cout << "(" << v.x << "," << v.y << "," << v.z << ")" << endl;
+}
+void DefPD::calculateMidPoint() {
+	//calculate mid point from two tets
+	vec3 sum(0, 0, 0);
+	for (int i = 0; i < 4; i++) {
+		sum += rTet.vertex[i] + sTet.vertex[i];
+	}
+	midPoint = vec3(sum.x / 8, sum.y / 8, sum.z / 8);
+	cout << "midPoint= (" << sum.x << "," << sum.y << "," << sum.z << ")" << endl;
 }
 void DefPD::printResult(int pairIndex) {
 
 	tet pTet = pTetAll.pTets[pairIndex];
 	double minOptValue = pTetAll.optValue[pairIndex];
-	double totalOptTime = pTetAll.optTime[pairIndex];
+	double optTime = pTetAll.optTime[pairIndex];
 
 	int minOptIndex = pairIndex;
 	if (minOptIndex != -1) {
@@ -616,8 +697,9 @@ void DefPD::printResult(int pairIndex) {
 		cout << endl;
 		cout << "[Optimization Result]" << endl;
 		cout << "1. Minimum metric value: " << minOptValue << endl;
-		cout << "2. Total Optimization time: " << totalOptTime << endl;
-		cout << "3. Separating plane from: " << minOptIndex << endl;
+		cout << "2. Optimization time for this pair:" << optTime << endl;
+		cout << "3. Total Optimization time: " << totalOptTime << endl;
+		cout << "4. Separating plane from: " << minOptIndex << endl;
 
 		//cout << "\n1) tetStatic:" << endl;
 		for (int i = 0; i < 4; i++) {
@@ -642,7 +724,7 @@ void DefPD::printResult(int pairIndex) {
 	}
 
 	if (minOptIndex < 4) {
-		cout << "4. Separating plane from static tetrahedron face " << minOptIndex << ":" << endl;;
+		cout << "5. Separating plane from static tetrahedron face " << minOptIndex << ":" << endl;;
 		for (int i = 0; i < 3; i++) {
 			printV3(sTet.face[minOptIndex][i]);
 		}
@@ -650,7 +732,7 @@ void DefPD::printResult(int pairIndex) {
 	else if (minOptIndex < 8) {
 		int index = minOptIndex - 4;
 
-		cout << "4. Separating Plane from deforming tetrahedron face " << index << ":" << endl;;
+		cout << "5. Separating Plane from deforming tetrahedron face " << index << ":" << endl;;
 		for (int i = 0; i < 3; i++) {
 			printV3(pTet.face[index][i]);
 		}
@@ -659,7 +741,7 @@ void DefPD::printResult(int pairIndex) {
 		int index = minOptIndex - 8;
 		int indexS = index / 6;
 		int indexP = index % 6;
-		cout << "4. Separating Plane from static edge :" << indexS;
+		cout << "5. Separating Plane from static edge :" << indexS;
 		for (int i = 0; i < 2; i++) {
 			printV3(sTet.edge[indexS][i]);
 		}
@@ -669,7 +751,7 @@ void DefPD::printResult(int pairIndex) {
 		}
 
 	}
-	cout << "5. Volume Changes :" << endl;
+	cout << "6. Volume Changes :" << endl;
 	float rVolume = calculateTetVolume(rTet);
 	float pVolume = calculateTetVolume(pTet);
 	cout << "Rest Volume :" << rVolume << "--> Deformed Volume : " << pVolume << endl;
@@ -713,8 +795,8 @@ void DefPD::separatingPlaneCalculation(vec3 faceVrtx[3], glm::vec3 *normal, doub
 	//compute the normal vector and constant of the plane equation for 3 vertices
 	glm::vec3 v01 = faceVrtx[1] - faceVrtx[0];
 	glm::vec3 v02 = faceVrtx[2] - faceVrtx[0];
-	//std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
-	//std::cout << "v02: (" << (v02).x << "," << (v02).y << "," << (v02).z << ")" << std::endl;
+	std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
+	std::cout << "v02: (" << (v02).x << "," << (v02).y << "," << (v02).z << ")" << std::endl;
 
 	(*normal) = glm::normalize(glm::cross(v01, v02));
 	*(d) = glm::dot(*normal, faceVrtx[0]);

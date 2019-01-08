@@ -96,7 +96,7 @@ void control_cb(int control)
 		else {
 			defPD->init(staticTet, restTet);
 		}
-		defPD->resolvePenetration();
+		defPD->resolveStaticDefPenetration();
 
 		//results
 		staticTet = defPD->getSTet();
