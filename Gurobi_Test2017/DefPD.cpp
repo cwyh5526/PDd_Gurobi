@@ -639,7 +639,7 @@ void DefPD::resolveDefDefPenetration() {
 		for (int d = 0; d < 6; d++) { //deforming edge
 			int index = s * 6 + d + 8;
 			pTetAll.index[index] = index;
-			optDefDefEdge(s, d, index);
+			//optDefDefEdge(s, d, index);
 			totalOptTime += pTetAll.optTime[index];
 			if (minOptValue > pTetAll.optValue[index]) {
 				minOptValue = pTetAll.optValue[index];
