@@ -31,11 +31,6 @@ typedef struct {
 	double optTime[44] = { 0.0 };
 }optResults2;
 
-typedef struct {
-	vec3 faceNormal; //n=(a,b,c);
-	double d;		 //plane eq: ax+by+cz = d; 
-}plane;
-
 
 class DefDefPD
 {

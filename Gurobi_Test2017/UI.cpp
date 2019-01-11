@@ -21,7 +21,9 @@
 
 #define STATIC_TET_RENDER	 300	//
 #define REST_TET_RENDER		 301
-#define OPTIMAL_TET_RENDER	 302
+#define OPTIMAL_STET_RENDER	 302
+#define OPTIMAL_RTET_RENDER	 302
+
 #define DEFORM_TET_RENDER	 303
 #define GROUND_RENDER		 304
 
@@ -43,8 +45,10 @@ float rotationX = 0.0, rotationY = 0.0;
 // input from user
 tet staticTet;
 tet restTet;
-tet optimalTet;
+tet sOptimalTet; 
+tet rOptimalTet;
 optResults allResults;
+//optResults2 allResults;
 
 float totalOptTime;
 float minOptValue;
@@ -53,7 +57,9 @@ int minOptIndex;
 //rendering option
 int   render_static_option = ON;
 int   render_rest_option = ON;
-int   render_optimal_option = ON;
+int   render_s_optimal_option = ON;
+int   render_r_optimal_option = ON;
+
 int   render_ground_option = ON;
 int	  renderDeform[45] = { 0 };
 
@@ -64,7 +70,9 @@ GLUI *glui, *glui2;
 //output
 GLUI_EditText   *edit_sTet[4][3];
 GLUI_EditText   *edit_rTet[4][3];
-GLUI_EditText   *edit_pTet[4][3];
+GLUI_EditText   *edit_spTet[4][3];
+GLUI_EditText   *edit_rpTet[4][3];
+
 GLUI_EditText	*text_optPair;
 GLUI_EditText	*text_optValue;
 GLUI_EditText	*text_optTime;
@@ -101,12 +109,15 @@ void control_cb(int control)
 		//results
 		staticTet = defPD->getSTet();
 		restTet = defPD->getRTet();
-		optimalTet = defPD->getPTet();
+		rOptimalTet = defPD->getPTet();
+		
+		//sOptimalTet =defPD->getSPTet(); //defdefImplementation
 
 		minOptIndex = defPD->getMinOptIndex();
 		minOptValue = defPD->getPD();
 		totalOptTime = defPD->getOptTime();
 		allResults = defPD->getPTetAll();
+		//allResults2 = def->getSPtetAll();//defdef
 
 		for (int v = 0; v < 4; v++) {
 			edit_sTet[v][0]->set_float_val(staticTet.vertex[v].x);
@@ -117,21 +128,23 @@ void control_cb(int control)
 			edit_rTet[v][1]->set_float_val(restTet.vertex[v].y);
 			edit_rTet[v][2]->set_float_val(restTet.vertex[v].z);
 
-			edit_pTet[v][0]->set_float_val(optimalTet.vertex[v].x);
-			edit_pTet[v][1]->set_float_val(optimalTet.vertex[v].y);
-			edit_pTet[v][2]->set_float_val(optimalTet.vertex[v].z);
+			edit_rpTet[v][0]->set_float_val(rOptimalTet.vertex[v].x);
+			edit_rpTet[v][1]->set_float_val(rOptimalTet.vertex[v].y);
+			edit_rpTet[v][2]->set_float_val(rOptimalTet.vertex[v].z);
+
+			edit_spTet[v][0]->set_float_val(sOptimalTet.vertex[v].x);//defdef
+			edit_spTet[v][1]->set_float_val(sOptimalTet.vertex[v].y);//defdef
+			edit_spTet[v][2]->set_float_val(sOptimalTet.vertex[v].z);//defdef
 		}
 		if (minOptIndex < 4) {
 			text_optPair->set_text("Static Face" + to_string(minOptIndex));
 		}
 		else if (minOptIndex < 8) {
 			text_optPair->set_text("Deforming Face" + to_string(minOptIndex-4));
-
 		}
 		else if (minOptIndex < 44) {
 			string str = "sE" + to_string((minOptIndex - 8) / 6)+ "dE" + to_string((minOptIndex - 8) % 6);
 			text_optPair->set_text(str);
-
 		}
 		
 		text_optValue->set_float_val(minOptValue);
@@ -142,7 +155,7 @@ void control_cb(int control)
 
 
 	}
-	if ((control == REST_TET_RENDER)|| (control == STATIC_TET_RENDER)|| (control == OPTIMAL_TET_RENDER)||(control ==GROUND_RENDER)) {
+	if ((control == REST_TET_RENDER)|| (control == STATIC_TET_RENDER)|| (control == OPTIMAL_STET_RENDER)||(control == OPTIMAL_RTET_RENDER)||(control ==GROUND_RENDER)) {
 		
 		glutPostRedisplay();
 
@@ -159,58 +172,6 @@ void control_cb(int control)
 		cout << "Deform_tet_render : " << renderDeform[44] << endl;
 		glutPostRedisplay();
 	}
-	
-	//if()
-	/*
-	else {
-	glDisable(GL_LIGHT0);
-	light0_spinner->disable();
-	}
-	}
-	else if (control == LIGHT1_ENABLED_ID) {
-	if (light1_enabled) {
-	glEnable(GL_LIGHT1);
-	light1_spinner->enable();
-	}
-	else {
-	glDisable(GL_LIGHT1);
-	light1_spinner->disable();
-	}
-	}
-	else if (control == LIGHT0_INTENSITY_ID) {
-	float v[] = {
-	light0_diffuse[0], light0_diffuse[1],
-	light0_diffuse[2], light0_diffuse[3] };
-
-	v[0] *= light0_intensity;
-	v[1] *= light0_intensity;
-	v[2] *= light0_intensity;
-
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, v);
-	}
-	*/
-	/*else if (control == ENABLE_ID)
-	{
-	glui2->enable();
-	}
-	else if (control == DISABLE_ID)
-	{
-	glui2->disable();
-	}
-	else if (control == SHOW_ID)
-	{
-	glui2->show();
-	}
-	else if (control == HIDE_ID)
-	{
-	glui2->hide();
-	}
-	else if (control == NEWPOSITION_ID)
-	{
-	seed = rand();
-	glutPostRedisplay();
-
-	}*/
 }
 
 /**************************************** myGlutKeyboard() **********/
@@ -372,8 +333,11 @@ void myGlutDisplay(void)
 			}
 		}
 	}
-	if (render_optimal_option == ON) {
-		drawTet(optimalTet, 0.1, 0.1, 1.0, 0.3);
+	if (render_r_optimal_option == ON) {
+		drawTet(rOptimalTet, 0.1, 0.1, 1.0, 0.3);
+	}
+	if (render_s_optimal_option == ON) {          //defdef
+		drawTet(sOptimalTet, 0.1, 0.1, 1.0, 0.3); //defdef
 	}
 	if (render_rest_option == ON) {
 		drawTet(restTet, 0.1, 1.0, 0.1, 0.3);
@@ -501,63 +465,94 @@ int main(int argc, char* argv[])
 	edit_rTet[3][1] = new GLUI_EditText(pan_r3, "y:", &restTet.vertex[3].y);
 	edit_rTet[3][2] = new GLUI_EditText(pan_r3, "z:", &restTet.vertex[3].z);
 
+	//Optimze Button
+	GLUI_Button *btn_opt = new GLUI_Button(in_out_panel, "Optimize", OPTIMIZE_ID, control_cb);;
+	//btn_opt->set_alignment(GLUI_ALIGN_LEFT);
 
 	glui->add_column_to_panel(in_out_panel, false);
 
-	//Optimze Button
-	GLUI_Button *btn_opt = new GLUI_Button(glui, "Optimize", OPTIMIZE_ID, control_cb);;
-	//btn_opt->set_alignment(GLUI_ALIGN_LEFT);
+	
 
 	/******* Output panel *********/
 
 	GLUI_Rollout *output_panel = new GLUI_Rollout(in_out_panel, "Output", true);
-	new GLUI_StaticText(output_panel, "Deformed Tetrahedron");
-	GLUI_Panel *pan_p0 = new GLUI_Panel(output_panel, "p0", true);
-	GLUI_Panel *pan_p1 = new GLUI_Panel(output_panel, "p1", true);
-	GLUI_Panel *pan_p2 = new GLUI_Panel(output_panel, "p2", true);
-	GLUI_Panel *pan_p3 = new GLUI_Panel(output_panel, "p3", true);
+
+	new GLUI_StaticText(output_panel, "sDeformed Tetrahedron");
+	GLUI_Panel *pan_sp0 = new GLUI_Panel(output_panel, "sp0", true);
+	GLUI_Panel *pan_sp1 = new GLUI_Panel(output_panel, "sp1", true);
+	GLUI_Panel *pan_sp2 = new GLUI_Panel(output_panel, "sp2", true);
+	GLUI_Panel *pan_sp3 = new GLUI_Panel(output_panel, "sp3", true);
 
 
-	edit_pTet[0][0] = new GLUI_EditText(pan_p0, "x:",&optimalTet.vertex[0].x);
-	edit_pTet[0][1] = new GLUI_EditText(pan_p0, "y:",&optimalTet.vertex[0].y);
-	edit_pTet[0][2] = new GLUI_EditText(pan_p0, "z:",&optimalTet.vertex[0].z);
+	edit_spTet[0][0] = new GLUI_EditText(pan_sp0, "x:", &sOptimalTet.vertex[0].x);
+	edit_spTet[0][1] = new GLUI_EditText(pan_sp0, "y:", &sOptimalTet.vertex[0].y);
+	edit_spTet[0][2] = new GLUI_EditText(pan_sp0, "z:", &sOptimalTet.vertex[0].z);
 
-	edit_pTet[1][0] = new GLUI_EditText(pan_p1, "x:", &optimalTet.vertex[1].x);
-	edit_pTet[1][1] = new GLUI_EditText(pan_p1, "y:", &optimalTet.vertex[1].y);
-	edit_pTet[1][2] = new GLUI_EditText(pan_p1, "z:", &optimalTet.vertex[1].z);
+	edit_spTet[1][0] = new GLUI_EditText(pan_sp1, "x:", &sOptimalTet.vertex[1].x);
+	edit_spTet[1][1] = new GLUI_EditText(pan_sp1, "y:", &sOptimalTet.vertex[1].y);
+	edit_spTet[1][2] = new GLUI_EditText(pan_sp1, "z:", &sOptimalTet.vertex[1].z);
 
-	edit_pTet[2][0] = new GLUI_EditText(pan_p2, "x:", &optimalTet.vertex[2].x);
-	edit_pTet[2][1] = new GLUI_EditText(pan_p2, "y:", &optimalTet.vertex[2].y);
-	edit_pTet[2][2] = new GLUI_EditText(pan_p2, "z:", &optimalTet.vertex[2].z);
+	edit_spTet[2][0] = new GLUI_EditText(pan_sp2, "x:", &sOptimalTet.vertex[2].x);
+	edit_spTet[2][1] = new GLUI_EditText(pan_sp2, "y:", &sOptimalTet.vertex[2].y);
+	edit_spTet[2][2] = new GLUI_EditText(pan_sp2, "z:", &sOptimalTet.vertex[2].z);
 
-	edit_pTet[3][0] = new GLUI_EditText(pan_p3, "x:", &optimalTet.vertex[3].x);
-	edit_pTet[3][1] = new GLUI_EditText(pan_p3, "y:", &optimalTet.vertex[3].y);
-	edit_pTet[3][2] = new GLUI_EditText(pan_p3, "z:", &optimalTet.vertex[3].z);
+	edit_spTet[3][0] = new GLUI_EditText(pan_sp3, "x:", &sOptimalTet.vertex[3].x);
+	edit_spTet[3][1] = new GLUI_EditText(pan_sp3, "y:", &sOptimalTet.vertex[3].y);
+	edit_spTet[3][2] = new GLUI_EditText(pan_sp3, "z:", &sOptimalTet.vertex[3].z);
+
+
+
+	glui->add_column_to_panel(output_panel);
+	new GLUI_StaticText(output_panel, "rDeformed Tetrahedron");
+	GLUI_Panel *pan_rp0 = new GLUI_Panel(output_panel, "rp0", true);
+	GLUI_Panel *pan_rp1 = new GLUI_Panel(output_panel, "rp1", true);
+	GLUI_Panel *pan_rp2 = new GLUI_Panel(output_panel, "rp2", true);
+	GLUI_Panel *pan_rp3 = new GLUI_Panel(output_panel, "rp3", true);
+
+
+	edit_rpTet[0][0] = new GLUI_EditText(pan_rp0, "x:", &rOptimalTet.vertex[0].x);
+	edit_rpTet[0][1] = new GLUI_EditText(pan_rp0, "y:", &rOptimalTet.vertex[0].y);
+	edit_rpTet[0][2] = new GLUI_EditText(pan_rp0, "z:", &rOptimalTet.vertex[0].z);
+
+	edit_rpTet[1][0] = new GLUI_EditText(pan_rp1, "x:", &rOptimalTet.vertex[1].x);
+	edit_rpTet[1][1] = new GLUI_EditText(pan_rp1, "y:", &rOptimalTet.vertex[1].y);
+	edit_rpTet[1][2] = new GLUI_EditText(pan_rp1, "z:", &rOptimalTet.vertex[1].z);
+
+	edit_rpTet[2][0] = new GLUI_EditText(pan_rp2, "x:", &rOptimalTet.vertex[2].x);
+	edit_rpTet[2][1] = new GLUI_EditText(pan_rp2, "y:", &rOptimalTet.vertex[2].y);
+	edit_rpTet[2][2] = new GLUI_EditText(pan_rp2, "z:", &rOptimalTet.vertex[2].z);
+
+	edit_rpTet[3][0] = new GLUI_EditText(pan_rp3, "x:", &rOptimalTet.vertex[3].x);
+	edit_rpTet[3][1] = new GLUI_EditText(pan_rp3, "y:", &rOptimalTet.vertex[3].y);
+	edit_rpTet[3][2] = new GLUI_EditText(pan_rp3, "z:", &rOptimalTet.vertex[3].z);
 
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 3; j++) {
 			edit_sTet[i][j]->set_w(5);
 			edit_rTet[i][j]->set_w(5);
-			edit_pTet[i][j]->set_w(5);
-			
+			edit_rpTet[i][j]->set_w(5);
+			edit_spTet[i][j]->set_w(5);
+
 		}
 	}
-
-	glui->add_column_to_panel(output_panel);
-
-	new GLUI_StaticText(output_panel, "Optimization Results");
-	new GLUI_StaticText(output_panel, "");
-	text_optPair = new GLUI_EditText(output_panel, "Optimal Pair : ");
-	text_optValue = new GLUI_EditText(output_panel, "Optimal Value: ", &minOptValue);
-	text_optTime = new GLUI_EditText(output_panel, "Optimal Time : ", &totalOptTime);
-
+	GLUI_Panel *output_value_panel= new GLUI_Panel(in_out_panel, "Optimization Results");
+	new GLUI_StaticText(output_value_panel, "");
+	text_optPair = new GLUI_EditText(output_value_panel, "Optimal Pair  : ");
+	text_optValue = new GLUI_EditText(output_value_panel,"Optimal Value:", &minOptValue);
+	text_optTime = new GLUI_EditText(output_value_panel, "Optimal Time  :", &totalOptTime);
+	
+	text_optPair->set_alignment(GLUI_ALIGN_RIGHT);
 	text_optValue->set_alignment(GLUI_ALIGN_RIGHT);
 	text_optTime->set_alignment(GLUI_ALIGN_RIGHT);
+	output_value_panel->set_alignment(GLUI_ALIGN_LEFT);
+	text_optPair->set_w(260);
+	text_optValue->set_w(260);
+	text_optTime->set_w(260);
 
 	glui->add_separator();
 
-
+	
 
 	/****** Rendering Panel ******/
 
@@ -566,27 +561,34 @@ int main(int argc, char* argv[])
 	GLUI_Panel *rendering_panel_up = new GLUI_Panel(rendering_panel, "Optimal Result", false);
 	GLUI_Panel *rendering_panel_down = new GLUI_Panel(rendering_panel, "All Deforming Result", true);
 
-	GLUI_Panel *text_render_static = new GLUI_Panel(rendering_panel_up, "Static Tet rendering", true);
+	GLUI_Panel *text_render_static = new GLUI_Panel(rendering_panel_up, "Static T render", true);
 	GLUI_RadioGroup *render_static = new GLUI_RadioGroup(text_render_static, &render_static_option, STATIC_TET_RENDER, control_cb);
 	new GLUI_RadioButton(render_static, "Off");
 	new GLUI_RadioButton(render_static, "On");
 	glui->add_column_to_panel(rendering_panel_up, false);
 
-	GLUI_Panel *text_render_rest = new GLUI_Panel(rendering_panel_up, "Rest Tet rendering", true);
+	GLUI_Panel *text_render_rest = new GLUI_Panel(rendering_panel_up, "Rest T render", true);
 	GLUI_RadioGroup *render_rest = new GLUI_RadioGroup(text_render_rest, &render_rest_option, REST_TET_RENDER, control_cb);
 
 	new GLUI_RadioButton(render_rest, "Off");
 	new GLUI_RadioButton(render_rest, "On");
 	glui->add_column_to_panel(rendering_panel_up, false);
 
-	GLUI_Panel *text_render_optimal = new GLUI_Panel(rendering_panel_up, "Optimal Tet rendering", true);
-	GLUI_RadioGroup *render_optimal = new GLUI_RadioGroup(text_render_optimal, &render_optimal_option, OPTIMAL_TET_RENDER, control_cb);
+	GLUI_Panel *text_render_s_optimal = new GLUI_Panel(rendering_panel_up, "Optimal sT render", true);
+	GLUI_RadioGroup *render_s_optimal = new GLUI_RadioGroup(text_render_s_optimal, &render_s_optimal_option, OPTIMAL_STET_RENDER, control_cb);
 
-	new GLUI_RadioButton(render_optimal, "Off");
-	new GLUI_RadioButton(render_optimal, "On");
+	new GLUI_RadioButton(render_s_optimal, "Off");
+	new GLUI_RadioButton(render_s_optimal, "On");
 	glui->add_column_to_panel(rendering_panel_up, false);
 
-	GLUI_Panel *text_render_ground = new GLUI_Panel(rendering_panel_up, "Ground rendering", true);
+	GLUI_Panel *text_render_r_optimal = new GLUI_Panel(rendering_panel_up, "Optimal rT render", true);
+	GLUI_RadioGroup *render_r_optimal = new GLUI_RadioGroup(text_render_r_optimal, &render_r_optimal_option, OPTIMAL_RTET_RENDER, control_cb);
+
+	new GLUI_RadioButton(render_r_optimal, "Off");
+	new GLUI_RadioButton(render_r_optimal, "On");
+	glui->add_column_to_panel(rendering_panel_up, false);
+
+	GLUI_Panel *text_render_ground = new GLUI_Panel(rendering_panel_up, "Ground render", true);
 	GLUI_RadioGroup *render_ground = new GLUI_RadioGroup(text_render_ground, &render_ground_option, GROUND_RENDER, control_cb);
 
 	new GLUI_RadioButton(render_ground, "Off");

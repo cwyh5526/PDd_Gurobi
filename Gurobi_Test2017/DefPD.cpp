@@ -797,8 +797,13 @@ void DefPD::separatingPlaneCalculation(vec3 faceVrtx[3], glm::vec3 *normal, doub
 	glm::vec3 v02 = faceVrtx[2] - faceVrtx[0];
 	std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
 	std::cout << "v02: (" << (v02).x << "," << (v02).y << "," << (v02).z << ")" << std::endl;
-
+	glm::vec3 v01 = faceVrtx[1] - faceVrtx[0];
+	glm::vec3 v02 = faceVrtx[2] - faceVrtx[0];
+	std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
+	std::cout << "v02: (" << (v02).x << "," << (v02).y << "," << (v02).z << ")" << std::endl;
 	(*normal) = glm::normalize(glm::cross(v01, v02));
 	*(d) = glm::dot(*normal, faceVrtx[0]);
+	std::cout << "n: (" << (*normal).x << "," << (*normal).y << "," << (*normal).z << ")" << std::endl;
+	std::cout << "d: (" << *d << std::endl;
 }
 
