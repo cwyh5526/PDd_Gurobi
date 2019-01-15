@@ -79,7 +79,7 @@ protected:
 	// simple calculation functions : should be called right after rTet and sTet is initialized
 	float calculateTetVolume(tet t);
 	void sumConstantCalculation(tet t, vec3 &sum, float &constant);
-	void separatingPlaneCalculation(vec3 faceVrtx[3], glm::vec3 *normal, double *d);//it can be called before optimization.... let me think how to move this. I need to make the data structures for this
+	void separatingPlaneCalculation(vec3 faceVrtx[3], vec3 vrtx, vec3 *normal, double *d);//it can be called before optimization.... let me think how to move this. I need to make the data structures for this
 	void calculateMidPoint(); //calculate midpoint of two tets : it will be used as the position of separating plane.
 
 							  // setters for tetrahedra

@@ -31,7 +31,7 @@ void DefDefPD::initTet(tet &T, vec3 v0, vec3 v1, vec3 v2, vec3 v3) {
 	T.face[3][0] = v0;	T.face[3][1] = v2;	T.face[3][2] = v1; //Face 3 has vertex 012
 
 
-															   //edge (0,5) edge(1,4) edge (2,3) are pairs. if one edge is realted to the contact, then other pair edge will be included in the constraints.
+	//edge (0,5) edge(1,4) edge (2,3) are pairs. if one edge is realted to the contact, then other pair edge will be included in the constraints.
 	T.edge[0][0] = v0;	T.edge[0][1] = v1;
 	T.edge[1][0] = v0;	T.edge[1][1] = v2;
 	T.edge[2][0] = v0;	T.edge[2][1] = v3;
@@ -47,14 +47,14 @@ void DefDefPD::initDefault() {
 	//static tetrahedron position
 	setSTet(vec3(0.0, 0.0, 0.0),
 		vec3(1.0, 0.0, 0.0),
-		vec3(0.0, 0.0, 1.0),
-		vec3(0.0, 1.0, 0.0));
+		vec3(0.0, 1.0, 0.0),
+		vec3(0.0, 0.0, 1.0));
 
 	//rest pose tetrahedron position
 	setRTet(vec3(0.2, 0.2, 0.2),
 		vec3(-1.2, 0.2, 0.2),
-		vec3(0.7, 0.7, 1.2),
-		vec3(0.2, 1.2, 0.2));
+		vec3(0.2, 1.2, 0.2),
+		vec3(0.7, 0.7, 1.2));
 
 	//2. Preprocessing
 	rVolume = calculateTetVolume(rTet);
@@ -181,7 +181,7 @@ void DefDefPD::optStaticFace(int fIndex, int pairIndex) {
 		//Calculate the static normal vector
 		glm::vec3 normal;
 		double constraintValue = 0.0;
-		separatingPlaneCalculation(sTet.face[fIndex], &normal, &constraintValue);
+		separatingPlaneCalculation(sTet.face[fIndex], sTet.vertex[fIndex], &normal, &constraintValue);
 
 		// Add constraints: 
 		// n·(p0-s0)>=0
@@ -271,7 +271,7 @@ void DefDefPD::optDeformingFace(int fIndex, int pairIndex) {
 		//d=n dot p0
 		glm::vec3 normal;
 		double constraintValue = 0.0;
-		separatingPlaneCalculation(rTet.face[fIndex], &normal, &constraintValue);
+		separatingPlaneCalculation(rTet.face[fIndex], rTet.vertex[fIndex], &normal, &constraintValue);
 		glm::vec3 separatingDirection = -normal;
 
 		//face index에 따라p도 달라져야 하는데..
@@ -760,13 +760,13 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 		vec3 sepDir(0, 0, 0); //separating direction
 		if (pairIndex<4) {//def tet1
 			cout << "6" << endl;
-			separatingPlaneCalculation(sTet.face[fIndex], &normal, &constraintValue);
+			separatingPlaneCalculation(sTet.face[fIndex],sTet.vertex[fIndex], &normal, &constraintValue);
 			sepDir = normal;
 
 		}
 		else {
 			cout << "7" << endl;
-			separatingPlaneCalculation(rTet.face[fIndex], &normal, &constraintValue);
+			separatingPlaneCalculation(rTet.face[fIndex], rTet.vertex[fIndex], &normal, &constraintValue);
 			sepDir = -normal;
 		}
 		cout << "8" << endl;
@@ -1446,14 +1446,22 @@ void DefDefPD::sumConstantCalculation(tet t, vec3 &sum, float &constant) {
 }
 
 
-void DefDefPD::separatingPlaneCalculation(vec3 faceVrtx[3], glm::vec3 *normal, double *d) {
+void DefDefPD::separatingPlaneCalculation(vec3 faceVrtx[3], vec3 vrtx, vec3 *normal, double *d) {
 	//compute the normal vector and constant of the plane equation for 3 vertices
 	glm::vec3 v01 = faceVrtx[1] - faceVrtx[0];
-	glm::vec3 v02 = faceVrtx[2] - faceVrtx[0];
+	glm::vec3 v12 = faceVrtx[2] - faceVrtx[1];
 	std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
-	std::cout << "v02: (" << (v02).x << "," << (v02).y << "," << (v02).z << ")" << std::endl;
-
-	(*normal) = glm::normalize(glm::cross(v01, v02));
+	std::cout << "v12: (" << (v12).x << "," << (v12).y << "," << (v12).z << ")" << std::endl;
+	vec3 n = cross(v01, v12);
+	if (dot(vrtx, n) < 0) {//if the calculated normal is inward, change it to outward
+		n = -n;
+	}
+	try {
+		(*normal) = glm::normalize(n);// divide by zero exception could occur
+	}
+	catch (exception e) {
+		cout <<"exception while normal calculation"<< e.what() << endl;
+	}
 	*(d) = glm::dot(*normal, faceVrtx[0]);
 }
 
