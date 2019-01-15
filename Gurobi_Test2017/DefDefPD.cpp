@@ -25,10 +25,10 @@ void DefDefPD::initTet(tet &T, vec3 v0, vec3 v1, vec3 v2, vec3 v3) {
 	T.vertex[3] = v3;
 
 	//each face number represent the vertex that the face does not contain.
-	T.face[0][0] = v1;	T.face[0][1] = v3;	T.face[0][2] = v2; //Face 0 has vertex 123
-	T.face[1][0] = v0;	T.face[1][1] = v2;	T.face[1][2] = v3; //Face 1 has vertex 023
-	T.face[2][0] = v0;	T.face[2][1] = v3;	T.face[2][2] = v1;	//Face 2 has vertex 031
-	T.face[3][0] = v0;	T.face[3][1] = v1;	T.face[3][2] = v2; //Face 3 has vertex 012
+	T.face[0][0] = v1;	T.face[0][1] = v2;	T.face[0][2] = v3; //Face 0 has vertex 123
+	T.face[1][0] = v0;	T.face[1][1] = v3;	T.face[1][2] = v2; //Face 1 has vertex 023
+	T.face[2][0] = v0;	T.face[2][1] = v1;	T.face[2][2] = v3;	//Face 2 has vertex 031
+	T.face[3][0] = v0;	T.face[3][1] = v2;	T.face[3][2] = v1; //Face 3 has vertex 012
 
 
 															   //edge (0,5) edge(1,4) edge (2,3) are pairs. if one edge is realted to the contact, then other pair edge will be included in the constraints.
