@@ -5,6 +5,7 @@ DefDefPD::DefDefPD() {
 	try {
 		//environment and model is allocated in the heap space, need to be deleted after using it.
 		env = new GRBEnv();
+		numOpt = 0;
 	}
 	catch (GRBException e) {
 		cout << "Error code = " << e.getErrorCode() << endl;
@@ -132,7 +133,7 @@ void DefDefPD::resolveDefDefPenetration() {
 	pTet[0] = pTetAll2.pTets1[minOptIndex];
 	pTet[1] = pTetAll2.pTets2[minOptIndex];
 	optimized = true;
-
+	numOpt++;
 }
 
 
@@ -525,6 +526,8 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 		// Time, value, pTet.
 		pTetAll2.optTime[pairIndex] = model.get(GRB_DoubleAttr_Runtime);
 		pTetAll2.optValue[pairIndex] = model.get(GRB_DoubleAttr_ObjVal);
+		pTetAll2.normal[pairIndex] = n;
+
 		//cout << "-----------------6----------------------------------------------------------" << endl;
 
 		vec3 t1p0(t1[0].x.get(GRB_DoubleAttr_X), t1[0].y.get(GRB_DoubleAttr_X), t1[0].z.get(GRB_DoubleAttr_X));
@@ -686,6 +689,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 			if (pTetAll2.optValue[pairIndex] > model_second.get(GRB_DoubleAttr_ObjVal)) {
 
 				pTetAll2.optValue[pairIndex] = model_second.get(GRB_DoubleAttr_ObjVal);
+				pTetAll2.normal[pairIndex] = n;
 
 
 				vec3 t1p0_(t1_[0].x.get(GRB_DoubleAttr_X), t1_[0].y.get(GRB_DoubleAttr_X), t1_[0].z.get(GRB_DoubleAttr_X));
