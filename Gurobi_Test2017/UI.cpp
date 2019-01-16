@@ -7,7 +7,8 @@
 //============================================================================
 
 #include "UI.h"
-#include "DefPD.h"
+#include "DefDefPD.h"
+#include <time.h>
 
 #define OFF 0
 #define ON 1
@@ -27,8 +28,12 @@
 #define DEFORM_TET_RENDER	 303
 #define GROUND_RENDER		 304
 
+#define NORMAL_RENDER		 305
+#define PAIR_RENDER			 306
+
 //optimization object;
-DefPD *defPD;
+DefDefPD *defdefPD;
+//DefPD *defPD;
 
 /********** rendering variable **********/
 int   main_window;
@@ -47,22 +52,26 @@ tet staticTet;
 tet restTet;
 tet sOptimalTet; 
 tet rOptimalTet;
-optResults allResults;
-//optResults2 allResults;
+//optResults allResults;
+optResults2 allResults;
 
 float totalOptTime;
 float minOptValue;
 int minOptIndex;
 
+string filename = "NULL";
+
 //rendering option
-int   render_static_option = ON;
-int   render_rest_option = ON;
-int   render_s_optimal_option = ON;
-int   render_r_optimal_option = ON;
+int render_static_option = ON;
+int render_rest_option = ON;
+int render_s_optimal_option = ON;
+int render_r_optimal_option = ON;
 
-int   render_ground_option = ON;
-int	  renderDeform[45] = { 0 };
+int render_ground_option = ON;
+int	renderDeform[45] = { 0 };
 
+int	render_normal_option = OFF;
+int render_pair_option = OFF;
 
 /** Pointers to the windows and some of the controls we'll create **/
 GLUI *glui, *glui2;
@@ -93,31 +102,76 @@ void control_cb(int control)
 {
 
 	if (control == OPTIMIZE_ID) {
-				
 		//optimize
 		cout << "default? Y/N" << endl;
 		char ans = 'Y';
 		cin >> ans;
+
+		/*defdefPd*/
+
 		if (ans == 'Y' || ans == 'y') {
-			defPD->initDefault();
+			defdefPD->initDefault();
 		}
 		else {
-			defPD->init(staticTet, restTet);
+			defdefPD->init(staticTet, restTet);
 		}
-		defPD->resolveStaticDefPenetration();
-
-		//results
-		staticTet = defPD->getSTet();
-		restTet = defPD->getRTet();
-		rOptimalTet = defPD->getPTet();
+		defdefPD->resolveDefDefPenetration();
 		
-		//sOptimalTet =defPD->getSPTet(); //defdefImplementation
+		//results
+		staticTet = defdefPD->getRTet(0);
+		restTet = defdefPD->getRTet(1);
+		sOptimalTet = defdefPD->getPTet(0);		
+		rOptimalTet =defdefPD->getPTet(1); 
 
-		minOptIndex = defPD->getMinOptIndex();
-		minOptValue = defPD->getPD();
-		totalOptTime = defPD->getOptTime();
-		allResults = defPD->getPTetAll();
+		minOptIndex = defdefPD->getMinOptIndex();
+		minOptValue = defdefPD->getPD();
+		totalOptTime = defdefPD->getOptTime();
+		allResults = defdefPD->getPTetAll();
 		//allResults2 = def->getSPtetAll();//defdef
+
+		if (defdefPD->getNumOpt() == 1)
+		{
+			time_t totalSec;
+			time(&totalSec);
+			tm *pt = localtime(&totalSec);
+			string fileMadeTime = "_" + to_string(pt->tm_year + 1900) + "_" + to_string(pt->tm_mon + 1) + "_" + to_string(pt->tm_mday) + "_" + to_string(pt->tm_hour) + "_" + to_string(pt->tm_min) + "_" + to_string(pt->tm_sec);
+
+			filename = "test" + fileMadeTime;
+			defdefPD->writeCSVHead(filename);
+		}
+		defdefPD->writeCSV(filename);
+
+		/*defPd*/
+		//if (ans == 'Y' || ans == 'y') {
+		//	defPD->initDefault();
+		//}
+		//else {
+		//	defPD->init(staticTet, restTet);
+		//}
+		//defPD->resolveStaticDefPenetration();
+
+		////results
+		//staticTet = defPD->getSTet();
+		//restTet = defPD->getRTet();
+		//rOptimalTet = defPD->getPTet();
+
+		//minOptIndex = defPD->getMinOptIndex();
+		//minOptValue = defPD->getPD();
+		//totalOptTime = defPD->getOptTime();
+		//allResults = defPD->getPTetAll();
+		//defPD->printResult(minOptIndex);
+
+		//if (defPD->getNumOpt() == 1)
+		//{
+		//	time_t totalSec;
+		//	time(&totalSec);
+		//	tm *pt = localtime(&totalSec);
+		//	string fileMadeTime = "_" + to_string(pt->tm_year + 1900) + "_" + to_string(pt->tm_mon + 1) + "_" + to_string(pt->tm_mday) + "_" + to_string(pt->tm_hour) + "_" + to_string(pt->tm_min) + "_" + to_string(pt->tm_sec);
+
+		//	filename = "test" + fileMadeTime;
+		//	defPD->writeCSVHead(filename);
+		//}
+		//defPD->writeCSV(filename);
 
 		for (int v = 0; v < 4; v++) {
 			edit_sTet[v][0]->set_float_val(staticTet.vertex[v].x);
@@ -137,25 +191,33 @@ void control_cb(int control)
 			edit_spTet[v][2]->set_float_val(sOptimalTet.vertex[v].z);//defdef
 		}
 		if (minOptIndex < 4) {
-			text_optPair->set_text("Static Face" + to_string(minOptIndex));
+			//text_optPair->set_text("Static Face" + to_string(minOptIndex));
+			text_optPair->set_text("tet1 Face" + to_string(minOptIndex));
 		}
 		else if (minOptIndex < 8) {
-			text_optPair->set_text("Deforming Face" + to_string(minOptIndex-4));
+			//text_optPair->set_text("Deforming Face" + to_string(minOptIndex-4));
+			text_optPair->set_text("tet2 Face" + to_string(minOptIndex - 4));
+
 		}
 		else if (minOptIndex < 44) {
-			string str = "sE" + to_string((minOptIndex - 8) / 6)+ "dE" + to_string((minOptIndex - 8) % 6);
+			//string str = "sE" + to_string((minOptIndex - 8) / 6)+ "dE" + to_string((minOptIndex - 8) % 6);
+			string str = "t1E" + to_string((minOptIndex - 8) / 6) + "t2E" + to_string((minOptIndex - 8) % 6);
+
 			text_optPair->set_text(str);
 		}
 		
 		text_optValue->set_float_val(minOptValue);
 		text_optTime->set_float_val(totalOptTime);
 
-		defPD->printResult(minOptIndex);
+		
 		glutPostRedisplay();
 
 
 	}
-	if ((control == REST_TET_RENDER)|| (control == STATIC_TET_RENDER)|| (control == OPTIMAL_STET_RENDER)||(control == OPTIMAL_RTET_RENDER)||(control ==GROUND_RENDER)) {
+	if ((control == REST_TET_RENDER)	|| 	(control == STATIC_TET_RENDER)	|| 
+		(control == OPTIMAL_STET_RENDER)||	(control == OPTIMAL_RTET_RENDER)||
+		(control ==GROUND_RENDER)		||(control == NORMAL_RENDER)		||
+		(control == PAIR_RENDER)) {
 		
 		glutPostRedisplay();
 
@@ -244,6 +306,102 @@ void myGlutReshape(int x, int y)
 //===================================================================================
 //  create Tets with 4 vertices, Init Tet
 //====================================================================================
+void drawNormal(int pairIndex, float r, float g, float b) {
+	vec3 center(0, 0, 0);
+	vec3 n(0, 0, 0);
+	glPushMatrix();
+	glLineWidth(1);
+	glBegin(GL_LINES);
+	glColor3f(r, g, b);
+	if (pairIndex < 4) {
+		int fIndex = pairIndex;
+		center = (staticTet.face[fIndex][0] + staticTet.face[fIndex][1] + staticTet.face[fIndex][2])/3.0f;
+		n = center+ allResults.normal[pairIndex];
+		
+	}
+	else if (pairIndex < 8) {
+		int fIndex = pairIndex - 4;
+		center = (restTet.face[fIndex][0] + restTet.face[fIndex][1] + restTet.face[fIndex][2]) / 3.0f;
+		
+	}
+	else if (pairIndex < 44) {
+		int sIndex = (pairIndex - 8) / 6;
+		int dIndex = (pairIndex - 8) % 6;
+		center = (staticTet.edge[sIndex][0]+ staticTet.edge[sIndex][1])/2.0f;
+	}
+	n = center + allResults.normal[pairIndex];
+	glVertex3f(center.x, center.y, center.z);
+	glVertex3f(n.x, n.y, n.z);
+	glEnd();
+	glPopMatrix();
+}
+void drawLinedFace(tet t,int fIndex,float r, float g, float b) {
+	glPushMatrix();
+	glLineWidth(5);
+
+	glBegin(GL_LINES);
+	glColor3f(r,g,b);
+	
+	glVertex3f(t.face[fIndex][0].x, t.face[fIndex][0].y, t.face[fIndex][0].z);
+	glVertex3f(t.face[fIndex][1].x, t.face[fIndex][1].y, t.face[fIndex][1].z);
+
+	glVertex3f(t.face[fIndex][1].x, t.face[fIndex][1].y, t.face[fIndex][1].z);
+	glVertex3f(t.face[fIndex][2].x, t.face[fIndex][2].y, t.face[fIndex][2].z);
+
+	glVertex3f(t.face[fIndex][2].x, t.face[fIndex][2].y, t.face[fIndex][2].z);
+	glVertex3f(t.face[fIndex][0].x, t.face[fIndex][0].y, t.face[fIndex][0].z);
+	glEnd();
+	glPopMatrix();
+}
+void drawLinedEdge(tet t, int eIndex, float r, float g, float b) {
+	glPushMatrix();
+	glLineWidth(5);
+
+	glBegin(GL_LINES);
+	glColor3f(r, g, b);
+	glVertex3f(t.edge[eIndex][0].x, t.edge[eIndex][0].y, t.edge[eIndex][0].z);
+	glVertex3f(t.edge[eIndex][1].x, t.edge[eIndex][1].y, t.edge[eIndex][1].z);
+
+	glEnd();
+	glPopMatrix();
+
+}
+void drawPairs(int i) {
+	if (i < 4) {//static face
+		drawLinedFace(staticTet, i, 1.0f, 0.f, 0.f);
+		
+	}
+	else if (i < 8) {//rest face
+		int index = i - 4;
+		drawLinedFace(restTet, index, 1.0f, 0.f, 0.f);
+		
+	}
+	else if(i<44) {
+		int sIndex = (i-8) / 6;
+		int dIndex = (i - 8) % 6;
+		if ((render_rest_option == ON)&&(render_static_option==ON)) {
+			drawLinedEdge(staticTet, sIndex, 1.0f, 0.f, 0.f);
+			drawLinedEdge(restTet, dIndex, 1.0f, 0.f, 0.f);
+		}
+		
+		//drawLinedEdge(sOptimalTet, sIndex, 0.f, 0.f, 1.f);
+		if (render_r_optimal_option == ON && (render_static_option == ON)) {
+			drawLinedEdge(rOptimalTet, dIndex, 0.f, 0.f, 1.f);
+		}
+		if (render_s_optimal_option == ON && (render_static_option == ON)) {
+			drawLinedEdge(sOptimalTet, sIndex, 0.f, 0.f, 1.f);
+		}
+		if (renderDeform[44] == OFF) {
+			//drawLinedEdge(staticTet, sIndex, 1.0f, 0.f, 0.f);
+			drawLinedEdge(allResults.pTets1[i], sIndex, 0.f, 0.f, 1.f);
+			drawLinedEdge(allResults.pTets2[i], dIndex,0.f,0.f,1.f); 
+		}
+	}
+	else {
+		cout << "[Error] drawFeatures: Wrong Index!!!" << endl;;
+	}
+
+}
 void drawTet(tet t, float r, float g, float b, float alpha) {
 	glPushMatrix();
 	glTranslatef(0, 0, 0);
@@ -263,6 +421,7 @@ void drawTet(tet t, float r, float g, float b, float alpha) {
 /***************************************** myGlutDisplay() *****************/
 void drawAxis() {
 	glPushMatrix();
+	glLineWidth(1);
 	glBegin(GL_LINES);
 	glColor3f(0.f, 0.f, 0.f);
 	//x axis
@@ -324,27 +483,52 @@ void myGlutDisplay(void)
 
 	drawAxis();
 	//glTranslatef();
-
+	
 
 	if (renderDeform[44] == OFF) { //when off is not checked
 		for (int i = 0; i < 44; i++) {
-			if (renderDeform[i] == ON) {
-				drawTet(allResults.pTets[i], 0.5f, 0.5f, 0.5f, 0.5f);
+			if (renderDeform[i] == ON) {				
+				//drawTet(allResults.pTets[i], 0.5f, 0.5f, 0.5f, 0.5f);
+				drawTet(allResults.pTets1[i], 0.5f, 0.5f, 0.0f, 0.5f);
+				drawTet(allResults.pTets2[i], 0.0f, 0.5f, 0.5f, 0.5f);
+				if (render_normal_option == ON)
+				{
+					drawNormal(i, 1.0f, 0.f, 0.f);
+				}
+				if (render_pair_option == ON)
+				{
+					drawPairs(i);
+				}
 			}
 		}
 	}
-	if (render_r_optimal_option == ON) {
-		drawTet(rOptimalTet, 0.1, 0.1, 1.0, 0.3);
-	}
-	if (render_s_optimal_option == ON) {          //defdef
-		drawTet(sOptimalTet, 0.1, 0.1, 1.0, 0.3); //defdef
-	}
+	
+	
 	if (render_rest_option == ON) {
 		drawTet(restTet, 0.1, 1.0, 0.1, 0.3);
 	}
 	if (render_static_option == ON) {
 		drawTet(staticTet, 1.0, 0.1, 0.1, 0.3);
 	}
+	if (render_s_optimal_option == ON) {          //defdef
+		drawTet(sOptimalTet, 0.1, 0.1, 1.0, 0.3); //defdef
+		if (render_pair_option == ON)
+		{
+			drawPairs(minOptIndex);
+		}
+	}
+	if (render_r_optimal_option == ON) {
+		drawTet(rOptimalTet, 0.1, 0.1, 1.0, 0.3);
+		if (render_pair_option == ON)
+		{
+			drawPairs(minOptIndex);
+		}
+	}
+	if (render_normal_option == ON && (render_r_optimal_option==ON||render_rest_option==ON))
+	{
+		drawNormal(minOptIndex, 1.0f, 0.f, 0.f);
+	}
+	
 	if (render_ground_option == ON) {
 		drawGround();
 	}
@@ -561,38 +745,53 @@ int main(int argc, char* argv[])
 	GLUI_Panel *rendering_panel_up = new GLUI_Panel(rendering_panel, "Optimal Result", false);
 	GLUI_Panel *rendering_panel_down = new GLUI_Panel(rendering_panel, "All Deforming Result", true);
 
-	GLUI_Panel *text_render_static = new GLUI_Panel(rendering_panel_up, "Static T render", true);
+	GLUI_Panel *text_render_static = new GLUI_Panel(rendering_panel_up, "Static Tet ", true);
 	GLUI_RadioGroup *render_static = new GLUI_RadioGroup(text_render_static, &render_static_option, STATIC_TET_RENDER, control_cb);
 	new GLUI_RadioButton(render_static, "Off");
 	new GLUI_RadioButton(render_static, "On");
 	glui->add_column_to_panel(rendering_panel_up, false);
 
-	GLUI_Panel *text_render_rest = new GLUI_Panel(rendering_panel_up, "Rest T render", true);
+	GLUI_Panel *text_render_rest = new GLUI_Panel(rendering_panel_up, "Rest Tet ", true);
 	GLUI_RadioGroup *render_rest = new GLUI_RadioGroup(text_render_rest, &render_rest_option, REST_TET_RENDER, control_cb);
 
 	new GLUI_RadioButton(render_rest, "Off");
 	new GLUI_RadioButton(render_rest, "On");
 	glui->add_column_to_panel(rendering_panel_up, false);
 
-	GLUI_Panel *text_render_s_optimal = new GLUI_Panel(rendering_panel_up, "Optimal sT render", true);
+	GLUI_Panel *text_render_s_optimal = new GLUI_Panel(rendering_panel_up, "Optimal sTet ", true);
 	GLUI_RadioGroup *render_s_optimal = new GLUI_RadioGroup(text_render_s_optimal, &render_s_optimal_option, OPTIMAL_STET_RENDER, control_cb);
 
 	new GLUI_RadioButton(render_s_optimal, "Off");
 	new GLUI_RadioButton(render_s_optimal, "On");
 	glui->add_column_to_panel(rendering_panel_up, false);
 
-	GLUI_Panel *text_render_r_optimal = new GLUI_Panel(rendering_panel_up, "Optimal rT render", true);
+	GLUI_Panel *text_render_r_optimal = new GLUI_Panel(rendering_panel_up, "Optimal rTet", true);
 	GLUI_RadioGroup *render_r_optimal = new GLUI_RadioGroup(text_render_r_optimal, &render_r_optimal_option, OPTIMAL_RTET_RENDER, control_cb);
 
 	new GLUI_RadioButton(render_r_optimal, "Off");
 	new GLUI_RadioButton(render_r_optimal, "On");
 	glui->add_column_to_panel(rendering_panel_up, false);
 
-	GLUI_Panel *text_render_ground = new GLUI_Panel(rendering_panel_up, "Ground render", true);
+	GLUI_Panel *text_render_ground = new GLUI_Panel(rendering_panel_up, "Ground", true);
 	GLUI_RadioGroup *render_ground = new GLUI_RadioGroup(text_render_ground, &render_ground_option, GROUND_RENDER, control_cb);
 
 	new GLUI_RadioButton(render_ground, "Off");
 	new GLUI_RadioButton(render_ground, "On");
+
+	glui->add_column_to_panel(rendering_panel_up, false);
+
+	GLUI_Panel *text_render_normal = new GLUI_Panel(rendering_panel_up, "normal", true);
+	GLUI_RadioGroup *render_normal = new GLUI_RadioGroup(text_render_normal, &render_normal_option,NORMAL_RENDER, control_cb);
+
+	new GLUI_RadioButton(render_normal, "Off");
+	new GLUI_RadioButton(render_normal, "On");
+	glui->add_column_to_panel(rendering_panel_up, false);
+
+	GLUI_Panel *text_render_pair = new GLUI_Panel(rendering_panel_up, "pair", true);
+	GLUI_RadioGroup *render_pair = new GLUI_RadioGroup(text_render_pair, &render_pair_option, PAIR_RENDER, control_cb);
+
+	new GLUI_RadioButton(render_pair, "Off");
+	new GLUI_RadioButton(render_pair, "On");
 
 	check_deform[44]= new GLUI_Checkbox(rendering_panel_down, "Off", &renderDeform[44], DEFORM_TET_RENDER, control_cb); //off면 모두 다 없애버령
 
@@ -691,7 +890,8 @@ int main(int argc, char* argv[])
 #endif
 
 	/**** Regular GLUT main loop ****/
-	defPD = new DefPD();
+	//defPD = new DefPD();
+	defdefPD = new DefDefPD();
 	glutMainLoop();
 
 	return EXIT_SUCCESS;

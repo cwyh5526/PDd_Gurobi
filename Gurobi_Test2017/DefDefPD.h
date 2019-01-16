@@ -3,6 +3,8 @@
 #include <glm/glm.hpp>
 
 #include <iostream>
+#include <fstream>
+
 #include<GL/glut.h>
 
 
@@ -11,24 +13,25 @@
 using namespace std;
 using namespace glm;
 
+typedef struct {
+	GRBVar x;
+	GRBVar y;
+	GRBVar z;
+}Var;
 
 typedef struct {
 	vec3 vertex[4];
 	vec3 face[4][3];
 	vec3 edge[6][2];
 }tet;
+
 typedef struct {
-	tet pTets[44];
+	tet pTets1[44]; 
+	tet pTets2[44];
 	int index[44];
 	double optValue[44] = { 1000.0 };
 	double optTime[44] = { 0.0 };
-}optResults;
-typedef struct {
-	tet pTets1[44]; //p
-	tet pTets2[44]; //s
-	int index[44];
-	double optValue[44] = { 1000.0 };
-	double optTime[44] = { 0.0 };
+	vec3 normal[44];
 }optResults2;
 
 
@@ -43,34 +46,28 @@ public:
 	void initDefault();
 	void init(tet tetS, tet tetR);
 	/* static-deformable PD */
-	void resolveStaticDefPenetration();
+	//void resolveStaticDefPenetration();
 	/* def-def PD*/
 	void resolveDefDefPenetration();
 
 	// getters
-	tet getSTet() { return sTet; };
-	tet getRTet() { return rTet; };
-	tet getPTet() { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return pTet; };
-	tet getPTet2() { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return pTet; };
+	tet getRTet(int i) { return rTet[i]; };
+	tet getPTet(int i) { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return pTet[i]; };
 
-	optResults  getPTetAll() { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return pTetAll; };
-	optResults2 getPTetAll2() { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return pTetAll2; };
+	optResults2 getPTetAll() { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return pTetAll2; };
 
 	int getMinOptIndex() { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return minOptIndex; };
 	float getPD() { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return minOptValue; };
 	float getOptTime() { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return totalOptTime; };
+	int getNumOpt() { return numOpt; }
 	void printResult(int pairIndex);
-	void printResult2(int pairIndex);
 
-
+	void writeCSV(string fileName);
+	void writeCSVHead(string fileName);
 
 protected:
 
 	/* static-deformable PD */
-	// substeps of optimization
-	void optStaticFace(int fIndex, int pairIndex);
-	void optDeformingFace(int fIndex, int pairIndex);
-	void optEdgeEdge(int sIndex, int dIndex, int pairIndex);
 
 	/* def-def PD*/
 	void optDefDefFace(int fIndex, int pairIndex);
@@ -82,17 +79,17 @@ protected:
 	void separatingPlaneCalculation(vec3 faceVrtx[3], vec3 vrtx, vec3 *normal, double *d);//it can be called before optimization.... let me think how to move this. I need to make the data structures for this
 	void calculateMidPoint(); //calculate midpoint of two tets : it will be used as the position of separating plane.
 
-							  // setters for tetrahedra
-	void setSTet(tet t) { initTet(sTet, t.vertex[0], t.vertex[1], t.vertex[2], t.vertex[3]); };
-	void setRTet(tet t) { initTet(rTet, t.vertex[0], t.vertex[1], t.vertex[2], t.vertex[3]); };
-	void setPTet(tet t) { initTet(pTet, t.vertex[0], t.vertex[1], t.vertex[2], t.vertex[3]); };
-	void setSTet(vec3 v0, vec3 v1, vec3 v2, vec3 v3) { initTet(sTet, v0, v1, v2, v3); };
-	void setRTet(vec3 v0, vec3 v1, vec3 v2, vec3 v3) { initTet(rTet, v0, v1, v2, v3); };
-	void setPTet(vec3 v0, vec3 v1, vec3 v2, vec3 v3) { initTet(pTet, v0, v1, v2, v3); };
+   // setters for tetrahedra
+	void setRTet(int i,tet t) { initTet(rTet[i], t.vertex[0], t.vertex[1], t.vertex[2], t.vertex[3]); };
+	void setPTet(int i,tet t) { initTet(pTet[i], t.vertex[0], t.vertex[1], t.vertex[2], t.vertex[3]); };
+
+	void setRTet(int i, vec3 v0, vec3 v1, vec3 v2, vec3 v3) { initTet(rTet[i], v0, v1, v2, v3);};
+	void setPTet(int i, vec3 v0, vec3 v1, vec3 v2, vec3 v3) { initTet(pTet[i], v0, v1, v2, v3); };
 
 	// utility functions
 	void initTet(tet &T, vec3 v0, vec3 v1, vec3 v2, vec3 v3);
 	void printV3(vec3 v);
+	void fprintV3(ofstream &fp, vec3 v);
 
 private:
 
@@ -100,15 +97,14 @@ private:
 	GRBEnv* env = NULL;
 
 	// input geometries and pre-calculated values
-	tet sTet, rTet;
-	vec3 rSum;
-	float rConstant;
-	float rVolume;
-	vec3 sSum;
+	tet rTet[2];
+	vec3 rSum[2];
+	float rConstant[2];
+	float rVolume[2];
 
 	//output geometries and values
-	tet pTet;
-	optResults pTetAll;
+	tet pTet[2];
+	optResults2 pTetAll2;
 	int minOptIndex = -1;
 	float minOptValue = 1000.0f;
 	float totalOptTime = 0.f;
@@ -118,13 +114,11 @@ private:
 	//  should be false when initialized function is called.
 	bool optimized = false;
 
+	int numOpt = 0;
+
 
 	//for def def
-	float sConstant;
-	float sVolume;
-	vec3 midPoint; //the mid point of two rest tetrahedron for Def-Def case.
-	tet pTet2;
-	optResults2 pTetAll2;
 
+	vec3 midPoint; //the mid point of two rest tetrahedron for Def-Def case.
 
 };
