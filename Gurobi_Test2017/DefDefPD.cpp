@@ -44,13 +44,13 @@ void DefDefPD::initTet(tet &T, vec3 v0, vec3 v1, vec3 v2, vec3 v3) {
 void DefDefPD::initDefault() {
 
 	//static tetrahedron position
-	setRTet(1,vec3(0.0, 0.0, 0.0),
+	setRTet(0,vec3(0.0, 0.0, 0.0),
 		vec3(1.0, 0.0, 0.0),
 		vec3(0.0, 1.0, 0.0),
 		vec3(0.0, 0.0, 1.0));
 
 	//rest pose tetrahedron position
-	setRTet(2,vec3(0.2, 0.2, 0.2),
+	setRTet(1,vec3(0.2, 0.2, 0.2),
 		vec3(-1.2, 0.2, 0.2),
 		vec3(0.2, 1.2, 0.2),
 		vec3(0.7, 0.7, 1.2));
@@ -59,6 +59,8 @@ void DefDefPD::initDefault() {
 	for (int i = 0; i < 2; i++) {
 		rVolume[i] = calculateTetVolume(rTet[i]);
 		sumConstantCalculation(rTet[i], rSum[i], rConstant[i]);
+		//printV3(rSum[i]);
+		//cout << rConstant[i] << endl;
 	}
 
 	calculateMidPoint();
@@ -325,7 +327,7 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 }
 
 void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
-	cout << "\n =========optEdgEdge tet1 Edge " << t1Index << "tet2 Edge" << t2Index << endl;
+	cout << "\n =========optEdgEdge tet1 Edge " << t1Index << ", tet2 Edge" << t2Index << endl;
 	
 
 	int e[6][2] = { { 0,1 },{ 0,2 },{ 0,3 },{ 1,2 },{ 1,3 },{ 2,3 } };
@@ -345,7 +347,9 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 	vec3 t2_e01 = t2[1] - t2[0];//contact edge vector in tet2's rest state
 
 	vec3 n_cross = cross(t1_e01, t2_e01);
+	printV3(n_cross);
 	vec3 n = normalize(n_cross);// normal vector 두 contact edge에 동시에 수직인 벡터, direction should be decided.
+
 	//Decide the normal direction	
 	float nDote02 = dot(n, t1_e02);// n·(t1.r2 - t1.r0),
 	float nDote03 = dot(n, t1_e03);// n·(t1.r3 - t1.r0), 
@@ -364,7 +368,10 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 		n = AB + BH;
 		n = normalize(n);
 		// both normal has to be tested in this case
-		nDecided = false;						 
+		nDecided = false;		
+		cout << "\n\n\n\n[FASLE]: 0. Parallel Edges \n\n\n" << endl;
+		cout << "n: ";
+		printV3(n);
 	}
 	else if ((nDote02 * nDote03) < 0) { // n·(s2 - s0) <0 or  n·(s3 - s0)<0
 										// if s2, s3 are in different direction, then normal cannot be decided
@@ -478,7 +485,10 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 
 
 		//cout << "-----------------1----------------------------------------------------------" << endl;
-
+		cout << "n: ";
+		printV3(n);
+		cout << "midPoint: ";
+		printV3(midPoint);
 		//Add Constraints
 
 		//mid point MP가 있다고 하면
@@ -559,38 +569,38 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 			Var t1_[4];
 			Var t2_[4];
 
-			t1_[0].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0x");
-			t1_[0].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0y");
-			t1_[0].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0z");
+			t1_[0].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0x");
+			t1_[0].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0y");
+			t1_[0].z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0z");
 
-			t1_[1].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P1x");
-			t1_[1].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P1y");
-			t1_[1].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P1z");
+			t1_[1].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P1x");
+			t1_[1].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P1y");
+			t1_[1].z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P1z");
 
-			t1_[2].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P2x");
-			t1_[2].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P2y");
-			t1_[2].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P2z");
+			t1_[2].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P2x");
+			t1_[2].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P2y");
+			t1_[2].z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P2z");
 
-			t1_[3].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P3x");
-			t1_[3].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P3y");
-			t1_[3].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P3z");
+			t1_[3].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P3x");
+			t1_[3].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P3y");
+			t1_[3].z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P3z");
 
 
-			t2_[0].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P0x");
-			t2_[0].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P0y");
-			t2_[0].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P0z");
+			t2_[0].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P0x");
+			t2_[0].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P0y");
+			t2_[0].z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P0z");
 
-			t2_[1].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P1x");
-			t2_[1].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P1y");
-			t2_[1].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P1z");
+			t2_[1].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P1x");
+			t2_[1].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P1y");
+			t2_[1].z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P1z");
 
-			t2_[2].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P2x");
-			t2_[2].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P2y");
-			t2_[2].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P2z");
+			t2_[2].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P2x");
+			t2_[2].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P2y");
+			t2_[2].z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P2z");
 
-			t2_[3].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3x");
-			t2_[3].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3y");
-			t2_[3].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3z");
+			t2_[3].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3x");
+			t2_[3].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3y");
+			t2_[3].z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3z");
 
 			cout << "3" << endl;
 			// Set objective
@@ -655,16 +665,16 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 			// n·(p2-mp)>=0
 			// n·(p3-mp)>=0
 			//1.t1은 separating normal 반대방향에 있다.
-			model.addConstr(n.x*t1_[0].x + n.y*t1_[0].y + n.z*t1_[0].z - dot(n, midPoint) <= 0, "c0");
-			model.addConstr(n.x*t1_[1].x + n.y*t1_[1].y + n.z*t1_[1].z - dot(n, midPoint) <= 0, "c1");
-			model.addConstr(n.x*t1_[2].x + n.y*t1_[2].y + n.z*t1_[2].z - dot(n, midPoint) <= 0, "c2");
-			model.addConstr(n.x*t1_[3].x + n.y*t1_[3].y + n.z*t1_[3].z - dot(n, midPoint) <= 0, "c3");
+			model_second.addConstr(n.x*t1_[0].x + n.y*t1_[0].y + n.z*t1_[0].z - dot(n, midPoint) <= 0, "c0");
+			model_second.addConstr(n.x*t1_[1].x + n.y*t1_[1].y + n.z*t1_[1].z - dot(n, midPoint) <= 0, "c1");
+			model_second.addConstr(n.x*t1_[2].x + n.y*t1_[2].y + n.z*t1_[2].z - dot(n, midPoint) <= 0, "c2");
+			model_second.addConstr(n.x*t1_[3].x + n.y*t1_[3].y + n.z*t1_[3].z - dot(n, midPoint) <= 0, "c3");
 
 			//2.t2는 separating n 방향에 있다.
-			model.addConstr(n.x*t2_[0].x + n.y*t2_[0].y + n.z*t2_[0].z - dot(n, midPoint) >= 0, "c4");
-			model.addConstr(n.x*t2_[1].x + n.y*t2_[1].y + n.z*t2_[1].z - dot(n, midPoint) >= 0, "c5");
-			model.addConstr(n.x*t2_[2].x + n.y*t2_[2].y + n.z*t2_[2].z - dot(n, midPoint) >= 0, "c6");
-			model.addConstr(n.x*t2_[3].x + n.y*t2_[3].y + n.z*t2_[3].z - dot(n, midPoint) >= 0, "c7");
+			model_second.addConstr(n.x*t2_[0].x + n.y*t2_[0].y + n.z*t2_[0].z - dot(n, midPoint) >= 0, "c4");
+			model_second.addConstr(n.x*t2_[1].x + n.y*t2_[1].y + n.z*t2_[1].z - dot(n, midPoint) >= 0, "c5");
+			model_second.addConstr(n.x*t2_[2].x + n.y*t2_[2].y + n.z*t2_[2].z - dot(n, midPoint) >= 0, "c6");
+			model_second.addConstr(n.x*t2_[3].x + n.y*t2_[3].y + n.z*t2_[3].z - dot(n, midPoint) >= 0, "c7");
 
 
 			//Optimization
