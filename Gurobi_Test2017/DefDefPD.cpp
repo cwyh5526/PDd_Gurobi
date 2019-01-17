@@ -137,7 +137,7 @@ void DefDefPD::resolveDefDefPenetration() {
 	//find minimum metric value and that case.
 	pTet[0] = pTetAll2.pTets1[minOptIndex];
 	pTet[1] = pTetAll2.pTets2[minOptIndex];
-	
+	optPlanePoint = pTetAll2.planePoint[minOptIndex];
 	optimized = true;
 	numOpt++;
 }
@@ -331,8 +331,7 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 		pTetAll2.optValue[pairIndex] = model.get(GRB_DoubleAttr_ObjVal);
 		pTetAll2.optTime[pairIndex] = model.get(GRB_DoubleAttr_Runtime);
 		pTetAll2.normal[pairIndex] = normal;
-
-
+		pTetAll2.planePoint[pairIndex] = vec3(mp.x.get(GRB_DoubleAttr_X), mp.y.get(GRB_DoubleAttr_X), mp.z.get(GRB_DoubleAttr_X));
 
 		vec3 t1p0(t1[0].x.get(GRB_DoubleAttr_X), t1[0].y.get(GRB_DoubleAttr_X), t1[0].z.get(GRB_DoubleAttr_X));
 		vec3 t1p1(t1[1].x.get(GRB_DoubleAttr_X), t1[1].y.get(GRB_DoubleAttr_X), t1[1].z.get(GRB_DoubleAttr_X));
@@ -526,10 +525,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 
 
 		//cout << "-----------------1----------------------------------------------------------" << endl;
-		cout << "n: ";
-		printV3(n);
-		cout << "midPoint: ";
-		printV3(midPoint);
+
 		//Add Constraints
 
 		//mid point MP가 있다고 하면
@@ -584,6 +580,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 		pTetAll2.optTime[pairIndex] = model.get(GRB_DoubleAttr_Runtime);
 		pTetAll2.optValue[pairIndex] = model.get(GRB_DoubleAttr_ObjVal);
 		pTetAll2.normal[pairIndex] = n;
+		pTetAll2.planePoint[pairIndex] = vec3(mp.x.get(GRB_DoubleAttr_X), mp.y.get(GRB_DoubleAttr_X), mp.z.get(GRB_DoubleAttr_X));
 
 		//cout << "-----------------6----------------------------------------------------------" << endl;
 
@@ -771,6 +768,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 
 				pTetAll2.optValue[pairIndex] = model_second.get(GRB_DoubleAttr_ObjVal);
 				pTetAll2.normal[pairIndex] = n;
+				pTetAll2.planePoint[pairIndex] = vec3(mp.x.get(GRB_DoubleAttr_X), mp.y.get(GRB_DoubleAttr_X), mp.z.get(GRB_DoubleAttr_X));
 
 
 				vec3 t1p0_(t1_[0].x.get(GRB_DoubleAttr_X), t1_[0].y.get(GRB_DoubleAttr_X), t1_[0].z.get(GRB_DoubleAttr_X));
@@ -823,7 +821,7 @@ void DefDefPD::calculateMidPoint() {
 	for (int i = 0; i < 4; i++) {
 		sum += rTet[0].vertex[i] + rTet[1].vertex[i];
 	}
-	midPoint = vec3(sum.x / 8, sum.y / 8, sum.z / 8);
+	vec3 midPoint = vec3(sum.x / 8, sum.y / 8, sum.z / 8);
 	cout << "midPoint= (" << sum.x << "," << sum.y << "," << sum.z << ")" << endl;
 }
 

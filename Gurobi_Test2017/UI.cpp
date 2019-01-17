@@ -463,7 +463,53 @@ void drawTet(tet t, float r, float g, float b, float alpha) {
 	glPopMatrix();
 
 }
+void drawSeparatingPlane( int i,float r, float g, float b, float alpha) {
+	vec3 width(0,0,0);
+	vec3 height(0, 0, 0);
+	vec3 pp1= allResults.planePoint[i];
+	vec3 pp2(0,0,0);
+	vec3 n= allResults.normal[i];
+	int e[6][2] = { { 0,1 },{ 0,2 },{ 0,3 },{ 1,2 },{ 1,3 },{ 2,3 } };
+	int f[4][4] = { { 1,2,3,0 },{ 0,3,2,1 },{ 0,1,3,2 },{ 0,2,1,3 } };
 
+	if (i < 4) {//tet1 face index
+		int index = i;
+		pp2 = allResults.pTets1[i].vertex[f[index][0]];
+	}
+	else if (i < 8) {
+		int index = i-4;
+		pp2 = allResults.pTets2[i].vertex[f[index][0]];
+	}
+	else if (i < 44) {
+		int sIndex = (i - 8) / 6;
+		int dIndex = (i - 8) % 6;
+		pp2 = allResults.pTets2[i].vertex[e[sIndex][0]];
+
+	}
+	else {
+		cout << "Draw Separating Plane: [ERROR] Wrong Index " << endl;
+	}
+	float scale = 3.0f;
+	width = scale*normalize(pp2 - pp1);
+	height = scale*normalize(cross(width, n));
+	
+	vec3 lb = pp1 - width - height;
+	vec3 lu = pp1 - width + height;
+	vec3 ru = pp1 + width + height;
+	vec3 rb = pp1 + width - height;
+
+	glPushMatrix();
+	glTranslatef(0, 0, 0);
+	glBegin(GL_QUADS);
+	glColor4f(r,g,b,alpha);
+	glNormal3f(n.x, n.y, n.z);
+	glVertex3f(lb.x, lb.y, lb.z);
+	glVertex3f(lu.x, lu.y, lu.z);
+	glVertex3f(ru.x, ru.y, ru.z);
+	glVertex3f(rb.x, rb.y, rb.z);
+	glEnd();
+	glPopMatrix();
+}
 /***************************************** myGlutDisplay() *****************/
 void drawAxis() {
 	glPushMatrix();
@@ -540,6 +586,7 @@ void myGlutDisplay(void)
 				if (render_normal_option == ON)
 				{
 					drawNormal(i, 1.0f, 0.f, 0.f);
+					drawSeparatingPlane(i,0.1f,0.f,0.1f,0.1f);
 				}
 				if (render_pair_option == ON)
 				{
@@ -574,6 +621,7 @@ void myGlutDisplay(void)
 	if (render_normal_option == ON && (render_s_optimal_option == ON||render_r_optimal_option==ON||render_rest_option==ON|| render_static_option == ON))
 	{
 		drawNormal(minOptIndex, 1.0f, 0.f, 0.f);
+		drawSeparatingPlane(minOptIndex,0.1f,0.1f,0.1f,0.1f);
 	}
 	
 	if (render_ground_option == ON) {

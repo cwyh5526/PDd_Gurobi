@@ -32,6 +32,7 @@ typedef struct {
 	double optValue[44] = { 1000.0 };
 	double optTime[44] = { 0.0 };
 	vec3 normal[44];
+	vec3 planePoint[44];
 }optResults2;
 
 
@@ -108,6 +109,7 @@ private:
 	int minOptIndex = -1;
 	float minOptValue = 1000.0f;
 	float totalOptTime = 0.f;
+	vec3 optPlanePoint;
 
 	//optimization flag
 	//: should be true when optimization function is called. 
