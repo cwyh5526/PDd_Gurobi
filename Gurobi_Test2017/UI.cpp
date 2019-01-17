@@ -61,6 +61,7 @@ float totalOptTime;
 float minOptValue;
 int minOptIndex;
 
+float optValue;
 string filename = "NULL";
 
 //rendering option
@@ -88,6 +89,10 @@ GLUI_EditText	*text_optPair;
 GLUI_EditText	*text_optValue;
 GLUI_EditText	*text_optTime;
 
+GLUI_EditText	*text_deformPair;
+GLUI_EditText	*text_deformValue;
+//GLUI_EditText	*text_optTime;
+
 GLUI_RadioGroup *radio_defom;
 GLUI_Checkbox	*check_deform[45];
 /********** Miscellaneous global variables **********/
@@ -100,7 +105,34 @@ GLfloat lights_rotation[16] = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }
 
 /**************************************** control_cb() *******************/
 /* GLUI control callback                                                 */
+void control_deform(int control) {
+	int index = control - 400;
+	if (renderDeform[44] == OFF) { //if Off checkboxed is checked
+		renderDeform[44] = ON;
+		radio_defom->set_selected(ON);
+	}
 
+	if (index < 4) {
+		//text_optPair->set_text("Static Face" + to_string(minOptIndex));
+		text_deformPair->set_text("tet1 Face" + to_string(index));
+	}
+	else if (index < 8) {
+		//text_optPair->set_text("Deforming Face" + to_string(minOptIndex-4));
+		text_deformPair->set_text("tet2 Face" + to_string(index - 4));
+
+	}
+	else if (index < 44) {
+		//string str = "sE" + to_string((minOptIndex - 8) / 6)+ "dE" + to_string((minOptIndex - 8) % 6);
+		string str = "E" + to_string((index - 8) / 6) + "E" + to_string((index - 8) % 6);
+
+		text_deformPair->set_text(str);
+	}
+	optValue = (float)allResults.optValue[control - 400];
+	text_deformValue->set_float_val(optValue);
+	cout << allResults.optValue[control - 400] << endl;
+	glutPostRedisplay();
+
+}
 void control_cb(int control)
 {
 
@@ -242,7 +274,7 @@ void control_cb(int control)
 			renderDeform[44] = ON;
 			radio_defom->set_selected(ON);
 		}
-
+		
 		glutPostRedisplay();
 	}
 }
@@ -513,6 +545,8 @@ void myGlutDisplay(void)
 				{
 					drawPairs(i);
 				}
+				
+
 			}
 		}
 	}
@@ -645,6 +679,7 @@ int main(int argc, char* argv[])
 	GLUI_Panel *pan_r2 = new GLUI_Panel(input_panel, "r2", true);
 	GLUI_Panel *pan_r3 = new GLUI_Panel(input_panel, "r3", true);
 
+	
 
 	edit_rTet[0][0] = new GLUI_EditText(pan_r0, "x:", &restTet.vertex[0].x);
 	edit_rTet[0][1] = new GLUI_EditText(pan_r0, "y:", &restTet.vertex[0].y);
@@ -665,7 +700,13 @@ int main(int argc, char* argv[])
 	//Optimze Button
 	GLUI_Button *btn_opt = new GLUI_Button(in_out_panel, "Optimize", OPTIMIZE_ID, control_cb);;
 	//btn_opt->set_alignment(GLUI_ALIGN_LEFT);
-
+	GLUI_Panel *deform_value_panel = new GLUI_Panel(in_out_panel, "Deformation Results");
+	new GLUI_StaticText(deform_value_panel, "");
+	text_deformPair = new GLUI_EditText(deform_value_panel, "Deform Pair  : ");
+	text_deformValue = new GLUI_EditText(deform_value_panel, "Deform Value:", &optValue);
+	//text_optTime = new GLUI_EditText(deform_value_panel, "Deform Time  :", &totalOptTime);
+	text_deformPair->set_w(260);
+	text_deformValue->set_w(260);
 	glui->add_column_to_panel(in_out_panel, false);
 
 	
@@ -813,60 +854,60 @@ int main(int argc, char* argv[])
 	//check_deform[44]= new GLUI_Checkbox(rendering_panel_down, "Off", &renderDeform[44], DEFORM_TET_RENDER, control_cb); //off면 모두 다 없애버령
 
 	new GLUI_StaticText(rendering_panel_down, "");
-	check_deform[0] = new GLUI_Checkbox(rendering_panel_down, "Static Face 0", &renderDeform[0], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[1] = new GLUI_Checkbox(rendering_panel_down, "Static Face 1", &renderDeform[1], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[2] = new GLUI_Checkbox(rendering_panel_down, "Static Face 2", &renderDeform[2], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[3] = new GLUI_Checkbox(rendering_panel_down, "Static Face 3", &renderDeform[3], DEFORM_TET_RENDER_CHECKED, control_cb);
+	check_deform[0] = new GLUI_Checkbox(rendering_panel_down, "Static Face 0", &renderDeform[0], DEFORM_TET_RENDER_CHECKED_0, control_deform);
+	check_deform[1] = new GLUI_Checkbox(rendering_panel_down, "Static Face 1", &renderDeform[1], DEFORM_TET_RENDER_CHECKED_1, control_deform);
+	check_deform[2] = new GLUI_Checkbox(rendering_panel_down, "Static Face 2", &renderDeform[2], DEFORM_TET_RENDER_CHECKED_2, control_deform);
+	check_deform[3] = new GLUI_Checkbox(rendering_panel_down, "Static Face 3", &renderDeform[3], DEFORM_TET_RENDER_CHECKED_3, control_deform);
 	new GLUI_StaticText(rendering_panel_down, "");												 
-	check_deform[4] = new GLUI_Checkbox(rendering_panel_down, "Deform Face 0", &renderDeform[4], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[5] = new GLUI_Checkbox(rendering_panel_down, "Deform Face 1", &renderDeform[5], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[6] = new GLUI_Checkbox(rendering_panel_down, "Deform Face 2", &renderDeform[6], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[7] = new GLUI_Checkbox(rendering_panel_down, "Deform Face 3", &renderDeform[7], DEFORM_TET_RENDER_CHECKED, control_cb);
+	check_deform[4] = new GLUI_Checkbox(rendering_panel_down, "Deform Face 0", &renderDeform[4], DEFORM_TET_RENDER_CHECKED_4, control_deform);
+	check_deform[5] = new GLUI_Checkbox(rendering_panel_down, "Deform Face 1", &renderDeform[5], DEFORM_TET_RENDER_CHECKED_5, control_deform);
+	check_deform[6] = new GLUI_Checkbox(rendering_panel_down, "Deform Face 2", &renderDeform[6], DEFORM_TET_RENDER_CHECKED_6, control_deform);
+	check_deform[7] = new GLUI_Checkbox(rendering_panel_down, "Deform Face 3", &renderDeform[7], DEFORM_TET_RENDER_CHECKED_7, control_deform);
 	glui->add_column_to_panel(rendering_panel_down);
 
-	check_deform[8] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 0", &renderDeform[8], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[9] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 1", &renderDeform[9], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[10] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 2", &renderDeform[10], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[11] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 3", &renderDeform[11], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[12] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 4", &renderDeform[12], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[13] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 5", &renderDeform[13], DEFORM_TET_RENDER_CHECKED, control_cb);
+	check_deform[8] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 0", &renderDeform[8], DEFORM_TET_RENDER_CHECKED_8, control_deform);
+	check_deform[9] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 1", &renderDeform[9], DEFORM_TET_RENDER_CHECKED_9, control_deform);
+	check_deform[10] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 2", &renderDeform[10], DEFORM_TET_RENDER_CHECKED_10, control_deform);
+	check_deform[11] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 3", &renderDeform[11], DEFORM_TET_RENDER_CHECKED_11, control_deform);
+	check_deform[12] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 4", &renderDeform[12], DEFORM_TET_RENDER_CHECKED_12, control_deform);
+	check_deform[13] = new GLUI_Checkbox(rendering_panel_down, "S Edge 0 D Edge 5", &renderDeform[13], DEFORM_TET_RENDER_CHECKED_13, control_deform);
 	new GLUI_StaticText(rendering_panel_down, "");													   
-	check_deform[14] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 0", &renderDeform[14], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[15] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 1", &renderDeform[15], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[16] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 2", &renderDeform[16], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[17] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 3", &renderDeform[17], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[18] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 4", &renderDeform[18], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[19] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 5", &renderDeform[19], DEFORM_TET_RENDER_CHECKED, control_cb);
+	check_deform[14] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 0", &renderDeform[14], DEFORM_TET_RENDER_CHECKED_14, control_deform);
+	check_deform[15] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 1", &renderDeform[15], DEFORM_TET_RENDER_CHECKED_15, control_deform);
+	check_deform[16] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 2", &renderDeform[16], DEFORM_TET_RENDER_CHECKED_16, control_deform);
+	check_deform[17] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 3", &renderDeform[17], DEFORM_TET_RENDER_CHECKED_17, control_deform);
+	check_deform[18] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 4", &renderDeform[18], DEFORM_TET_RENDER_CHECKED_18, control_deform);
+	check_deform[19] = new GLUI_Checkbox(rendering_panel_down, "S Edge 1 D Edge 5", &renderDeform[19], DEFORM_TET_RENDER_CHECKED_19, control_deform);
 	glui->add_column_to_panel(rendering_panel_down);
 
-	check_deform[20] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 0", &renderDeform[20], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[21] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 1", &renderDeform[21], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[22] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 2", &renderDeform[22], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[23] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 3", &renderDeform[23], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[24] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 4", &renderDeform[24], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[25] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 5", &renderDeform[25], DEFORM_TET_RENDER_CHECKED, control_cb);
-	new GLUI_StaticText(rendering_panel_down, "");													   
-	check_deform[26] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 0", &renderDeform[26], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[27] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 1", &renderDeform[27], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[28] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 2", &renderDeform[28], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[29] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 3", &renderDeform[29], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[30] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 4", &renderDeform[30], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[31] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 5", &renderDeform[31], DEFORM_TET_RENDER_CHECKED, control_cb);
-	glui->add_column_to_panel(rendering_panel_down);
-
-	check_deform[32] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 0", &renderDeform[32], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[33] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 1", &renderDeform[33], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[34] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 2", &renderDeform[34], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[35] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 3", &renderDeform[35], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[36] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 4", &renderDeform[36], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[37] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 5", &renderDeform[37], DEFORM_TET_RENDER_CHECKED, control_cb);
-	new GLUI_StaticText(rendering_panel_down, "");													   
-	check_deform[38] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 0", &renderDeform[38], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[39] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 1", &renderDeform[39], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[40] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 2", &renderDeform[40], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[41] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 3", &renderDeform[41], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[42] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 4", &renderDeform[42], DEFORM_TET_RENDER_CHECKED, control_cb);
-	check_deform[43] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 5", &renderDeform[43], DEFORM_TET_RENDER_CHECKED, control_cb);
+	check_deform[20] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 0", &renderDeform[20], DEFORM_TET_RENDER_CHECKED_20, control_deform);
+	check_deform[21] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 1", &renderDeform[21], DEFORM_TET_RENDER_CHECKED_21, control_deform);
+	check_deform[22] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 2", &renderDeform[22], DEFORM_TET_RENDER_CHECKED_22, control_deform);
+	check_deform[23] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 3", &renderDeform[23], DEFORM_TET_RENDER_CHECKED_23, control_deform);
+	check_deform[24] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 4", &renderDeform[24], DEFORM_TET_RENDER_CHECKED_24, control_deform);
+	check_deform[25] = new GLUI_Checkbox(rendering_panel_down, "S Edge 2 D Edge 5", &renderDeform[25], DEFORM_TET_RENDER_CHECKED_25, control_deform);
+	new GLUI_StaticText(rendering_panel_down, "");													   							
+	check_deform[26] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 0", &renderDeform[26], DEFORM_TET_RENDER_CHECKED_26, control_deform);
+	check_deform[27] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 1", &renderDeform[27], DEFORM_TET_RENDER_CHECKED_27, control_deform);
+	check_deform[28] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 2", &renderDeform[28], DEFORM_TET_RENDER_CHECKED_28, control_deform);
+	check_deform[29] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 3", &renderDeform[29], DEFORM_TET_RENDER_CHECKED_29, control_deform);
+	check_deform[30] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 4", &renderDeform[30], DEFORM_TET_RENDER_CHECKED_30, control_deform);
+	check_deform[31] = new GLUI_Checkbox(rendering_panel_down, "S Edge 3 D Edge 5", &renderDeform[31], DEFORM_TET_RENDER_CHECKED_31, control_deform);
+	glui->add_column_to_panel(rendering_panel_down);																			
+																																
+	check_deform[32] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 0", &renderDeform[32], DEFORM_TET_RENDER_CHECKED_32, control_deform);
+	check_deform[33] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 1", &renderDeform[33], DEFORM_TET_RENDER_CHECKED_33, control_deform);
+	check_deform[34] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 2", &renderDeform[34], DEFORM_TET_RENDER_CHECKED_34, control_deform);
+	check_deform[35] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 3", &renderDeform[35], DEFORM_TET_RENDER_CHECKED_35, control_deform);
+	check_deform[36] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 4", &renderDeform[36], DEFORM_TET_RENDER_CHECKED_36, control_deform);
+	check_deform[37] = new GLUI_Checkbox(rendering_panel_down, "S Edge 4 D Edge 5", &renderDeform[37], DEFORM_TET_RENDER_CHECKED_37, control_deform);
+	new GLUI_StaticText(rendering_panel_down, "");													   							
+	check_deform[38] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 0", &renderDeform[38], DEFORM_TET_RENDER_CHECKED_38, control_deform);
+	check_deform[39] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 1", &renderDeform[39], DEFORM_TET_RENDER_CHECKED_39, control_deform);
+	check_deform[40] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 2", &renderDeform[40], DEFORM_TET_RENDER_CHECKED_40, control_deform);
+	check_deform[41] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 3", &renderDeform[41], DEFORM_TET_RENDER_CHECKED_41, control_deform);
+	check_deform[42] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 4", &renderDeform[42], DEFORM_TET_RENDER_CHECKED_42, control_deform);
+	check_deform[43] = new GLUI_Checkbox(rendering_panel_down, "S Edge 5 D Edge 5", &renderDeform[43], DEFORM_TET_RENDER_CHECKED_43, control_deform);
 
 
 	/**** Link windows to GLUI, and register idle callback ******/

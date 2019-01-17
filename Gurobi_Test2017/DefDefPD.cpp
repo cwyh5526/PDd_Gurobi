@@ -67,6 +67,8 @@ void DefDefPD::initDefault() {
 	calculateMidPoint();
 
 	optimized = false;
+	minOptValue = 1000.f;
+	minOptIndex = -1;
 	totalOptTime = 0.f;
 	return;
 
@@ -84,6 +86,9 @@ void DefDefPD::init(tet tet1, tet tet2) {
 	calculateMidPoint();
 
 	optimized = false;
+	minOptValue = 1000.f;
+	minOptIndex = -1;
+
 	totalOptTime = 0.f;
 
 }
@@ -132,6 +137,7 @@ void DefDefPD::resolveDefDefPenetration() {
 	//find minimum metric value and that case.
 	pTet[0] = pTetAll2.pTets1[minOptIndex];
 	pTet[1] = pTetAll2.pTets2[minOptIndex];
+	
 	optimized = true;
 	numOpt++;
 }
@@ -154,7 +160,11 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 		cout << "2" << endl;
 		Var t1[4];
 		Var t2[4];
-		//Var mp;
+		Var mp;
+
+		mp.x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPx");
+		mp.y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPy");
+		mp.z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPz");
 
 		t1[0].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0x");
 		t1[0].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0y");
@@ -256,7 +266,6 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 			normal = -normal;
 		}
 
-		pTetAll2.normal[pairIndex] = normal;
 		cout << "8" << endl;
 		// Add constraints: Face에포함된 vertex를 순서대로 p0 p1 p2라 하고, face에 포함되지 않은 vertex를 p3라 하자. 즉 faceIndex를 가진 vertex 자리에 p3를 넣어주어야 한다.
 
@@ -272,19 +281,45 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 		// n·(t2_2-mp)>=0
 		// n·(t2_3-mp)>=0
 
+		////1.t1은 separating normal 반대방향에 있다.
+		//model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - dot(normal, midPoint) <= 0, "c0");
+		//model.addConstr(normal.x*t1[1].x + normal.y*t1[1].y + normal.z*t1[1].z - dot(normal, midPoint) <= 0, "c1");
+		//model.addConstr(normal.x*t1[2].x + normal.y*t1[2].y + normal.z*t1[2].z - dot(normal, midPoint) <= 0, "c2");
+		//model.addConstr(normal.x*t1[3].x + normal.y*t1[3].y + normal.z*t1[3].z - dot(normal, midPoint) <= 0, "c3");
+
+		////2.t2는 separating normal 방향에 있다.
+		//model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - dot(normal, midPoint) >= 0, "c4");
+		//model.addConstr(normal.x*t2[1].x + normal.y*t2[1].y + normal.z*t2[1].z - dot(normal, midPoint) >= 0, "c5");
+		//model.addConstr(normal.x*t2[2].x + normal.y*t2[2].y + normal.z*t2[2].z - dot(normal, midPoint) >= 0, "c6");
+		//model.addConstr(normal.x*t2[3].x + normal.y*t2[3].y + normal.z*t2[3].z - dot(normal, midPoint) >= 0, "c7");
+
 		//1.t1은 separating normal 반대방향에 있다.
-		model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - dot(normal, midPoint) <= 0, "c0");
-		model.addConstr(normal.x*t1[1].x + normal.y*t1[1].y + normal.z*t1[1].z - dot(normal, midPoint) <= 0, "c1");
-		model.addConstr(normal.x*t1[2].x + normal.y*t1[2].y + normal.z*t1[2].z - dot(normal, midPoint) <= 0, "c2");
-		model.addConstr(normal.x*t1[3].x + normal.y*t1[3].y + normal.z*t1[3].z - dot(normal, midPoint) <= 0, "c3");
+		model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c0");
+		model.addConstr(normal.x*t1[1].x + normal.y*t1[1].y + normal.z*t1[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c1");
+		model.addConstr(normal.x*t1[2].x + normal.y*t1[2].y + normal.z*t1[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c2");
+		model.addConstr(normal.x*t1[3].x + normal.y*t1[3].y + normal.z*t1[3].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c3");
 
-		//2.t2는 separating normal 방향에 있다.
-		model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - dot(normal, midPoint) >= 0, "c4");
-		model.addConstr(normal.x*t2[1].x + normal.y*t2[1].y + normal.z*t2[1].z - dot(normal, midPoint) >= 0, "c5");
-		model.addConstr(normal.x*t2[2].x + normal.y*t2[2].y + normal.z*t2[2].z - dot(normal, midPoint) >= 0, "c6");
-		model.addConstr(normal.x*t2[3].x + normal.y*t2[3].y + normal.z*t2[3].z - dot(normal, midPoint) >= 0, "c7");
+		//2.t2는 separating n 방향에 있다.						 
+		model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c4");
+		model.addConstr(normal.x*t2[1].x + normal.y*t2[1].y + normal.z*t2[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c5");
+		model.addConstr(normal.x*t2[2].x + normal.y*t2[2].y + normal.z*t2[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c6");		
+		model.addConstr(normal.x*t2[3].x + normal.y*t2[3].y + normal.z*t2[3].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c7");
+		//3. mp는 separating plane 위에 있다.
 
+		if (pairIndex < 4) {
+			model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c8");
+			model.addConstr(normal.x*t1[1].x + normal.y*t1[1].y + normal.z*t1[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c9");
+			model.addConstr(normal.x*t1[2].x + normal.y*t1[2].y + normal.z*t1[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c10");
 
+			model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c11");
+		}
+		else {
+			model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0,  "c8");
+																																		    
+			model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c9");
+			model.addConstr(normal.x*t2[1].x + normal.y*t2[1].y + normal.z*t2[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c10");
+			model.addConstr(normal.x*t2[2].x + normal.y*t2[2].y + normal.z*t2[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0,  "c11");
+		}
 
 		cout << "9" << endl;
 
@@ -295,6 +330,7 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 		//get Result;
 		pTetAll2.optValue[pairIndex] = model.get(GRB_DoubleAttr_ObjVal);
 		pTetAll2.optTime[pairIndex] = model.get(GRB_DoubleAttr_Runtime);
+		pTetAll2.normal[pairIndex] = normal;
 
 
 
@@ -402,7 +438,11 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 
 		Var t1[4];
 		Var t2[4];
-		//Var mp;
+		Var mp;
+
+		mp.x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPx"); 
+		mp.y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPy"); 
+		mp.z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPz"); 
 
 		t1[0].x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0x");
 		t1[0].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0y");
@@ -440,7 +480,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 		cout << "3" << endl;
 		// Set objective
 		GRBQuadExpr obj =
-			(t1[0].x*t1[0].x + t1[0].x*t1[1].x + t1[1].x*t1[1].x + t1[0].x*t1[2].x + t1[1].x*t1[2].x + t1[2].x*t1[2].x + t1[0].x*t1[3].x + t1[1].x*t1[3].x + t1[2].x*t1[3].x + t1[3].x*t1[3].x
+			     (t1[0].x*t1[0].x + t1[0].x*t1[1].x + t1[1].x*t1[1].x + t1[0].x*t1[2].x + t1[1].x*t1[2].x + t1[2].x*t1[2].x + t1[0].x*t1[3].x + t1[1].x*t1[3].x + t1[2].x*t1[3].x + t1[3].x*t1[3].x
 				+ t1[0].y*t1[0].y + t1[0].y*t1[1].y + t1[1].y*t1[1].y + t1[0].y*t1[2].y + t1[1].y*t1[2].y + t1[2].y*t1[2].y + t1[0].y*t1[3].y + t1[1].y*t1[3].y + t1[2].y*t1[3].y + t1[3].y*t1[3].y
 				+ t1[0].z*t1[0].z + t1[0].z*t1[1].z + t1[1].z*t1[1].z + t1[0].z*t1[2].z + t1[1].z*t1[2].z + t1[2].z*t1[2].z + t1[0].z*t1[3].z + t1[1].z*t1[3].z + t1[2].z*t1[3].z + t1[3].z*t1[3].z
 
@@ -504,20 +544,37 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 		// n·(p2-mp)>=0
 		// n·(p3-mp)>=0
 
+		////1.t1은 separating normal 반대방향에 있다.
+		//model.addConstr(n.x*t1[0].x + n.y*t1[0].y + n.z*t1[0].z - dot(n, midPoint) <= 0, "c0");
+		//model.addConstr(n.x*t1[1].x + n.y*t1[1].y + n.z*t1[1].z - dot(n, midPoint) <= 0, "c1");
+		//model.addConstr(n.x*t1[2].x + n.y*t1[2].y + n.z*t1[2].z - dot(n, midPoint) <= 0, "c2");
+		//model.addConstr(n.x*t1[3].x + n.y*t1[3].y + n.z*t1[3].z - dot(n, midPoint) <= 0, "c3");
+
+		////2.t2는 separating n 방향에 있다.
+		//model.addConstr(n.x*t2[0].x + n.y*t2[0].y + n.z*t2[0].z - dot(n, midPoint) >= 0, "c4");
+		//model.addConstr(n.x*t2[1].x + n.y*t2[1].y + n.z*t2[1].z - dot(n, midPoint) >= 0, "c5");
+		//model.addConstr(n.x*t2[2].x + n.y*t2[2].y + n.z*t2[2].z - dot(n, midPoint) >= 0, "c6");
+		//model.addConstr(n.x*t2[3].x + n.y*t2[3].y + n.z*t2[3].z - dot(n, midPoint) >= 0, "c7");
+
 		//1.t1은 separating normal 반대방향에 있다.
-		model.addConstr(n.x*t1[0].x + n.y*t1[0].y + n.z*t1[0].z - dot(n, midPoint) <= 0, "c0");
-		model.addConstr(n.x*t1[1].x + n.y*t1[1].y + n.z*t1[1].z - dot(n, midPoint) <= 0, "c1");
-		model.addConstr(n.x*t1[2].x + n.y*t1[2].y + n.z*t1[2].z - dot(n, midPoint) <= 0, "c2");
-		model.addConstr(n.x*t1[3].x + n.y*t1[3].y + n.z*t1[3].z - dot(n, midPoint) <= 0, "c3");
+		model.addConstr(n.x*t1[0].x + n.y*t1[0].y + n.z*t1[0].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c0");
+		model.addConstr(n.x*t1[1].x + n.y*t1[1].y + n.z*t1[1].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c1");
+		model.addConstr(n.x*t1[2].x + n.y*t1[2].y + n.z*t1[2].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c2");
+		model.addConstr(n.x*t1[3].x + n.y*t1[3].y + n.z*t1[3].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c3");
+																  
+		//2.t2는 separating n 방향에 있다.						 
+		model.addConstr(n.x*t2[0].x + n.y*t2[0].y + n.z*t2[0].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c4");
+		model.addConstr(n.x*t2[1].x + n.y*t2[1].y + n.z*t2[1].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c5");
+		model.addConstr(n.x*t2[2].x + n.y*t2[2].y + n.z*t2[2].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c6");
+		model.addConstr(n.x*t2[3].x + n.y*t2[3].y + n.z*t2[3].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c7");
+		//3. mp는 separating plane 위에 있다.
 
-		//2.t2는 separating n 방향에 있다.
-		model.addConstr(n.x*t2[0].x + n.y*t2[0].y + n.z*t2[0].z - dot(n, midPoint) >= 0, "c4");
-		model.addConstr(n.x*t2[1].x + n.y*t2[1].y + n.z*t2[1].z - dot(n, midPoint) >= 0, "c5");
-		model.addConstr(n.x*t2[2].x + n.y*t2[2].y + n.z*t2[2].z - dot(n, midPoint) >= 0, "c6");
-		model.addConstr(n.x*t2[3].x + n.y*t2[3].y + n.z*t2[3].z - dot(n, midPoint) >= 0, "c7");
+		model.addConstr(n.x*t1[0].x + n.y*t1[0].y + n.z*t1[0].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) == 0, "c8");
+		model.addConstr(n.x*t1[1].x + n.y*t1[1].y + n.z*t1[1].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) == 0, "c9");
 
-
-
+		model.addConstr(n.x*t2[1].x + n.y*t2[1].y + n.z*t2[1].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) == 0, "c10");																									
+		model.addConstr(n.x*t2[0].x + n.y*t2[0].y + n.z*t2[0].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) == 0, "c11");
+		
 		//Optimization
 		model.optimize();
 		//cout << "-----------------5----------------------------------------------------------" << endl;
@@ -571,6 +628,11 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 			// Create variables
 			Var t1_[4];
 			Var t2_[4];
+			Var mp_;
+
+			mp_.x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPx");
+			mp_.y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPy");
+			mp_.z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPz");
 
 			t1_[0].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0x");
 			t1_[0].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0y");
@@ -667,18 +729,37 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 			// n·(p1-mp)>=0
 			// n·(p2-mp)>=0
 			// n·(p3-mp)>=0
+			////1.t1은 separating normal 반대방향에 있다.
+			//model_second.addConstr(n.x*t1_[0].x + n.y*t1_[0].y + n.z*t1_[0].z - dot(n, midPoint) <= 0, "c0");
+			//model_second.addConstr(n.x*t1_[1].x + n.y*t1_[1].y + n.z*t1_[1].z - dot(n, midPoint) <= 0, "c1");
+			//model_second.addConstr(n.x*t1_[2].x + n.y*t1_[2].y + n.z*t1_[2].z - dot(n, midPoint) <= 0, "c2");
+			//model_second.addConstr(n.x*t1_[3].x + n.y*t1_[3].y + n.z*t1_[3].z - dot(n, midPoint) <= 0, "c3");
+
+			////2.t2는 separating n 방향에 있다.
+			//model_second.addConstr(n.x*t2_[0].x + n.y*t2_[0].y + n.z*t2_[0].z - dot(n, midPoint) >= 0, "c4");
+			//model_second.addConstr(n.x*t2_[1].x + n.y*t2_[1].y + n.z*t2_[1].z - dot(n, midPoint) >= 0, "c5");
+			//model_second.addConstr(n.x*t2_[2].x + n.y*t2_[2].y + n.z*t2_[2].z - dot(n, midPoint) >= 0, "c6");
+			//model_second.addConstr(n.x*t2_[3].x + n.y*t2_[3].y + n.z*t2_[3].z - dot(n, midPoint) >= 0, "c7");
+
+
 			//1.t1은 separating normal 반대방향에 있다.
-			model_second.addConstr(n.x*t1_[0].x + n.y*t1_[0].y + n.z*t1_[0].z - dot(n, midPoint) <= 0, "c0");
-			model_second.addConstr(n.x*t1_[1].x + n.y*t1_[1].y + n.z*t1_[1].z - dot(n, midPoint) <= 0, "c1");
-			model_second.addConstr(n.x*t1_[2].x + n.y*t1_[2].y + n.z*t1_[2].z - dot(n, midPoint) <= 0, "c2");
-			model_second.addConstr(n.x*t1_[3].x + n.y*t1_[3].y + n.z*t1_[3].z - dot(n, midPoint) <= 0, "c3");
+			model_second.addConstr(n.x*t1_[0].x + n.y*t1_[0].y + n.z*t1_[0].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c0");
+			model_second.addConstr(n.x*t1_[1].x + n.y*t1_[1].y + n.z*t1_[1].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c1");
+			model_second.addConstr(n.x*t1_[2].x + n.y*t1_[2].y + n.z*t1_[2].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c2");
+			model_second.addConstr(n.x*t1_[3].x + n.y*t1_[3].y + n.z*t1_[3].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c3");
 
-			//2.t2는 separating n 방향에 있다.
-			model_second.addConstr(n.x*t2_[0].x + n.y*t2_[0].y + n.z*t2_[0].z - dot(n, midPoint) >= 0, "c4");
-			model_second.addConstr(n.x*t2_[1].x + n.y*t2_[1].y + n.z*t2_[1].z - dot(n, midPoint) >= 0, "c5");
-			model_second.addConstr(n.x*t2_[2].x + n.y*t2_[2].y + n.z*t2_[2].z - dot(n, midPoint) >= 0, "c6");
-			model_second.addConstr(n.x*t2_[3].x + n.y*t2_[3].y + n.z*t2_[3].z - dot(n, midPoint) >= 0, "c7");
+			//2.t2는 separating n 방향에 있다.						 
+			model_second.addConstr(n.x*t2_[0].x + n.y*t2_[0].y + n.z*t2_[0].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c4");
+			model_second.addConstr(n.x*t2_[1].x + n.y*t2_[1].y + n.z*t2_[1].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c5");
+			model_second.addConstr(n.x*t2_[2].x + n.y*t2_[2].y + n.z*t2_[2].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c6");
+			model_second.addConstr(n.x*t2_[3].x + n.y*t2_[3].y + n.z*t2_[3].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c7");
+			//3. mp는 separating plane 위에 있다.
 
+			model_second.addConstr(n.x*t1_[0].x + n.y*t1_[0].y + n.z*t1_[0].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) == 0, "c8");
+			model_second.addConstr(n.x*t1_[1].x + n.y*t1_[1].y + n.z*t1_[1].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) == 0, "c9");
+
+			model_second.addConstr(n.x*t2_[1].x + n.y*t2_[1].y + n.z*t2_[1].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) == 0, "c10");
+			model_second.addConstr(n.x*t2_[0].x + n.y*t2_[0].y + n.z*t2_[0].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) == 0, "c11");
 
 			//Optimization
 			model_second.optimize();
@@ -752,7 +833,7 @@ void DefDefPD::printV3(vec3 v) {
 void DefDefPD::printResult(int pairIndex) {
 
 	tet pTet[2] = { pTetAll2.pTets1[pairIndex], pTetAll2.pTets2[pairIndex] };
-	double minOptValue = pTetAll2.optValue[pairIndex];
+	double optValue = pTetAll2.optValue[pairIndex];	
 	double optTime = pTetAll2.optTime[pairIndex];
 
 	int minOptIndex = pairIndex;
@@ -761,6 +842,8 @@ void DefDefPD::printResult(int pairIndex) {
 		cout << endl;
 		cout << "[Optimization Result]" << endl;
 		cout << "1. Minimum metric value: " << minOptValue << endl;
+		cout << " metric value: " << optValue << endl;
+
 		cout << "2. Optimization time for this pair:" << optTime << endl;
 		cout << "3. Total Optimization time: " << totalOptTime << endl;
 		cout << "4. Separating plane from: " << minOptIndex << endl;
@@ -868,7 +951,7 @@ void DefDefPD::separatingPlaneCalculation(vec3 faceVrtx[3], vec3 vrtx, vec3 *nor
 	std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
 	std::cout << "v12: (" << (v12).x << "," << (v12).y << "," << (v12).z << ")" << std::endl;
 	vec3 n = cross(v01, v12);
-	if (dot(vrtx, n) < 0) {//if the calculated normal is inward, change it to outward
+	if (dot(vrtx- faceVrtx[1] , n) > 0) {//if the calculated normal is inward, change it to outward
 		n = -n;
 	}
 	try {
@@ -912,7 +995,7 @@ void DefDefPD::writeCSV(string fileName) {
 	fprintV3(output, rTet[1].vertex[0]);
 	output << ",t1.p0,";
 	fprintV3(output, pTet[0].vertex[0]);
-	output << ",t2.p0";
+	output << ",t2.p0,";
 	fprintV3(output, pTet[1].vertex[0]);
 	output << ",";
 

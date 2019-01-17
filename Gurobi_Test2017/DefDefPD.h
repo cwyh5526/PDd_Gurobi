@@ -119,6 +119,6 @@ private:
 
 	//for def def
 
-	vec3 midPoint; //the mid point of two rest tetrahedron for Def-Def case.
+	//vec3 midPoint; //the mid point of two rest tetrahedron for Def-Def case.
 
 };
