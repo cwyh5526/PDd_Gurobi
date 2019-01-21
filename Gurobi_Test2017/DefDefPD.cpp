@@ -293,20 +293,22 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 		//model.addConstr(normal.x*t2[2].x + normal.y*t2[2].y + normal.z*t2[2].z - dot(normal, midPoint) >= 0, "c6");
 		//model.addConstr(normal.x*t2[3].x + normal.y*t2[3].y + normal.z*t2[3].z - dot(normal, midPoint) >= 0, "c7");
 
-		//1.t1은 separating normal 반대방향에 있다.
-		model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c0");
-		model.addConstr(normal.x*t1[1].x + normal.y*t1[1].y + normal.z*t1[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c1");
-		model.addConstr(normal.x*t1[2].x + normal.y*t1[2].y + normal.z*t1[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c2");
-		model.addConstr(normal.x*t1[3].x + normal.y*t1[3].y + normal.z*t1[3].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c3");
-
-		//2.t2는 separating n 방향에 있다.						 
-		model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c4");
-		model.addConstr(normal.x*t2[1].x + normal.y*t2[1].y + normal.z*t2[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c5");
-		model.addConstr(normal.x*t2[2].x + normal.y*t2[2].y + normal.z*t2[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c6");		
-		model.addConstr(normal.x*t2[3].x + normal.y*t2[3].y + normal.z*t2[3].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c7");
-		//3. mp는 separating plane 위에 있다.
 
 		if (pairIndex < 4) {
+
+			//1.t1은 separating normal 반대방향에 있다.
+			//model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c0");
+			//model.addConstr(normal.x*t1[1].x + normal.y*t1[1].y + normal.z*t1[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c1");
+			//model.addConstr(normal.x*t1[2].x + normal.y*t1[2].y + normal.z*t1[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c2");
+			model.addConstr(normal.x*t1[3].x + normal.y*t1[3].y + normal.z*t1[3].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c3");
+
+			//2.t2는 separating n 방향에 있다.						 
+			//model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c4");
+			model.addConstr(normal.x*t2[1].x + normal.y*t2[1].y + normal.z*t2[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c5");
+			model.addConstr(normal.x*t2[2].x + normal.y*t2[2].y + normal.z*t2[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c6");
+			model.addConstr(normal.x*t2[3].x + normal.y*t2[3].y + normal.z*t2[3].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c7");
+
+			//3. mp는 separating plane 위에 있다.
 			model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c8");
 			model.addConstr(normal.x*t1[1].x + normal.y*t1[1].y + normal.z*t1[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c9");
 			model.addConstr(normal.x*t1[2].x + normal.y*t1[2].y + normal.z*t1[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c10");
@@ -314,6 +316,20 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 			model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c11");
 		}
 		else {
+
+			//1.t1은 separating normal 반대방향에 있다.
+			//model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c0");
+			model.addConstr(normal.x*t1[1].x + normal.y*t1[1].y + normal.z*t1[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c1");
+			model.addConstr(normal.x*t1[2].x + normal.y*t1[2].y + normal.z*t1[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c2");
+			model.addConstr(normal.x*t1[3].x + normal.y*t1[3].y + normal.z*t1[3].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) <= 0, "c3");
+
+			//2.t2는 separating n 방향에 있다.						 
+			//model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c4");
+			//model.addConstr(normal.x*t2[1].x + normal.y*t2[1].y + normal.z*t2[1].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c5");
+			//model.addConstr(normal.x*t2[2].x + normal.y*t2[2].y + normal.z*t2[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c6");
+			model.addConstr(normal.x*t2[3].x + normal.y*t2[3].y + normal.z*t2[3].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) >= 0, "c7");
+
+			//3. mp는 separating plane 위에 있다.
 			model.addConstr(normal.x*t1[0].x + normal.y*t1[0].y + normal.z*t1[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0,  "c8");
 																																		    
 			model.addConstr(normal.x*t2[0].x + normal.y*t2[0].y + normal.z*t2[0].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0, "c9");
@@ -553,14 +569,14 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 		//model.addConstr(n.x*t2[3].x + n.y*t2[3].y + n.z*t2[3].z - dot(n, midPoint) >= 0, "c7");
 
 		//1.t1은 separating normal 반대방향에 있다.
-		model.addConstr(n.x*t1[0].x + n.y*t1[0].y + n.z*t1[0].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c0");
-		model.addConstr(n.x*t1[1].x + n.y*t1[1].y + n.z*t1[1].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c1");
+		//model.addConstr(n.x*t1[0].x + n.y*t1[0].y + n.z*t1[0].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c0");
+		//model.addConstr(n.x*t1[1].x + n.y*t1[1].y + n.z*t1[1].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c1");
 		model.addConstr(n.x*t1[2].x + n.y*t1[2].y + n.z*t1[2].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c2");
 		model.addConstr(n.x*t1[3].x + n.y*t1[3].y + n.z*t1[3].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) <= 0, "c3");
 																  
 		//2.t2는 separating n 방향에 있다.						 
-		model.addConstr(n.x*t2[0].x + n.y*t2[0].y + n.z*t2[0].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c4");
-		model.addConstr(n.x*t2[1].x + n.y*t2[1].y + n.z*t2[1].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c5");
+		//model.addConstr(n.x*t2[0].x + n.y*t2[0].y + n.z*t2[0].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c4");
+		//model.addConstr(n.x*t2[1].x + n.y*t2[1].y + n.z*t2[1].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c5");
 		model.addConstr(n.x*t2[2].x + n.y*t2[2].y + n.z*t2[2].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c6");
 		model.addConstr(n.x*t2[3].x + n.y*t2[3].y + n.z*t2[3].z - (n.x*mp.x + n.y*mp.y + n.z*mp.z) >= 0, "c7");
 		//3. mp는 separating plane 위에 있다.

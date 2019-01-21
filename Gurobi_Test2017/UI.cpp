@@ -466,7 +466,8 @@ void drawTet(tet t, float r, float g, float b, float alpha) {
 void drawSeparatingPlane( int i,float r, float g, float b, float alpha) {
 	vec3 width(0,0,0);
 	vec3 height(0, 0, 0);
-	vec3 pp1= allResults.planePoint[i];
+	vec3 pp1(0,0,0);
+	//allResults.planePoint[i];
 	vec3 pp2(0,0,0);
 	vec3 n= allResults.normal[i];
 	int e[6][2] = { { 0,1 },{ 0,2 },{ 0,3 },{ 1,2 },{ 1,3 },{ 2,3 } };
@@ -474,17 +475,19 @@ void drawSeparatingPlane( int i,float r, float g, float b, float alpha) {
 
 	if (i < 4) {//tet1 face index
 		int index = i;
+		pp1 = allResults.pTets1[i].vertex[f[index][1]];
 		pp2 = allResults.pTets1[i].vertex[f[index][0]];
 	}
 	else if (i < 8) {
 		int index = i-4;
+		pp1 = allResults.pTets2[i].vertex[f[index][1]];
 		pp2 = allResults.pTets2[i].vertex[f[index][0]];
 	}
 	else if (i < 44) {
 		int sIndex = (i - 8) / 6;
 		int dIndex = (i - 8) % 6;
-		pp2 = allResults.pTets2[i].vertex[e[sIndex][0]];
-
+		pp1 = allResults.pTets1[i].vertex[e[sIndex][1]];
+		pp2 = allResults.pTets1[i].vertex[e[sIndex][0]];
 	}
 	else {
 		cout << "Draw Separating Plane: [ERROR] Wrong Index " << endl;
