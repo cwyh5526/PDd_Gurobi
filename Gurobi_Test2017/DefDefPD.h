@@ -1,40 +1,13 @@
 #pragma once
-#pragma once
-#include <glm/glm.hpp>
 
 #include <iostream>
 #include <fstream>
 
 #include<GL/glut.h>
+#include"DataStructure.h"
 
-
-#include "gurobi_c++.h"
 
 using namespace std;
-using namespace glm;
-
-typedef struct {
-	GRBVar x;
-	GRBVar y;
-	GRBVar z;
-}Var;
-
-typedef struct {
-	vec3 vertex[4];
-	vec3 face[4][3];
-	vec3 edge[6][2];
-}tet;
-
-typedef struct {
-	tet pTets1[44]; 
-	tet pTets2[44];
-	int index[44];
-	double optValue[44] = { 1000.0 };
-	double optTime[44] = { 0.0 };
-	vec3 normal[44];
-	vec3 planePoint[44];
-}optResults2;
-
 
 class DefDefPD
 {

@@ -8,6 +8,7 @@
 
 #include "UI.h"
 #include "DefDefPD.h"
+#include "RigidPD.h"
 #include <time.h>
 
 #define OFF 0
@@ -34,8 +35,10 @@
 #define DEFORM_TET_RENDER_CHECKED 307
 
 //optimization object;
+//RigidPD *rigidPD;
 DefDefPD *defdefPD;
 //DefPD *defPD;
+
 
 /********** rendering variable **********/
 int   main_window;
@@ -146,25 +149,38 @@ void control_cb(int control)
 
 		if (ans == 'Y' || ans == 'y') {
 			defdefPD->initDefault();
+			//rigidPD->initDefault();
 		}
 		else {
 			defdefPD->init(staticTet, restTet);
+			//rigidPD->init(staticTet, restTet);
+
 		}
 		defdefPD->resolveDefDefPenetration();
-		
+		//rigidPD->calculateRigidPD();
+
 		//results
+		/*staticTet = rigidPD->getSTet();
+		restTet = rigidPD->getRTet();
+		sOptimalTet = rigidPD->getPTet(0);
+		rOptimalTet = rigidPD->getPTet(1);
+
+		minOptIndex = rigidPD->rigidPD_Pair;
+		minOptValue = rigidPD->rigidPD_Value;
+		totalOptTime = rigidPD->totalOptTime;
+		allResults = rigidPD->result;*/
 		staticTet = defdefPD->getRTet(0);
 		restTet = defdefPD->getRTet(1);
 		sOptimalTet = defdefPD->getPTet(0);		
 		rOptimalTet =defdefPD->getPTet(1); 
-
 		minOptIndex = defdefPD->getMinOptIndex();
 		minOptValue = defdefPD->getPD();
 		totalOptTime = defdefPD->getOptTime();
 		allResults = defdefPD->getPTetAll();
+		
 		//allResults2 = def->getSPtetAll();//defdef
 
-		if (defdefPD->getNumOpt() == 1)
+		/*if (defdefPD->getNumOpt() == 1)
 		{
 			time_t totalSec;
 			time(&totalSec);
@@ -173,9 +189,9 @@ void control_cb(int control)
 
 			filename = "test" + fileMadeTime;
 			defdefPD->writeCSVHead(filename);
-		}
-		defdefPD->writeCSV(filename);
-		defdefPD->printResult(minOptIndex);
+		}*/
+		//defdefPD->writeCSV(filename);
+		//defdefPD->printResult(minOptIndex);
 		/*defPd*/
 		//if (ans == 'Y' || ans == 'y') {
 		//	defPD->initDefault();
@@ -607,6 +623,7 @@ void myGlutDisplay(void)
 	
 	if (render_rest_option == ON) {
 		drawTet(restTet, 0.1, 1.0, 0.1, 0.3);
+		cout << "restTet" << endl;
 		
 	}
 	if (render_static_option == ON) {
@@ -1001,6 +1018,7 @@ int main(int argc, char* argv[])
 	/**** Regular GLUT main loop ****/
 	//defPD = new DefPD();
 	defdefPD = new DefDefPD();
+	//rigidPD = new RigidPD;
 	glutMainLoop();
 
 	return EXIT_SUCCESS;
