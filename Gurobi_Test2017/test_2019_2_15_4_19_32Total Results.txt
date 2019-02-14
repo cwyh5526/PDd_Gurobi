@@ -1,0 +1,454 @@
+totalOptTime for Rigid: 6e-05seconds
+totalOptTime for Def: 0seconds
+totalOptTime for DefDef: 0.00927553seconds
+Min,Max time for Rigid: (0,0.001) seconds
+Min,Max time for Def:   (0,0) seconds
+Min,Max time for DefDef:(0,0.0160027) seconds
+same direction :58%
+possiblity of within 0th direction :58%, 58%
+possiblity of within 1th direction :18%, 76%
+possiblity of within 2th direction :3%, 79%
+possiblity of within 3th direction :6%, 85%
+possiblity of within 4th direction :5%, 90%
+possiblity of within 5th direction :4%, 94%
+possiblity of within 6th direction :1%, 95%
+possiblity of within 7th direction :1%, 96%
+possiblity of within 8th direction :1%, 97%
+possiblity of within 9th direction :3%, 100%
+possiblity of within 10th direction :0%, 100%
+possiblity of within 11th direction :0%, 100%
+possiblity of within 12th direction :0%, 100%
+possiblity of within 13th direction :0%, 100%
+possiblity of within 14th direction :0%, 100%
+possiblity of within 15th direction :0%, 100%
+possiblity of within 16th direction :0%, 100%
+possiblity of within 17th direction :0%, 100%
+possiblity of within 18th direction :0%, 100%
+possiblity of within 19th direction :0%, 100%
+possiblity of within 20th direction :0%, 100%
+possiblity of within 21th direction :0%, 100%
+possiblity of within 22th direction :0%, 100%
+possiblity of within 23th direction :0%, 100%
+possiblity of within 24th direction :0%, 100%
+possiblity of within 25th direction :0%, 100%
+possiblity of within 26th direction :0%, 100%
+possiblity of within 27th direction :0%, 100%
+possiblity of within 28th direction :0%, 100%
+possiblity of within 29th direction :0%, 100%
+possiblity of within 30th direction :0%, 100%
+possiblity of within 31th direction :0%, 100%
+possiblity of within 32th direction :0%, 100%
+possiblity of within 33th direction :0%, 100%
+possiblity of within 34th direction :0%, 100%
+possiblity of within 35th direction :0%, 100%
+possiblity of within 36th direction :0%, 100%
+possiblity of within 37th direction :0%, 100%
+possiblity of within 38th direction :0%, 100%
+possiblity of within 39th direction :0%, 100%
+possiblity of within 40th direction :0%, 100%
+possiblity of within 41th direction :0%, 100%
+possiblity of within 42th direction :0%, 100%
+possiblity of within 43th direction :0%, 100%
+averate Rank:1.72th rigid PD direction is same with deformed PD direction
+rigid > defdef : 100%
+Mean differeces between metric: 99.0114%
+rigid PD [0]= 0.0595552	DefDef PD [0]= 0.000189999
+rigid direction [0]= 6	DefDef direction [0]= 6
+0th value:rigid direction[6] =0.0595552
+
+rigid PD [1]= 0.272408	DefDef PD [1]= 0.00406506
+rigid direction [1]= 8	DefDef direction [1]= 7
+1th value:rigid direction[7] =0.27546
+
+rigid PD [2]= 0.0185051	DefDef PD [2]= 1.84274e-05
+rigid direction [2]= 3	DefDef direction [2]= 3
+0th value:rigid direction[3] =0.0185051
+
+rigid PD [3]= 0.11149	DefDef PD [3]= 0.000665884
+rigid direction [3]= 5	DefDef direction [3]= 5
+0th value:rigid direction[5] =0.11149
+
+rigid PD [4]= 0.0832356	DefDef PD [4]= 0.000465226
+rigid direction [4]= 12	DefDef direction [4]= 34
+3th value:rigid direction[34] =0.105195
+
+rigid PD [5]= 0.0989966	DefDef PD [5]= 0.000910878
+rigid direction [5]= 5	DefDef direction [5]= 5
+0th value:rigid direction[5] =0.0989966
+
+rigid PD [6]= 0.00751586	DefDef PD [6]= 4.69995e-06
+rigid direction [6]= 39	DefDef direction [6]= 39
+0th value:rigid direction[39] =0.00751586
+
+rigid PD [7]= 0.163674	DefDef PD [7]= 0.00206522
+rigid direction [7]= 41	DefDef direction [7]= 38
+1th value:rigid direction[38] =0.174488
+
+rigid PD [8]= 0.169225	DefDef PD [8]= 0.00225845
+rigid direction [8]= 30	DefDef direction [8]= 5
+9th value:rigid direction[5] =0.205215
+
+rigid PD [9]= 0.128861	DefDef PD [9]= 0.00138373
+rigid direction [9]= 21	DefDef direction [9]= 21
+0th value:rigid direction[21] =0.128861
+
+rigid PD [10]= 0.0880434	DefDef PD [10]= 0.000645951
+rigid direction [10]= 12	DefDef direction [10]= 12
+0th value:rigid direction[12] =0.0880434
+
+rigid PD [11]= 0.227834	DefDef PD [11]= 0.00349132
+rigid direction [11]= 34	DefDef direction [11]= 37
+3th value:rigid direction[37] =0.276829
+
+rigid PD [12]= 0.105859	DefDef PD [12]= 0.000944062
+rigid direction [12]= 43	DefDef direction [12]= 43
+0th value:rigid direction[43] =0.105859
+
+rigid PD [13]= 0.124228	DefDef PD [13]= 0.00118948
+rigid direction [13]= 26	DefDef direction [13]= 28
+1th value:rigid direction[28] =0.161748
+
+rigid PD [14]= 0.12377	DefDef PD [14]= 0.00127661
+rigid direction [14]= 27	DefDef direction [14]= 27
+0th value:rigid direction[27] =0.12377
+
+rigid PD [15]= 0.21235	DefDef PD [15]= 0.00241568
+rigid direction [15]= 3	DefDef direction [15]= 3
+0th value:rigid direction[3] =0.21235
+
+rigid PD [16]= 0.276592	DefDef PD [16]= 0.00677591
+rigid direction [16]= 27	DefDef direction [16]= 6
+7th value:rigid direction[6] =0.344698
+
+rigid PD [17]= 0.125653	DefDef PD [17]= 0.00154459
+rigid direction [17]= 7	DefDef direction [17]= 37
+5th value:rigid direction[37] =0.162829
+
+rigid PD [18]= 0.0993248	DefDef PD [18]= 0.000822176
+rigid direction [18]= 10	DefDef direction [18]= 10
+0th value:rigid direction[10] =0.0993248
+
+rigid PD [19]= 0.0842164	DefDef PD [19]= 0.000659218
+rigid direction [19]= 12	DefDef direction [19]= 12
+0th value:rigid direction[12] =0.0842164
+
+rigid PD [20]= 0.263756	DefDef PD [20]= 0.00495371
+rigid direction [20]= 3	DefDef direction [20]= 3
+0th value:rigid direction[3] =0.263756
+
+rigid PD [21]= 0.193566	DefDef PD [21]= 0.0055382
+rigid direction [21]= 36	DefDef direction [21]= 33
+8th value:rigid direction[33] =0.244899
+
+rigid PD [22]= 0.033187	DefDef PD [22]= 9.17548e-05
+rigid direction [22]= 41	DefDef direction [22]= 41
+0th value:rigid direction[41] =0.033187
+
+rigid PD [23]= 0.178914	DefDef PD [23]= 0.00243983
+rigid direction [23]= 34	DefDef direction [23]= 22
+1th value:rigid direction[22] =0.199162
+
+rigid PD [24]= 0.0309474	DefDef PD [24]= 7.97392e-05
+rigid direction [24]= 21	DefDef direction [24]= 21
+0th value:rigid direction[21] =0.0309474
+
+rigid PD [25]= 0.168537	DefDef PD [25]= 0.00246067
+rigid direction [25]= 35	DefDef direction [25]= 35
+0th value:rigid direction[35] =0.168537
+
+rigid PD [26]= 0.160276	DefDef PD [26]= 0.00198522
+rigid direction [26]= 21	DefDef direction [26]= 4
+5th value:rigid direction[4] =0.18193
+
+rigid PD [27]= 0.0933084	DefDef PD [27]= 0.000725583
+rigid direction [27]= 29	DefDef direction [27]= 29
+0th value:rigid direction[29] =0.0933084
+
+rigid PD [28]= 0.01128	DefDef PD [28]= 1.05823e-05
+rigid direction [28]= 26	DefDef direction [28]= 26
+0th value:rigid direction[26] =0.01128
+
+rigid PD [29]= 0.090046	DefDef PD [29]= 0.000712192
+rigid direction [29]= 25	DefDef direction [29]= 25
+0th value:rigid direction[25] =0.090046
+
+rigid PD [30]= 0.0748145	DefDef PD [30]= 0.000346569
+rigid direction [30]= 39	DefDef direction [30]= 6
+4th value:rigid direction[6] =0.0804349
+
+rigid PD [31]= 0.0624002	DefDef PD [31]= 0.000208593
+rigid direction [31]= 1	DefDef direction [31]= 1
+0th value:rigid direction[1] =0.0624002
+
+rigid PD [32]= 0.0105739	DefDef PD [32]= 9.37458e-06
+rigid direction [32]= 12	DefDef direction [32]= 12
+0th value:rigid direction[12] =0.0105739
+
+rigid PD [33]= 0.163995	DefDef PD [33]= 0.00224127
+rigid direction [33]= 19	DefDef direction [33]= 19
+0th value:rigid direction[19] =0.163995
+
+rigid PD [34]= 0.0600443	DefDef PD [34]= 0.000292905
+rigid direction [34]= 27	DefDef direction [34]= 0
+1th value:rigid direction[0] =0.0730654
+
+rigid PD [35]= 0.17245	DefDef PD [35]= 0.00232505
+rigid direction [35]= 26	DefDef direction [35]= 29
+5th value:rigid direction[29] =0.226127
+
+rigid PD [36]= 0.185815	DefDef PD [36]= 0.00184475
+rigid direction [36]= 4	DefDef direction [36]= 37
+4th value:rigid direction[37] =0.228647
+
+rigid PD [37]= 0.0455027	DefDef PD [37]= 0.000149992
+rigid direction [37]= 36	DefDef direction [37]= 6
+1th value:rigid direction[6] =0.0529154
+
+rigid PD [38]= 0.177765	DefDef PD [38]= 0.00334383
+rigid direction [38]= 5	DefDef direction [38]= 5
+0th value:rigid direction[5] =0.177765
+
+rigid PD [39]= 0.104443	DefDef PD [39]= 0.000909017
+rigid direction [39]= 33	DefDef direction [39]= 33
+0th value:rigid direction[33] =0.104443
+
+rigid PD [40]= 0.232862	DefDef PD [40]= 0.00390205
+rigid direction [40]= 22	DefDef direction [40]= 2
+1th value:rigid direction[2] =0.244347
+
+rigid PD [41]= 0.0497571	DefDef PD [41]= 0.000158032
+rigid direction [41]= 41	DefDef direction [41]= 23
+1th value:rigid direction[23] =0.0577892
+
+rigid PD [42]= 0.0557681	DefDef PD [42]= 0.000340064
+rigid direction [42]= 19	DefDef direction [42]= 1
+3th value:rigid direction[1] =0.0603541
+
+rigid PD [43]= 0.00844776	DefDef PD [43]= 5.80102e-06
+rigid direction [43]= 34	DefDef direction [43]= 34
+0th value:rigid direction[34] =0.00844776
+
+rigid PD [44]= 0.00235128	DefDef PD [44]= 5.31209e-07
+rigid direction [44]= 40	DefDef direction [44]= 40
+0th value:rigid direction[40] =0.00235128
+
+rigid PD [45]= 0.0251174	DefDef PD [45]= 5.24244e-05
+rigid direction [45]= 15	DefDef direction [45]= 15
+0th value:rigid direction[15] =0.0251174
+
+rigid PD [46]= 0.0280997	DefDef PD [46]= 6.58161e-05
+rigid direction [46]= 42	DefDef direction [46]= 42
+0th value:rigid direction[42] =0.0280997
+
+rigid PD [47]= 0.23156	DefDef PD [47]= 0.00466121
+rigid direction [47]= 17	DefDef direction [47]= 15
+9th value:rigid direction[15] =0.300561
+
+rigid PD [48]= 0.13564	DefDef PD [48]= 0.000956535
+rigid direction [48]= 36	DefDef direction [48]= 31
+4th value:rigid direction[31] =0.143052
+
+rigid PD [49]= 0.19547	DefDef PD [49]= 0.0023877
+rigid direction [49]= 43	DefDef direction [49]= 34
+6th value:rigid direction[34] =0.228151
+
+rigid PD [50]= 0.113157	DefDef PD [50]= 0.000817888
+rigid direction [50]= 22	DefDef direction [50]= 5
+4th value:rigid direction[5] =0.123562
+
+rigid PD [51]= 0.109278	DefDef PD [51]= 0.000718895
+rigid direction [51]= 42	DefDef direction [51]= 41
+1th value:rigid direction[41] =0.12256
+
+rigid PD [52]= 0.0850141	DefDef PD [52]= 0.000387166
+rigid direction [52]= 3	DefDef direction [52]= 3
+0th value:rigid direction[3] =0.0850141
+
+rigid PD [53]= 0.0819532	DefDef PD [53]= 0.000559708
+rigid direction [53]= 29	DefDef direction [53]= 29
+0th value:rigid direction[29] =0.0819532
+
+rigid PD [54]= 0.130326	DefDef PD [54]= 0.00141544
+rigid direction [54]= 43	DefDef direction [54]= 43
+0th value:rigid direction[43] =0.130326
+
+rigid PD [55]= 0.0695221	DefDef PD [55]= 0.00047392
+rigid direction [55]= 31	DefDef direction [55]= 31
+0th value:rigid direction[31] =0.0695221
+
+rigid PD [56]= 0.164485	DefDef PD [56]= 0.0014493
+rigid direction [56]= 0	DefDef direction [56]= 0
+0th value:rigid direction[0] =0.164485
+
+rigid PD [57]= 0.0744754	DefDef PD [57]= 0.000295247
+rigid direction [57]= 41	DefDef direction [57]= 29
+1th value:rigid direction[29] =0.0805464
+
+rigid PD [58]= 0.0795174	DefDef PD [58]= 0.000584781
+rigid direction [58]= 42	DefDef direction [58]= 42
+0th value:rigid direction[42] =0.0795174
+
+rigid PD [59]= 0.130568	DefDef PD [59]= 0.000913325
+rigid direction [59]= 5	DefDef direction [59]= 5
+0th value:rigid direction[5] =0.130568
+
+rigid PD [60]= 0.103127	DefDef PD [60]= 0.000767046
+rigid direction [60]= 24	DefDef direction [60]= 12
+4th value:rigid direction[12] =0.128226
+
+rigid PD [61]= 0.142803	DefDef PD [61]= 0.0010926
+rigid direction [61]= 7	DefDef direction [61]= 7
+0th value:rigid direction[7] =0.142803
+
+rigid PD [62]= 0.0628028	DefDef PD [62]= 0.000339022
+rigid direction [62]= 11	DefDef direction [62]= 9
+1th value:rigid direction[9] =0.0654243
+
+rigid PD [63]= 0.112429	DefDef PD [63]= 0.000677239
+rigid direction [63]= 4	DefDef direction [63]= 4
+0th value:rigid direction[4] =0.112429
+
+rigid PD [64]= 0.22962	DefDef PD [64]= 0.0058002
+rigid direction [64]= 40	DefDef direction [64]= 43
+9th value:rigid direction[43] =0.298206
+
+rigid PD [65]= 0.325363	DefDef PD [65]= 0.00842554
+rigid direction [65]= 12	DefDef direction [65]= 11
+1th value:rigid direction[11] =0.335786
+
+rigid PD [66]= 0.0652003	DefDef PD [66]= 0.000354184
+rigid direction [66]= 38	DefDef direction [66]= 38
+0th value:rigid direction[38] =0.0652003
+
+rigid PD [67]= 0.00759581	DefDef PD [67]= 4.83688e-06
+rigid direction [67]= 24	DefDef direction [67]= 24
+0th value:rigid direction[24] =0.00759581
+
+rigid PD [68]= 0.218001	DefDef PD [68]= 0.00396038
+rigid direction [68]= 37	DefDef direction [68]= 37
+0th value:rigid direction[37] =0.218001
+
+rigid PD [69]= 0.134229	DefDef PD [69]= 0.000987377
+rigid direction [69]= 3	DefDef direction [69]= 12
+2th value:rigid direction[12] =0.140994
+
+rigid PD [70]= 0.236549	DefDef PD [70]= 0.0057081
+rigid direction [70]= 35	DefDef direction [70]= 35
+0th value:rigid direction[35] =0.236549
+
+rigid PD [71]= 0.122676	DefDef PD [71]= 0.000806221
+rigid direction [71]= 1	DefDef direction [71]= 1
+0th value:rigid direction[1] =0.122676
+
+rigid PD [72]= 0.0816299	DefDef PD [72]= 0.000695143
+rigid direction [72]= 18	DefDef direction [72]= 18
+0th value:rigid direction[18] =0.0816299
+
+rigid PD [73]= 0.143266	DefDef PD [73]= 0.00181802
+rigid direction [73]= 36	DefDef direction [73]= 24
+1th value:rigid direction[24] =0.168878
+
+rigid PD [74]= 0.132671	DefDef PD [74]= 0.0013603
+rigid direction [74]= 11	DefDef direction [74]= 4
+1th value:rigid direction[4] =0.144411
+
+rigid PD [75]= 0.179448	DefDef PD [75]= 0.00298855
+rigid direction [75]= 18	DefDef direction [75]= 18
+0th value:rigid direction[18] =0.179448
+
+rigid PD [76]= 0.244937	DefDef PD [76]= 0.00396892
+rigid direction [76]= 18	DefDef direction [76]= 30
+5th value:rigid direction[30] =0.287049
+
+rigid PD [77]= 0.263144	DefDef PD [77]= 0.00577042
+rigid direction [77]= 19	DefDef direction [77]= 19
+0th value:rigid direction[19] =0.263144
+
+rigid PD [78]= 0.22849	DefDef PD [78]= 0.00494028
+rigid direction [78]= 43	DefDef direction [78]= 43
+0th value:rigid direction[43] =0.22849
+
+rigid PD [79]= 0.212567	DefDef PD [79]= 0.00254359
+rigid direction [79]= 39	DefDef direction [79]= 26
+3th value:rigid direction[26] =0.222246
+
+rigid PD [80]= 0.167727	DefDef PD [80]= 0.00223062
+rigid direction [80]= 34	DefDef direction [80]= 40
+1th value:rigid direction[40] =0.178573
+
+rigid PD [81]= 0.0381823	DefDef PD [81]= 0.000121523
+rigid direction [81]= 15	DefDef direction [81]= 15
+0th value:rigid direction[15] =0.0381823
+
+rigid PD [82]= 0.168984	DefDef PD [82]= 0.00279688
+rigid direction [82]= 23	DefDef direction [82]= 11
+3th value:rigid direction[11] =0.19908
+
+rigid PD [83]= 0.0369081	DefDef PD [83]= 0.000113444
+rigid direction [83]= 27	DefDef direction [83]= 27
+0th value:rigid direction[27] =0.0369081
+
+rigid PD [84]= 0.117258	DefDef PD [84]= 0.000813019
+rigid direction [84]= 2	DefDef direction [84]= 2
+0th value:rigid direction[2] =0.117258
+
+rigid PD [85]= 0.158122	DefDef PD [85]= 0.00198541
+rigid direction [85]= 27	DefDef direction [85]= 7
+1th value:rigid direction[7] =0.162861
+
+rigid PD [86]= 0.0182561	DefDef PD [86]= 2.77693e-05
+rigid direction [86]= 23	DefDef direction [86]= 23
+0th value:rigid direction[23] =0.0182561
+
+rigid PD [87]= 0.147823	DefDef PD [87]= 0.00184735
+rigid direction [87]= 42	DefDef direction [87]= 43
+1th value:rigid direction[43] =0.188411
+
+rigid PD [88]= 0.19967	DefDef PD [88]= 0.00347939
+rigid direction [88]= 30	DefDef direction [88]= 30
+0th value:rigid direction[30] =0.19967
+
+rigid PD [89]= 0.204392	DefDef PD [89]= 0.00349106
+rigid direction [89]= 12	DefDef direction [89]= 12
+0th value:rigid direction[12] =0.204392
+
+rigid PD [90]= 0.130901	DefDef PD [90]= 0.00142801
+rigid direction [90]= 34	DefDef direction [90]= 34
+0th value:rigid direction[34] =0.130901
+
+rigid PD [91]= 0.168895	DefDef PD [91]= 0.00237719
+rigid direction [91]= 15	DefDef direction [91]= 15
+0th value:rigid direction[15] =0.168895
+
+rigid PD [92]= 0.127472	DefDef PD [92]= 0.000930226
+rigid direction [92]= 9	DefDef direction [92]= 5
+3th value:rigid direction[5] =0.129657
+
+rigid PD [93]= 0.139059	DefDef PD [93]= 0.00103587
+rigid direction [93]= 0	DefDef direction [93]= 0
+0th value:rigid direction[0] =0.139059
+
+rigid PD [94]= 0.0286917	DefDef PD [94]= 6.86393e-05
+rigid direction [94]= 37	DefDef direction [94]= 37
+0th value:rigid direction[37] =0.0286917
+
+rigid PD [95]= 0.292449	DefDef PD [95]= 0.00918027
+rigid direction [95]= 8	DefDef direction [95]= 36
+2th value:rigid direction[36] =0.308692
+
+rigid PD [96]= 0.13854	DefDef PD [96]= 0.00159944
+rigid direction [96]= 8	DefDef direction [96]= 8
+0th value:rigid direction[8] =0.13854
+
+rigid PD [97]= 0.0293196	DefDef PD [97]= 7.17131e-05
+rigid direction [97]= 26	DefDef direction [97]= 26
+0th value:rigid direction[26] =0.0293196
+
+rigid PD [98]= 0.0702859	DefDef PD [98]= 0.000348332
+rigid direction [98]= 34	DefDef direction [98]= 0
+1th value:rigid direction[0] =0.076945
+
+rigid PD [99]= 0.124031	DefDef PD [99]= 0.000851746
+rigid direction [99]= 18	DefDef direction [99]= 3
+2th value:rigid direction[3] =0.126092
+

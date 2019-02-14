@@ -5,6 +5,7 @@ DefDefPD::DefDefPD() {
 	try {
 		//environment and model is allocated in the heap space, need to be deleted after using it.
 		env = new GRBEnv();
+		env->set(GRB_IntParam_OutputFlag, 0);
 		numOpt = 0;
 	}
 	catch (GRBException e) {
@@ -142,22 +143,57 @@ void DefDefPD::resolveDefDefPenetration() {
 	numOpt++;
 }
 
-
+//mask[44]: contains sortedIndex of rigid PD calculation result
+//limit : decides how many directions to be tested?
+void DefDefPD::resolveDefDefPenetrationWithCulling(int mask[44],int limit) {
+	for (int i = 0; i < limit; i++) {
+		int index = mask[i];
+		if (index < 4) {
+			//1st tet face case
+			pTetAll2.index[index] = index;
+			optDefDefFace(index, index);			
+		}
+		else if (index < 8) {
+			//2nd tet face cases
+			pTetAll2.index[index] = index;
+			optDefDefFace(index-4, index);			
+		}
+		else {
+			//edge edge casese
+			int s = (index - 8) / 6;
+			int d = (index - 8) % 6;
+			pTetAll2.index[index] = index;
+			optDefDefEdge(s, d, index);			
+		}
+		
+		totalOptTime += pTetAll2.optTime[index];		
+		if (minOptValue > pTetAll2.optValue[index]) {
+			minOptValue = pTetAll2.optValue[index];
+			minOptIndex = index;
+		}
+	}
+	//find minimum metric value and that case.
+	pTet[0] = pTetAll2.pTets1[minOptIndex];
+	pTet[1] = pTetAll2.pTets2[minOptIndex];
+	optPlanePoint = pTetAll2.planePoint[minOptIndex];
+	optimized = true;
+	numOpt++;
+}
 
 
 void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 	//calculate normal
 
-	cout << "\n =========optDef Def Face " << fIndex << endl;
+	//cout << "\n =========optDef Def Face " << fIndex << endl;
 
 
 	int vIndex[4][4] = { { 1,2,3,0 },{ 0,3,2,1 },{ 0,1,3,2 },{ 0,2,1,3 } };
 	try {
-		cout << "1" << endl;
+		//cout << "1" << endl;
 		GRBModel model = GRBModel(*env);
 
 		// Create variables
-		cout << "2" << endl;
+		//cout << "2" << endl;
 		Var t1[4];
 		Var t2[4];
 		Var mp;
@@ -199,7 +235,7 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 		t2[3].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3y");
 		t2[3].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3z");
 
-		cout << "3" << endl;
+		//cout << "3" << endl;
 		// Set objective
 		GRBQuadExpr obj =
 			(t1[0].x*t1[0].x + t1[0].x*t1[1].x + t1[1].x*t1[1].x + t1[0].x*t1[2].x + t1[1].x*t1[2].x + t1[2].x*t1[2].x + t1[0].x*t1[3].x + t1[1].x*t1[3].x + t1[2].x*t1[3].x + t1[3].x*t1[3].x
@@ -221,9 +257,9 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 				- t1[2].z*(rSum[0].z + rTet[0].vertex[vIndex[fIndex][2]].z)
 				- t1[3].z*(rSum[0].z + rTet[0].vertex[vIndex[fIndex][3]].z)
 
-				+ rConstant[0]) / (60.f*rVolume[0])
+				+ rConstant[0]
 
-			    +(t2[0].x*t2[0].x + t2[0].x*t2[1].x + t2[1].x*t2[1].x + t2[0].x*t2[2].x + t2[1].x*t2[2].x + t2[2].x*t2[2].x + t2[0].x*t2[3].x + t2[1].x*t2[3].x + t2[2].x*t2[3].x + t2[3].x*t2[3].x
+			    +t2[0].x*t2[0].x + t2[0].x*t2[1].x + t2[1].x*t2[1].x + t2[0].x*t2[2].x + t2[1].x*t2[2].x + t2[2].x*t2[2].x + t2[0].x*t2[3].x + t2[1].x*t2[3].x + t2[2].x*t2[3].x + t2[3].x*t2[3].x
 				+ t2[0].y*t2[0].y + t2[0].y*t2[1].y + t2[1].y*t2[1].y + t2[0].y*t2[2].y + t2[1].y*t2[2].y + t2[2].y*t2[2].y + t2[0].y*t2[3].y + t2[1].y*t2[3].y + t2[2].y*t2[3].y + t2[3].y*t2[3].y
 				+ t2[0].z*t2[0].z + t2[0].z*t2[1].z + t2[1].z*t2[1].z + t2[0].z*t2[2].z + t2[1].z*t2[2].z + t2[2].z*t2[2].z + t2[0].z*t2[3].z + t2[1].z*t2[3].z + t2[2].z*t2[3].z + t2[3].z*t2[3].z
 
@@ -242,13 +278,13 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 				- t2[2].z*(rSum[1].z + rTet[1].vertex[vIndex[fIndex][2]].z)
 				- t2[3].z*(rSum[1].z + rTet[1].vertex[vIndex[fIndex][3]].z)
 
-				+ rConstant[1]) / (60.f*rVolume[1]);
+				+ rConstant[1]) / (10.f);
 
-		cout << "4" << endl;
+		//cout << "4" << endl;
 		
 		model.setObjective(obj, GRB_MINIMIZE);
 
-		cout << "5" << endl;
+		//cout << "5" << endl;
 		//Calculate the static normal vector
 		//n=-r01xr02 : face normal for rest state face
 		//d=n dot p0
@@ -256,17 +292,17 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 		double constraintValue = 0.0;
 
 		if (pairIndex<4) {//def tet1
-			cout << "6" << endl;
+			//cout << "6" << endl;
 			separatingPlaneCalculation(rTet[0].face[fIndex], rTet[0].vertex[fIndex], &normal, &constraintValue);
 			normal = normal;
 		}
 		else {
-			cout << "7" << endl;
+			//cout << "7" << endl;
 			separatingPlaneCalculation(rTet[1].face[fIndex], rTet[1].vertex[fIndex], &normal, &constraintValue);
 			normal = -normal;
 		}
 
-		cout << "8" << endl;
+		//cout << "8" << endl;
 		// Add constraints: Face에포함된 vertex를 순서대로 p0 p1 p2라 하고, face에 포함되지 않은 vertex를 p3라 하자. 즉 faceIndex를 가진 vertex 자리에 p3를 넣어주어야 한다.
 
 		//mid point MP가 있다고 하면
@@ -337,12 +373,12 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 			model.addConstr(normal.x*t2[2].x + normal.y*t2[2].y + normal.z*t2[2].z - (normal.x*mp.x + normal.y*mp.y + normal.z*mp.z) == 0,  "c11");
 		}
 
-		cout << "9" << endl;
+		//cout << "9" << endl;
 
 
 		//Optimization
 		model.optimize();
-		cout << "10" << endl;
+		//cout << "10" << endl;
 		//get Result;
 		pTetAll2.optValue[pairIndex] = model.get(GRB_DoubleAttr_ObjVal);
 		pTetAll2.optTime[pairIndex] = model.get(GRB_DoubleAttr_Runtime);
@@ -379,7 +415,7 @@ void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 }
 
 void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
-	cout << "\n =========optEdgEdge tet1 Edge " << t1Index << ", tet2 Edge" << t2Index << endl;
+	//cout << "\n =========optEdgEdge tet1 Edge " << t1Index << ", tet2 Edge" << t2Index << endl;
 	
 
 	int e[6][2] = { { 0,1 },{ 0,2 },{ 0,3 },{ 1,2 },{ 1,3 },{ 2,3 } };
@@ -399,7 +435,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 	vec3 t2_e01 = t2[1] - t2[0];//contact edge vector in tet2's rest state
 
 	vec3 n_cross = cross(t1_e01, t2_e01);
-	printV3(n_cross);
+	//printV3(n_cross);
 	vec3 n = normalize(n_cross);// normal vector 두 contact edge에 동시에 수직인 벡터, direction should be decided.
 
 	//Decide the normal direction	
@@ -414,35 +450,43 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 	//          /     |    
 	//  ---t1[0](B)---H------>t1[1](C)-------				
 	if (dot(n_cross, n_cross) == 0) {	
-		vec3 AB = t1[0] - t2[0];
-		vec3 BCdirection = normalize(t1_e01);
-		vec3 BH = sqrt(dot(AB, AB) - dot(cross(BCdirection, -AB), cross(BCdirection, -AB)))*BCdirection; 		
-		n = AB + BH;
-		n = normalize(n);
+		//vec3 AB = t1[0] - t2[0];
+		//vec3 BCdirection = normalize(t1_e01);
+		//vec3 BH = sqrt(dot(AB, AB) - dot(cross(BCdirection, -AB), cross(BCdirection, -AB)))*BCdirection; 		
+		//n = AB + BH;
+		//n = normalize(n);
 		// both normal has to be tested in this case
+		vec3 r0s0 = t2[0] - t1[0];
+		n_cross = cross(r0s0, t1_e01);
+		if (dot(n_cross, n_cross) == 0) {
+			//if two edges are colinear, ignore
+			return;
+		}
+		n = normalize(n_cross);
 		nDecided = false;		
-		cout << "\n\n\n\n[FASLE]: 0. Parallel Edges \n\n\n" << endl;
-		cout << "n: ";
-		printV3(n);
+		//cout << "\n\n\n\n[FASLE]: 0. Parallel Edges \n\n\n" << endl;
+		//cout << "n: ";
+		//printV3(n);
 	}
 	else if ((nDote02 * nDote03) < 0) { // n·(s2 - s0) <0 or  n·(s3 - s0)<0
 										// if s2, s3 are in different direction, then normal cannot be decided
 		nDecided = false;
-		cout << "\n\n\n\n[FASLE]: 1. Normal not decided \n\n\n" << endl;
+	//	cout << "\n\n\n\n[FASLE]: 1. Normal not decided \n\n\n" << endl;
 	}
 	else if ((nDote02 >= 0) && (nDote03 >= 0)) { // n·(s2 - s0) >=0 and  n·(s3 - s0) >=0
 												 //if both s2, s3 are in the same direction of normal, then the normal direction should be inverted
 		n = -n;
 		nDecided = true;
-		cout << "\n\n\n\n[true]: 2 . normal Inverted\n\n\n" << endl;
+		//cout << "\n\n\n\n[true]: 2 . normal Inverted\n\n\n" << endl;
 	}
 	else if ((nDote02 <= 0) && (nDote03 <= 0)) {// n·(s2 - s0) <=0 and  n·(s3 - s0) <=0
 												//if both s2, s3 are in the opposite direction of normal, then the normal direction is correct
 		nDecided = true;
-		cout << "\n\n\n\n[true]: 3. normal unchanged\n\n\n" << endl;
+		//cout << "\n\n\n\n[true]: 3. normal unchanged\n\n\n" << endl;
 	}
 	else {
-		nDecided = false; 		cout << "\n\n\n\n[FASLE]: 4. this cannot be reached something wrong\n\n\n" << endl;
+		nDecided = false; 		
+		//cout << "\n\n\n\n[FASLE]: 4. this cannot be reached something wrong\n\n\n" << endl;
 	}
 
 
@@ -492,7 +536,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 		t2[3].y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3y");
 		t2[3].z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3z");
 
-		cout << "3" << endl;
+		//cout << "3" << endl;
 		// Set objective
 		GRBQuadExpr obj =
 			     (t1[0].x*t1[0].x + t1[0].x*t1[1].x + t1[1].x*t1[1].x + t1[0].x*t1[2].x + t1[1].x*t1[2].x + t1[2].x*t1[2].x + t1[0].x*t1[3].x + t1[1].x*t1[3].x + t1[2].x*t1[3].x + t1[3].x*t1[3].x
@@ -514,9 +558,9 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 				- t1[2].z*(rSum[0].z + rTet[0].vertex[i1[2]].z)
 				- t1[3].z*(rSum[0].z + rTet[0].vertex[i1[3]].z)
 
-				+ rConstant[0]) / (60.f*rVolume[0])
+				+ rConstant[0]
 
-			+ (t2[0].x*t2[0].x + t2[0].x*t2[1].x + t2[1].x*t2[1].x + t2[0].x*t2[2].x + t2[1].x*t2[2].x + t2[2].x*t2[2].x + t2[0].x*t2[3].x + t2[1].x*t2[3].x + t2[2].x*t2[3].x + t2[3].x*t2[3].x
+			+ t2[0].x*t2[0].x + t2[0].x*t2[1].x + t2[1].x*t2[1].x + t2[0].x*t2[2].x + t2[1].x*t2[2].x + t2[2].x*t2[2].x + t2[0].x*t2[3].x + t2[1].x*t2[3].x + t2[2].x*t2[3].x + t2[3].x*t2[3].x
 				+ t2[0].y*t2[0].y + t2[0].y*t2[1].y + t2[1].y*t2[1].y + t2[0].y*t2[2].y + t2[1].y*t2[2].y + t2[2].y*t2[2].y + t2[0].y*t2[3].y + t2[1].y*t2[3].y + t2[2].y*t2[3].y + t2[3].y*t2[3].y
 				+ t2[0].z*t2[0].z + t2[0].z*t2[1].z + t2[1].z*t2[1].z + t2[0].z*t2[2].z + t2[1].z*t2[2].z + t2[2].z*t2[2].z + t2[0].z*t2[3].z + t2[1].z*t2[3].z + t2[2].z*t2[3].z + t2[3].z*t2[3].z
 
@@ -535,7 +579,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 				- t2[2].z*(rSum[1].z + rTet[1].vertex[i2[2]].z)
 				- t2[3].z*(rSum[1].z + rTet[1].vertex[i2[3]].z)
 
-				+ rConstant[1]) / (60.f*rVolume[1]);
+				+ rConstant[1]) / (10.f);
 
 		model.setObjective(obj, GRB_MINIMIZE);
 
@@ -632,7 +676,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 		default: cout << "[EdgeEdge Result]Wrong Edge Index \n" << endl; break;
 		}
 		if (nDecided == false) {
-			cout << "-----------------seconde case----------------------------------------------------------" << endl;
+			//cout << "-----------------seconde case----------------------------------------------------------" << endl;
 
 			n = -n; //do the same thing on the opposite direction
 
@@ -643,9 +687,9 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 			Var t2_[4];
 			Var mp_;
 
-			mp_.x = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPx");
-			mp_.y = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPy");
-			mp_.z = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPz");
+			mp_.x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPx");
+			mp_.y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPy");
+			mp_.z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "MPz");
 
 			t1_[0].x = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0x");
 			t1_[0].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t1_P0y");
@@ -680,10 +724,10 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 			t2_[3].y = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3y");
 			t2_[3].z = model_second.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "t2_P3z");
 
-			cout << "3" << endl;
+			//cout << "3" << endl;
 			// Set objective
 			GRBQuadExpr obj_ =
-				(t1_[0].x*t1_[0].x + t1_[0].x*t1_[1].x + t1_[1].x*t1_[1].x + t1_[0].x*t1_[2].x + t1_[1].x*t1_[2].x + t1_[2].x*t1_[2].x + t1_[0].x*t1_[3].x + t1_[1].x*t1_[3].x + t1_[2].x*t1_[3].x + t1_[3].x*t1_[3].x
+					 (t1_[0].x*t1_[0].x + t1_[0].x*t1_[1].x + t1_[1].x*t1_[1].x + t1_[0].x*t1_[2].x + t1_[1].x*t1_[2].x + t1_[2].x*t1_[2].x + t1_[0].x*t1_[3].x + t1_[1].x*t1_[3].x + t1_[2].x*t1_[3].x + t1_[3].x*t1_[3].x
 					+ t1_[0].y*t1_[0].y + t1_[0].y*t1_[1].y + t1_[1].y*t1_[1].y + t1_[0].y*t1_[2].y + t1_[1].y*t1_[2].y + t1_[2].y*t1_[2].y + t1_[0].y*t1_[3].y + t1_[1].y*t1_[3].y + t1_[2].y*t1_[3].y + t1_[3].y*t1_[3].y
 					+ t1_[0].z*t1_[0].z + t1_[0].z*t1_[1].z + t1_[1].z*t1_[1].z + t1_[0].z*t1_[2].z + t1_[1].z*t1_[2].z + t1_[2].z*t1_[2].z + t1_[0].z*t1_[3].z + t1_[1].z*t1_[3].z + t1_[2].z*t1_[3].z + t1_[3].z*t1_[3].z
 
@@ -702,9 +746,9 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 					- t1_[2].z*(rSum[0].z + rTet[0].vertex[i1[2]].z)
 					- t1_[3].z*(rSum[0].z + rTet[0].vertex[i1[3]].z)
 
-					+ rConstant[0]) / (60.f*rVolume[0])
+					+ rConstant[0]
 
-				+ (t2_[0].x*t2_[0].x + t2_[0].x*t2_[1].x + t2_[1].x*t2_[1].x + t2_[0].x*t2_[2].x + t2_[1].x*t2_[2].x + t2_[2].x*t2_[2].x + t2_[0].x*t2_[3].x + t2_[1].x*t2_[3].x + t2_[2].x*t2_[3].x + t2_[3].x*t2_[3].x
+					+ t2_[0].x*t2_[0].x + t2_[0].x*t2_[1].x + t2_[1].x*t2_[1].x + t2_[0].x*t2_[2].x + t2_[1].x*t2_[2].x + t2_[2].x*t2_[2].x + t2_[0].x*t2_[3].x + t2_[1].x*t2_[3].x + t2_[2].x*t2_[3].x + t2_[3].x*t2_[3].x
 					+ t2_[0].y*t2_[0].y + t2_[0].y*t2_[1].y + t2_[1].y*t2_[1].y + t2_[0].y*t2_[2].y + t2_[1].y*t2_[2].y + t2_[2].y*t2_[2].y + t2_[0].y*t2_[3].y + t2_[1].y*t2_[3].y + t2_[2].y*t2_[3].y + t2_[3].y*t2_[3].y
 					+ t2_[0].z*t2_[0].z + t2_[0].z*t2_[1].z + t2_[1].z*t2_[1].z + t2_[0].z*t2_[2].z + t2_[1].z*t2_[2].z + t2_[2].z*t2_[2].z + t2_[0].z*t2_[3].z + t2_[1].z*t2_[3].z + t2_[2].z*t2_[3].z + t2_[3].z*t2_[3].z
 
@@ -723,7 +767,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 					- t2_[2].z*(rSum[1].z + rTet[1].vertex[i2[2]].z)
 					- t2_[3].z*(rSum[1].z + rTet[1].vertex[i2[3]].z)
 
-					+ rConstant[1]) / (60.f*rVolume[1]);
+					+ rConstant[1]) / (10.f);
 
 			model_second.setObjective(obj_, GRB_MINIMIZE);
 
@@ -754,16 +798,15 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 			//model_second.addConstr(n.x*t2_[2].x + n.y*t2_[2].y + n.z*t2_[2].z - dot(n, midPoint) >= 0, "c6");
 			//model_second.addConstr(n.x*t2_[3].x + n.y*t2_[3].y + n.z*t2_[3].z - dot(n, midPoint) >= 0, "c7");
 
-
 			//1.t1은 separating normal 반대방향에 있다.
-			model_second.addConstr(n.x*t1_[0].x + n.y*t1_[0].y + n.z*t1_[0].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c0");
-			model_second.addConstr(n.x*t1_[1].x + n.y*t1_[1].y + n.z*t1_[1].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c1");
+			//model_second.addConstr(n.x*t1_[0].x + n.y*t1_[0].y + n.z*t1_[0].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c0");
+			//model_second.addConstr(n.x*t1_[1].x + n.y*t1_[1].y + n.z*t1_[1].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c1");
 			model_second.addConstr(n.x*t1_[2].x + n.y*t1_[2].y + n.z*t1_[2].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c2");
 			model_second.addConstr(n.x*t1_[3].x + n.y*t1_[3].y + n.z*t1_[3].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) <= 0, "c3");
 
 			//2.t2는 separating n 방향에 있다.						 
-			model_second.addConstr(n.x*t2_[0].x + n.y*t2_[0].y + n.z*t2_[0].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c4");
-			model_second.addConstr(n.x*t2_[1].x + n.y*t2_[1].y + n.z*t2_[1].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c5");
+			//model_second.addConstr(n.x*t2_[0].x + n.y*t2_[0].y + n.z*t2_[0].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c4");
+			//model_second.addConstr(n.x*t2_[1].x + n.y*t2_[1].y + n.z*t2_[1].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c5");
 			model_second.addConstr(n.x*t2_[2].x + n.y*t2_[2].y + n.z*t2_[2].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c6");
 			model_second.addConstr(n.x*t2_[3].x + n.y*t2_[3].y + n.z*t2_[3].z - (n.x*mp_.x + n.y*mp_.y + n.z*mp_.z) >= 0, "c7");
 			//3. mp는 separating plane 위에 있다.
@@ -784,7 +827,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 
 				pTetAll2.optValue[pairIndex] = model_second.get(GRB_DoubleAttr_ObjVal);
 				pTetAll2.normal[pairIndex] = n;
-				pTetAll2.planePoint[pairIndex] = vec3(mp.x.get(GRB_DoubleAttr_X), mp.y.get(GRB_DoubleAttr_X), mp.z.get(GRB_DoubleAttr_X));
+				pTetAll2.planePoint[pairIndex] = vec3(mp_.x.get(GRB_DoubleAttr_X), mp_.y.get(GRB_DoubleAttr_X), mp_.z.get(GRB_DoubleAttr_X));
 
 
 				vec3 t1p0_(t1_[0].x.get(GRB_DoubleAttr_X), t1_[0].y.get(GRB_DoubleAttr_X), t1_[0].z.get(GRB_DoubleAttr_X));
@@ -819,9 +862,9 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 			}
 		}
 	}
-	catch (GRBException e) {
-		cout << "Error code = " << e.getErrorCode() << endl;
-		cout << e.getMessage() << endl;
+	catch (GRBException ee) {
+		cout << "Error code = " << ee.getErrorCode() << endl;
+		cout << ee.getMessage() << endl;
 	}
 	catch (...) {
 		cout << "Exception during optimization" << endl;
@@ -838,7 +881,7 @@ void DefDefPD::calculateMidPoint() {
 		sum += rTet[0].vertex[i] + rTet[1].vertex[i];
 	}
 	vec3 midPoint = vec3(sum.x / 8, sum.y / 8, sum.z / 8);
-	cout << "midPoint= (" << sum.x << "," << sum.y << "," << sum.z << ")" << endl;
+	//cout << "midPoint= (" << sum.x << "," << sum.y << "," << sum.z << ")" << endl;
 }
 
 void DefDefPD::printV3(vec3 v) {
@@ -927,9 +970,9 @@ void DefDefPD::printResult(int pairIndex) {
 }
 float DefDefPD::calculateTetVolume(tet t) {
 	float volume = abs(dot((t.vertex[0] - t.vertex[3]), cross(t.vertex[1] - t.vertex[3], t.vertex[2] - t.vertex[3])) / 6.0f);
-	cout << "tet's volume: " << volume << endl;
+	//cout << "tet's volume: " << volume << endl;
 	if (volume == 0) {
-		cout << "Volume is Zero!" << endl;
+		//cout << "Volume is Zero!" << endl;
 		(volume = 0.0000000000000000001f);
 	}
 	return volume;
@@ -962,8 +1005,8 @@ void DefDefPD::separatingPlaneCalculation(vec3 faceVrtx[3], vec3 vrtx, vec3 *nor
 	//compute the normal vector and constant of the plane equation for 3 vertices
 	glm::vec3 v01 = faceVrtx[1] - faceVrtx[0];
 	glm::vec3 v12 = faceVrtx[2] - faceVrtx[1];
-	std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
-	std::cout << "v12: (" << (v12).x << "," << (v12).y << "," << (v12).z << ")" << std::endl;
+	//std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
+	//std::cout << "v12: (" << (v12).x << "," << (v12).y << "," << (v12).z << ")" << std::endl;
 	vec3 n = cross(v01, v12);
 	if (dot(vrtx- faceVrtx[1] , n) > 0) {//if the calculated normal is inward, change it to outward
 		n = -n;

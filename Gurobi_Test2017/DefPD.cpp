@@ -5,6 +5,7 @@ DefPD::DefPD() {
 	try {
 		//environment and model is allocated in the heap space, need to be deleted after using it.
 		env = new GRBEnv();		
+		env->set(GRB_IntParam_OutputFlag, 0);
 		numOpt = 0;
 	}
 	catch (GRBException e) {
@@ -63,10 +64,10 @@ void DefPD::resolveStaticDefPenetration() {
 	optimized = true;
 	numOpt++;
 
-	for (int i = 0; i < 44; i++) {
+	/*for (int i = 0; i < 44; i++) {
 		cout << "***************Index " << i << endl;
 		printResult(i);
-	}
+	}*/
 
 }
 
@@ -149,7 +150,7 @@ void DefPD::init(tet tetS, tet tetR) {
 }
 
 void DefPD::optStaticFace(int fIndex, int pairIndex) {
-	cout << "\n =========optStaticFace Face " << fIndex << endl;
+	//cout << "\n =========optStaticFace Face " << fIndex << endl;
 	
 	try {
 		GRBModel model = GRBModel(*env);
@@ -193,7 +194,7 @@ void DefPD::optStaticFace(int fIndex, int pairIndex) {
 				- zP2*(rSum.z + rTet.vertex[2].z)
 				- zP3*(rSum.z + rTet.vertex[3].z)
 
-				+ rConstant) / (60.f*rVolume);
+				+ rConstant) / (10.f);
 
 		model.setObjective(obj, GRB_MINIMIZE);
 
@@ -235,7 +236,7 @@ void DefPD::optStaticFace(int fIndex, int pairIndex) {
 	}
 }
 void DefPD::optDeformingFace(int fIndex, int pairIndex) {
-	cout << "\n =========optDeforming Face " << fIndex << endl;
+	//cout << "\n =========optDeforming Face " << fIndex << endl;
 	
 
 	int vIndex[4][4] = { { 1,3,2,0 },{ 0,2,3,1 },{ 0,3,1,2 },{ 0,1,2,3 } };
@@ -282,7 +283,7 @@ void DefPD::optDeformingFace(int fIndex, int pairIndex) {
 				- zP2*(rSum.z + rTet.vertex[vIndex[fIndex][2]].z)
 				- zP3*(rSum.z + rTet.vertex[vIndex[fIndex][3]].z)
 
-				+ rConstant) / (60.f*rVolume);
+				+ rConstant) / (10.f);
 
 		model.setObjective(obj, GRB_MINIMIZE);
 
@@ -347,7 +348,7 @@ void DefPD::optDeformingFace(int fIndex, int pairIndex) {
 }
 
 void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
-	cout << "\n =========optEdgEdge staticEdge " << sIndex << "deforming Edge" << dIndex << endl;
+	//cout << "\n =========optEdgEdge staticEdge " << sIndex << "deforming Edge" << dIndex << endl;
 
 	int e[6][2] = { { 0,1 },{ 0,2 },{ 0,3 },{ 1,2 },{ 1,3 },{ 2,3 } };
 
@@ -392,13 +393,17 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 		// n is the shortest distance vector from the point r0 to static edge s01.
 		vec3 r0s0 = s0 - r0;
 		//float s01_length = sqrt(dot(s01, s01));
-		vec3 direction = normalize(s01);
-		vec3 s0h = sqrt(dot(r0s0, r0s0) - dot(cross(direction, -r0s0), cross(direction, -r0s0)))*direction;
+		//vec3 direction = normalize(s01);
+		//vec3 s0h = sqrt(dot(r0s0, r0s0) - dot(cross(direction, -r0s0), cross(direction, -r0s0)))*direction;
 		//cout << "r0s0 = (" << r0s0.x << ", " << r0s0.y << "," << r0s0.z << ")" << endl;
 		//cout << "s01_length = (" << s01_length << ")" << endl;
-
-		n = r0s0 + s0h;
-		n = normalize(n);
+		n_cross = cross(r01, r0s0);
+		//n = r0s0 + s0h;
+		if (dot(n_cross, n_cross) == 0) {
+			//if two edges are colinear, use near face plane or ignore this case
+			return;
+		}
+		n = normalize(n_cross);
 
 		nDecided = false;// both normal has to be tested in this case
 						 /*cout<<"WHAT IS GOING ON"<<endl;
@@ -408,21 +413,22 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 	else if ((nDotS02 * nDotS03) < 0) { // n，(s2 - s0) <0 or  n，(s3 - s0)<0
 										// if s2, s3 are in different direction, then normal cannot be decided
 		nDecided = false;
-		cout << "\n\n\n\n[FASLE]: 1. Normal not decided \n\n\n" << endl;
+		//cout << "\n\n\n\n[FASLE]: 1. Normal not decided \n\n\n" << endl;
 	}
 	else if ((nDotS02 >= 0) && (nDotS03 >= 0)) { // n，(s2 - s0) >=0 and  n，(s3 - s0) >=0
 												 //if both s2, s3 are in the same direction of normal, then the normal direction should be inverted
 		n = -n;
 		nDecided = true;
-		cout << "\n\n\n\n[true]: 2 . normal Inverted\n\n\n" << endl;
+		//cout << "\n\n\n\n[true]: 2 . normal Inverted\n\n\n" << endl;
 	}
 	else if ((nDotS02 <= 0) && (nDotS03 <= 0)) {// n，(s2 - s0) <=0 and  n，(s3 - s0) <=0
 												//if both s2, s3 are in the opposite direction of normal, then the normal direction is correct
 		nDecided = true;
-		cout << "\n\n\n\n[true]: 3. normal unchanged\n\n\n" << endl;
+		//cout << "\n\n\n\n[true]: 3. normal unchanged\n\n\n" << endl;
 	}
 	else {
-		nDecided = false; 		cout << "\n\n\n\n[FASLE]: 4. this cannot be reached something wrong\n\n\n" << endl;
+		nDecided = false; 		
+		//cout << "\n\n\n\n[FASLE]: 4. this cannot be reached something wrong\n\n\n" << endl;
 	}
 
 	pTetAll.normal[pairIndex] = n;
@@ -469,7 +475,7 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 				- zP2*(rSum.z + rTet.vertex[d2].z)
 				- zP3*(rSum.z + rTet.vertex[d3].z)
 
-				+ rConstant)/(60.f*rVolume);
+				+ rConstant)/(10.f);
 
 		model.setObjective(obj, GRB_MINIMIZE);
 		//cout << "-----------------1----------------------------------------------------------" << endl;
@@ -525,7 +531,7 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 		default: cout << "[EdgeEdge Result]Wrong Edge Index \n" << endl; break;
 		}
 		if (nDecided == false) {
-			cout << "-----------------seconde case----------------------------------------------------------" << endl;
+			//cout << "-----------------seconde case----------------------------------------------------------" << endl;
 
 			n = -n; //do the same thing on the opposite direction
 
@@ -768,9 +774,9 @@ void DefPD::printResult(int pairIndex) {
 
 float DefPD::calculateTetVolume(tet t) {
 	float volume = abs(dot((t.vertex[0] - t.vertex[3]), cross(t.vertex[1] - t.vertex[3], t.vertex[2] - t.vertex[3])) / 6.0f);
-	cout << "tet's volume: " << volume << endl;
+	//cout << "tet's volume: " << volume << endl;
 	if (volume == 0) {
-		cout << "Volume is Zero!" << endl;
+		//cout << "Volume is Zero!" << endl;
 		(volume = 0.0000000000000000001);
 	}
 	return volume;
@@ -818,8 +824,8 @@ void DefPD::separatingPlaneCalculation(vec3 faceVrtx[3], vec3 vrtx, vec3 *normal
 	//compute the normal vector and constant of the plane equation for 3 vertices
 	glm::vec3 v01 = faceVrtx[1] - faceVrtx[0];
 	glm::vec3 v12 = faceVrtx[2] - faceVrtx[1];
-	std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
-	std::cout << "v12: (" << (v12).x << "," << (v12).y << "," << (v12).z << ")" << std::endl;
+	//std::cout << "v01: (" << (v01).x << "," << (v01).y << "," << (v01).z << ")" << std::endl;
+	//std::cout << "v12: (" << (v12).x << "," << (v12).y << "," << (v12).z << ")" << std::endl;
 	vec3 n = cross(v01, v12);
 	if (dot(vrtx-faceVrtx[1], n) > 0) {//if the calculated normal is inward, change it to outward 
 		n = -n;

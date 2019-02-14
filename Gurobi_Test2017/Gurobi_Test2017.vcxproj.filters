@@ -48,6 +48,9 @@
     <ClCompile Include="PrimitiveTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="problem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FullTest_p.h">

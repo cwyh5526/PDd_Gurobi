@@ -24,7 +24,7 @@ public:
 	//void resolveStaticDefPenetration();
 	/* def-def PD*/
 	void resolveDefDefPenetration();
-
+	void resolveDefDefPenetrationWithCulling(int mask[44], int limit);
 	// getters
 	tet getRTet(int i) { return rTet[i]; };
 	tet getPTet(int i) { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return pTet[i]; };

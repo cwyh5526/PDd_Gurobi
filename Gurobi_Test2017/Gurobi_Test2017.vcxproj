@@ -158,6 +158,7 @@
     <ClCompile Include="FullTest_p++.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PrimitiveTests.cpp" />
+    <ClCompile Include="problem.cpp" />
     <ClCompile Include="RigidPD.cpp" />
     <ClCompile Include="TetTet.cpp" />
     <ClCompile Include="UI.cpp" />

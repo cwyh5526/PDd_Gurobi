@@ -27,10 +27,12 @@ public:
 	optResults2 getPTetAll() {	return allResults;	};
 	int getMinOptIndex() { return minOptIndex; };
 	float getPD() { return rigidPD_Value; };
-	float getOptTime() { return totalOptTime; };
+	double getOptTime() { return totalOptTime; };
+	int getNumOpt() { return numOpt; }
 
 	void printV3(vec3 v);
 	void printResult();
+	float calculateTetVolume(tet t);
 
 	void writeCSV(string fileName);
 	void writeCSVHead(string fileName);
@@ -53,7 +55,6 @@ protected:
 
 	// utility functions
 	void initTet(tet &T, vec3 v0, vec3 v1, vec3 v2, vec3 v3);	
-	float calculateTetVolume(tet t);
 
 	void fprintV3(ofstream &fp, vec3 v);
 
@@ -70,7 +71,7 @@ private:
 	int minOptIndex = -1;
 	float rigidPD_Value = 1000.0f; //smallest distances
 	vec3 rigidPD_Direction;
-	float totalOptTime = 0.f;
+	double totalOptTime = 0.0;
 	int numOpt = 0;
 
 };

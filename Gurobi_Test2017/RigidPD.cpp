@@ -1,4 +1,5 @@
 #include "RigidPD.h"
+#include <limits>
 
 
 RigidPD::RigidPD() {
@@ -29,7 +30,7 @@ void RigidPD::initDefault() {
 	minOptIndex = -1;
 	totalOptTime = 0.f;
 	rVolume[0] = calculateTetVolume(rTet[0]);
-	rVolume[1] = calculateTetVolume(rTet[0]);
+	rVolume[1] = calculateTetVolume(rTet[1]);
 
 	return;
 }
@@ -43,7 +44,7 @@ void RigidPD::init(tet tet1, tet tet2) {
 
 	totalOptTime = 0.f;
 	rVolume[0] = calculateTetVolume(rTet[0]);
-	rVolume[1] = calculateTetVolume(rTet[0]);
+	rVolume[1] = calculateTetVolume(rTet[1]);
 
 }
 
@@ -60,7 +61,7 @@ bool RigidPD::resolveRigidPenetration() {
 		pl = calculateSeparatingPlane(rTet[0].face[i]); //get normal;
 		o = rTet[0].face[i][0];
 		if (!overlapTest(rTet, o, pl.n, pd, pl.n)) {
-			cout << "Found Separating Axis on tet1 Face " << i << endl;
+			//cout << "Found Separating Axis on tet1 Face " << i << endl;
 			return false;
 		}
 		updateResult(index, -1, pd, pl);
@@ -71,7 +72,7 @@ bool RigidPD::resolveRigidPenetration() {
 		pl = calculateSeparatingPlane(rTet[1].face[i]);
 		o = rTet[1].face[i][0];
 		if (!overlapTest(rTet, o, pl.n, pd, pl.n)) {
-			cout << "Found Separating Axis on tet2 Face " << i << endl;
+			//cout << "Found Separating Axis on tet2 Face " << i << endl;
 			return false;
 		}
 		updateResult(index, -1, pd, pl);
@@ -83,7 +84,7 @@ bool RigidPD::resolveRigidPenetration() {
 			pl = calculateSeparatingPlane(edges, rTet[0].edge[5 - s][0]);
 			o = rTet[0].edge[s][0];
 			if (!overlapTest(rTet, o, pl.n, pd, pl.n)) {
-				cout << "Found Separating Axis on Edge " << s << " Edge " << r << endl;
+				//cout << "Found Separating Axis on Edge " << s << " Edge " << r << endl;
 				return false;
 			}
 			updateResult(index, -1, pd, pl);
@@ -101,7 +102,9 @@ bool RigidPD::resolveRigidPenetration() {
 	rigidPD_Direction = allResults.normal[minOptIndex];
 	rigidPD_Value = allResults.optValue[minOptIndex];
 	clock_t end = clock();
-	totalOptTime = (float)((float)end - (float)start) / (float)CLOCKS_PER_SEC;
+	totalOptTime = (double)((double)end - (double)start) / (double)CLOCKS_PER_SEC;
+	
+
 	pTet[0] = allResults.pTets1[minOptIndex];
 	pTet[1] = allResults.pTets2[minOptIndex];
 	numOpt++;
@@ -182,7 +185,7 @@ float RigidPD::coordOnAxis(vec3 p, vec3 o, vec3 n) {
 }
 float RigidPD::calculateTetVolume(tet t) {
 	float volume = abs(dot((t.vertex[0] - t.vertex[3]), cross(t.vertex[1] - t.vertex[3], t.vertex[2] - t.vertex[3])) / 6.0f);
-	cout << "tet's volume: " << volume << endl;
+	//cout << "tet's volume: " << volume << endl;
 	if (volume == 0) {
 		cout << "Volume is Zero!" << endl;
 		(volume = 0.0000000000000000001f);
