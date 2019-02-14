@@ -7,6 +7,7 @@
 //============================================================================
 
 #include "UI.h"
+#include "DefPD.h"
 #include "DefDefPD.h"
 #include "RigidPD.h"
 #include <time.h>
@@ -19,7 +20,9 @@
 #define INPUT_STATIC_TET_ID		200
 #define INPUT_REST_TET_ID		201
 
-#define OPTIMIZE_ID				250 //opt button
+#define OPTIMIZE_RIGID_ID		250 //opt button
+#define OPTIMIZE_DEF_ID			251 //opt button
+#define OPTIMIZE_DEFDEF_ID		252
 
 #define STATIC_TET_RENDER	 300	//
 #define REST_TET_RENDER		 301
@@ -35,9 +38,9 @@
 #define DEFORM_TET_RENDER_CHECKED 307
 
 //optimization object;
-//RigidPD *rigidPD;
+RigidPD *rigidPD;
 DefDefPD *defdefPD;
-//DefPD *defPD;
+DefPD *defPD;
 
 
 /********** rendering variable **********/
@@ -57,8 +60,12 @@ tet staticTet;
 tet restTet;
 tet sOptimalTet; 
 tet rOptimalTet;
-//optResults allResults;
+//optResults allResults1;
 optResults2 allResults;
+
+
+//optResults allResults;
+
 
 float totalOptTime;
 float minOptValue;
@@ -138,91 +145,106 @@ void control_deform(int control) {
 }
 void control_cb(int control)
 {
-
-	if (control == OPTIMIZE_ID) {
-		//optimize
+	if((control== OPTIMIZE_RIGID_ID)|| (control==OPTIMIZE_DEF_ID)||(control== OPTIMIZE_DEFDEF_ID)){
 		cout << "default? Y/N" << endl;
 		char ans = 'Y';
 		cin >> ans;
 
-		/*defdefPd*/
+		if (control == OPTIMIZE_RIGID_ID) {
+			//optimize
 
-		if (ans == 'Y' || ans == 'y') {
-			defdefPD->initDefault();
-			//rigidPD->initDefault();
+			/*rigidPD*/
+			if (ans == 'Y' || ans == 'y') {
+				rigidPD->initDefault();
+			}
+			else {
+				rigidPD->init(staticTet, restTet);
+
+			}
+			rigidPD->resolveRigidPenetration();
+
+			//results
+			staticTet = rigidPD->getRTet(0);
+			restTet = rigidPD->getRTet(1);
+			sOptimalTet = rigidPD->getPTet(0);
+			rOptimalTet = rigidPD->getPTet(1);
+
+			minOptIndex = rigidPD->getMinOptIndex();
+			minOptValue = rigidPD->getPD();
+			totalOptTime = rigidPD->getOptTime();
+			allResults = rigidPD->getPTetAll();
+		}
+		else if (control == OPTIMIZE_DEFDEF_ID) {
+			/*defdefPd*/
+		
+			if (ans == 'Y' || ans == 'y') {
+				defdefPD->initDefault();
+			}
+			else {
+				defdefPD->init(staticTet, restTet);
+
+			}
+			defdefPD->resolveDefDefPenetration();
+
+			staticTet = defdefPD->getRTet(0);
+			restTet = defdefPD->getRTet(1);
+			sOptimalTet = defdefPD->getPTet(0);
+			rOptimalTet = defdefPD->getPTet(1);
+			minOptIndex = defdefPD->getMinOptIndex();
+			minOptValue = defdefPD->getPD();
+			totalOptTime = defdefPD->getOptTime();
+			allResults = defdefPD->getPTetAll();
+
+			if (defdefPD->getNumOpt() == 1)
+			{
+				time_t totalSec;
+				time(&totalSec);
+				tm *pt = localtime(&totalSec);
+				string fileMadeTime = "_" + to_string(pt->tm_year + 1900) + "_" + to_string(pt->tm_mon + 1) + "_" + to_string(pt->tm_mday) + "_" + to_string(pt->tm_hour) + "_" + to_string(pt->tm_min) + "_" + to_string(pt->tm_sec);
+
+				filename = "test" + fileMadeTime;
+				defdefPD->writeCSVHead(filename);
+			}
+			defdefPD->writeCSV(filename);
+			defdefPD->printResult(minOptIndex);
 		}
 		else {
-			defdefPD->init(staticTet, restTet);
-			//rigidPD->init(staticTet, restTet);
+			/*defPd*/
+			if (ans == 'Y' || ans == 'y') {
+				defPD->initDefault();
+			}
+			else {
+				defPD->init(staticTet, restTet);
+			}
+			defPD->resolveStaticDefPenetration();
 
+			//results
+			staticTet = defPD->getSTet();
+			restTet = defPD->getRTet();
+			rOptimalTet = defPD->getPTet();
+
+			minOptIndex = defPD->getMinOptIndex();
+			minOptValue = defPD->getPD();
+			totalOptTime = defPD->getOptTime();
+			allResults = defPD->getPTetAll();
+			defPD->printResult(minOptIndex);
+
+			if (defPD->getNumOpt() == 1)
+			{
+				time_t totalSec;
+				time(&totalSec);
+				tm *pt = localtime(&totalSec);
+				string fileMadeTime = "_" + to_string(pt->tm_year + 1900) + "_" + to_string(pt->tm_mon + 1) + "_" + to_string(pt->tm_mday) + "_" + to_string(pt->tm_hour) + "_" + to_string(pt->tm_min) + "_" + to_string(pt->tm_sec);
+
+				filename = "test" + fileMadeTime;
+				defPD->writeCSVHead(filename);
+			}
+			defPD->writeCSV(filename);
 		}
-		defdefPD->resolveDefDefPenetration();
-		//rigidPD->calculateRigidPD();
 
-		//results
-		/*staticTet = rigidPD->getSTet();
-		restTet = rigidPD->getRTet();
-		sOptimalTet = rigidPD->getPTet(0);
-		rOptimalTet = rigidPD->getPTet(1);
-
-		minOptIndex = rigidPD->rigidPD_Pair;
-		minOptValue = rigidPD->rigidPD_Value;
-		totalOptTime = rigidPD->totalOptTime;
-		allResults = rigidPD->result;*/
-		staticTet = defdefPD->getRTet(0);
-		restTet = defdefPD->getRTet(1);
-		sOptimalTet = defdefPD->getPTet(0);		
-		rOptimalTet =defdefPD->getPTet(1); 
-		minOptIndex = defdefPD->getMinOptIndex();
-		minOptValue = defdefPD->getPD();
-		totalOptTime = defdefPD->getOptTime();
-		allResults = defdefPD->getPTetAll();
 		
-		//allResults2 = def->getSPtetAll();//defdef
 
-		/*if (defdefPD->getNumOpt() == 1)
-		{
-			time_t totalSec;
-			time(&totalSec);
-			tm *pt = localtime(&totalSec);
-			string fileMadeTime = "_" + to_string(pt->tm_year + 1900) + "_" + to_string(pt->tm_mon + 1) + "_" + to_string(pt->tm_mday) + "_" + to_string(pt->tm_hour) + "_" + to_string(pt->tm_min) + "_" + to_string(pt->tm_sec);
-
-			filename = "test" + fileMadeTime;
-			defdefPD->writeCSVHead(filename);
-		}*/
-		//defdefPD->writeCSV(filename);
-		//defdefPD->printResult(minOptIndex);
-		/*defPd*/
-		//if (ans == 'Y' || ans == 'y') {
-		//	defPD->initDefault();
-		//}
-		//else {
-		//	defPD->init(staticTet, restTet);
-		//}
-		//defPD->resolveStaticDefPenetration();
-
-		////results
-		//staticTet = defPD->getSTet();
-		//restTet = defPD->getRTet();
-		//rOptimalTet = defPD->getPTet();
-
-		//minOptIndex = defPD->getMinOptIndex();
-		//minOptValue = defPD->getPD();
-		//totalOptTime = defPD->getOptTime();
-		//allResults = defPD->getPTetAll();
-		//defPD->printResult(minOptIndex);
-
-		//if (defPD->getNumOpt() == 1)
-		//{
-		//	time_t totalSec;
-		//	time(&totalSec);
-		//	tm *pt = localtime(&totalSec);
-		//	string fileMadeTime = "_" + to_string(pt->tm_year + 1900) + "_" + to_string(pt->tm_mon + 1) + "_" + to_string(pt->tm_mday) + "_" + to_string(pt->tm_hour) + "_" + to_string(pt->tm_min) + "_" + to_string(pt->tm_sec);
-
-		//	filename = "test" + fileMadeTime;
-		//	defPD->writeCSVHead(filename);
-		//}
-		//defPD->writeCSV(filename);
+		
 
 		for (int v = 0; v < 4; v++) {
 			edit_sTet[v][0]->set_float_val(staticTet.vertex[v].x);
@@ -252,7 +274,7 @@ void control_cb(int control)
 		}
 		else if (minOptIndex < 44) {
 			//string str = "sE" + to_string((minOptIndex - 8) / 6)+ "dE" + to_string((minOptIndex - 8) % 6);
-			string str = "t1E" + to_string((minOptIndex - 8) / 6) + "t2E" + to_string((minOptIndex - 8) % 6);
+			string str = "E" + to_string((minOptIndex - 8) / 6) + "E" + to_string((minOptIndex - 8) % 6);
 
 			text_optPair->set_text(str);
 		}
@@ -265,6 +287,7 @@ void control_cb(int control)
 
 
 	}
+	
 	if ((control == REST_TET_RENDER)	|| 	(control == STATIC_TET_RENDER)	|| 
 		(control == OPTIMAL_STET_RENDER)||	(control == OPTIMAL_RTET_RENDER)||
 		(control ==GROUND_RENDER)		||(control == NORMAL_RENDER)		||
@@ -621,22 +644,21 @@ void myGlutDisplay(void)
 		drawPairs(minOptIndex);
 	}
 	
-	if (render_rest_option == ON) {
-		drawTet(restTet, 0.1, 1.0, 0.1, 0.3);
-		cout << "restTet" << endl;
-		
-	}
-	if (render_static_option == ON) {
-		drawTet(staticTet, 1.0, 0.1, 0.1, 0.3);
 	
-	}
 	if (render_s_optimal_option == ON) {          //defdef
-		drawTet(sOptimalTet, 0.1, 0.1, 1.0, 0.3); //defdef
+		drawTet(sOptimalTet, 0.1f, 0.1f, 1.0f, 0.3f); //defdef
 		
 	}
 	if (render_r_optimal_option == ON) {
-		drawTet(rOptimalTet, 0.1, 0.1, 1.0, 0.3);
+		drawTet(rOptimalTet, 0.1f, 0.1f, 1.0f, 0.3f);
 		
+	}
+	if (render_rest_option == ON) {
+		drawTet(restTet, 0.1f, 1.0f, 0.1f, 0.3f);
+
+	}
+	if (render_static_option == ON) {
+		drawTet(staticTet, 1.0f, 0.1f, 0.1f, 0.3f);
 	}
 	if (render_normal_option == ON && (render_s_optimal_option == ON||render_r_optimal_option==ON||render_rest_option==ON|| render_static_option == ON))
 	{
@@ -766,10 +788,21 @@ int main(int argc, char* argv[])
 	edit_rTet[3][2] = new GLUI_EditText(pan_r3, "z:", &restTet.vertex[3].z);
 
 	//Optimze Button
-	GLUI_Button *btn_opt = new GLUI_Button(in_out_panel, "Optimize", OPTIMIZE_ID, control_cb);;
-	//btn_opt->set_alignment(GLUI_ALIGN_LEFT);
-	GLUI_Panel *deform_value_panel = new GLUI_Panel(in_out_panel, "Deformation Results");
-	new GLUI_StaticText(deform_value_panel, "");
+	GLUI_Panel *btn_panel = new GLUI_Panel(in_out_panel, "", GLUI_PANEL_NONE);
+
+	GLUI_Button *btn_opt_rigid = new GLUI_Button(btn_panel, "Rigid PD", OPTIMIZE_RIGID_ID, control_cb);
+	btn_opt_rigid->set_w(80);
+	glui->add_column_to_panel(btn_panel, false);
+
+	GLUI_Button *btn_opt_def = new GLUI_Button(btn_panel, "Def PD", OPTIMIZE_DEF_ID, control_cb);;
+	btn_opt_def->set_w(80);
+	glui->add_column_to_panel(btn_panel, false);
+
+	GLUI_Button *btn_opt_defdef = new GLUI_Button(btn_panel, "DefDef PD", OPTIMIZE_DEFDEF_ID, control_cb);;
+	btn_opt_defdef->set_w(80);
+
+	GLUI_Panel *deform_value_panel = new GLUI_Panel(in_out_panel, "",GLUI_PANEL_NONE);
+	//new GLUI_StaticText(deform_value_panel, "");
 	text_deformPair = new GLUI_EditText(deform_value_panel, "Deform Pair  : ");
 	text_deformValue = new GLUI_EditText(deform_value_panel, "Deform Value:", &optValue);
 	//text_optTime = new GLUI_EditText(deform_value_panel, "Deform Time  :", &totalOptTime);
@@ -992,23 +1025,23 @@ int main(int argc, char* argv[])
 	view_rot->set_spin(1.0);
 	new GLUI_Column(glui2, false);
 	GLUI_Rotation *lights_rot = new GLUI_Rotation(glui2, "Blue Light", lights_rotation);
-	lights_rot->set_spin(.82);
+	lights_rot->set_spin(.82f);
 	new GLUI_Column(glui2, false);
 	GLUI_Translation *trans_xy =
 		new GLUI_Translation(glui2, "Objects XY", GLUI_TRANSLATION_XY, obj_pos);
-	trans_xy->set_speed(.005);
+	trans_xy->set_speed(.005f);
 	new GLUI_Column(glui2, false);
 	GLUI_Translation *trans_x =
 		new GLUI_Translation(glui2, "Objects X", GLUI_TRANSLATION_X, obj_pos);
-	trans_x->set_speed(.005);
+	trans_x->set_speed(.005f);
 	new GLUI_Column(glui2, false);
 	GLUI_Translation *trans_y =
 		new GLUI_Translation(glui2, "Objects Y", GLUI_TRANSLATION_Y, &obj_pos[1]);
-	trans_y->set_speed(.005);
+	trans_y->set_speed(.005f);
 	new GLUI_Column(glui2, false);
 	GLUI_Translation *trans_z =
 		new GLUI_Translation(glui2, "Objects Z", GLUI_TRANSLATION_Z, &obj_pos[2]);
-	trans_z->set_speed(.005);
+	trans_z->set_speed(.005f);
 
 #if 0
 	/**** We register the idle callback with GLUI, *not* with GLUT ****/
@@ -1016,9 +1049,9 @@ int main(int argc, char* argv[])
 #endif
 
 	/**** Regular GLUT main loop ****/
-	//defPD = new DefPD();
+	defPD = new DefPD();
 	defdefPD = new DefDefPD();
-	//rigidPD = new RigidPD;
+	rigidPD = new RigidPD();
 	glutMainLoop();
 
 	return EXIT_SUCCESS;

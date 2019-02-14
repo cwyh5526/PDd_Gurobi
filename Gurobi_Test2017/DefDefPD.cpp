@@ -930,7 +930,7 @@ float DefDefPD::calculateTetVolume(tet t) {
 	cout << "tet's volume: " << volume << endl;
 	if (volume == 0) {
 		cout << "Volume is Zero!" << endl;
-		(volume = 0.0000000000000000001);
+		(volume = 0.0000000000000000001f);
 	}
 	return volume;
 }

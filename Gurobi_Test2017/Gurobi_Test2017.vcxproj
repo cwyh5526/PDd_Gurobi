@@ -157,7 +157,9 @@
     <ClCompile Include="FullTest_d++.cpp" />
     <ClCompile Include="FullTest_p++.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PrimitiveTests.cpp" />
     <ClCompile Include="RigidPD.cpp" />
+    <ClCompile Include="TetTet.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="STA_4con_d++.cpp" />
   </ItemGroup>
@@ -167,6 +169,7 @@
     <ClInclude Include="DefPD.h" />
     <ClInclude Include="FullTest_p.h" />
     <ClInclude Include="RigidPD.h" />
+    <ClInclude Include="TetTet.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

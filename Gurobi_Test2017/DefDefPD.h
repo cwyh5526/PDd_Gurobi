@@ -16,9 +16,10 @@ public:
 	DefDefPD(); //create Environment  for optimization
 	~DefDefPD(); //delete Environment 
 
-			  // initialize optimization variables and geometries : it is the first function that should be called
+	// initialize optimization variables and geometries : it is the first function that should be called
 	void initDefault();
 	void init(tet tetS, tet tetR);
+
 	/* static-deformable PD */
 	//void resolveStaticDefPenetration();
 	/* def-def PD*/
