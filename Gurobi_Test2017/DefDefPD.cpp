@@ -99,40 +99,49 @@ void DefDefPD::init(tet tet1, tet tet2) {
 void DefDefPD::resolveDefDefPenetration() {
 	
 	//4 Deforming faces from first tet
+	clock_t start = clock();
+//#pragma omp parallel for
 	for (int i = 0; i < 4; i++) {
-		pTetAll2.index[i] = i;
+		//pTetAll2.index[i] = i;
 		optDefDefFace(i, i);
-		totalOptTime += pTetAll2.optTime[i];
+		/*totalOptTime += pTetAll2.optTime[i];
 		if (minOptValue >pTetAll2.optValue[i]) {
 			minOptValue = pTetAll2.optValue[i];
 			minOptIndex = i;
-		}
+		}*/
 	}
 
 	//4 deforming faces from second tet
+//#pragma omp parallel for
 	for (int i = 0; i < 4; i++) {
 		int index = i + 4;
-		pTetAll2.index[index] = index;
+		//pTetAll2.index[index] = index;
 		optDefDefFace(i, index);
-		totalOptTime += pTetAll2.optTime[index];
+		/*totalOptTime += pTetAll2.optTime[index];
 		if (minOptValue > pTetAll2.optValue[index]) {
 			minOptValue = pTetAll2.optValue[index];
 			minOptIndex = index;
-		}
+		}*/
 
 	}
 
 	//36 deforming faces from edge-edge case
+//#pragma omp parallel for
 	for (int s = 0; s < 6; s++) {
 		for (int d = 0; d < 6; d++) { //deforming edge
 			int index = s * 6 + d + 8;
-			pTetAll2.index[index] = index;
+			//pTetAll2.index[index] = index;
 			optDefDefEdge(s, d, index);
-			totalOptTime += pTetAll2.optTime[index];
-			if (minOptValue > pTetAll2.optValue[index]) {
-				minOptValue = pTetAll2.optValue[index];
-				minOptIndex = index;
-			}
+			
+		}
+	}
+
+	for (int i = 0; i < 44; i++) {
+		pTetAll2.index[i] = i;
+		totalOptTime += pTetAll2.optTime[i];
+		if (minOptValue > pTetAll2.optValue[i]) {
+			minOptValue = pTetAll2.optValue[i];
+			minOptIndex = i;
 		}
 	}
 	//find minimum metric value and that case.
@@ -141,32 +150,42 @@ void DefDefPD::resolveDefDefPenetration() {
 	optPlanePoint = pTetAll2.planePoint[minOptIndex];
 	optimized = true;
 	numOpt++;
+	clock_t end = clock();
+	double time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+	//cout << time << endl;
 }
 
 //mask[44]: contains sortedIndex of rigid PD calculation result
 //limit : decides how many directions to be tested?
-void DefDefPD::resolveDefDefPenetrationWithCulling(int mask[44],int limit) {
+void DefDefPD::resolveDefDefPenetrationWithCulling(int mask[44], int limit) {
+//#pragma omp parallel for
 	for (int i = 0; i < limit; i++) {
 		int index = mask[i];
 		if (index < 4) {
 			//1st tet face case
-			pTetAll2.index[index] = index;
-			optDefDefFace(index, index);			
+
+			optDefDefFace(index, index);
 		}
 		else if (index < 8) {
 			//2nd tet face cases
 			pTetAll2.index[index] = index;
-			optDefDefFace(index-4, index);			
+			optDefDefFace(index - 4, index);
 		}
 		else {
 			//edge edge casese
 			int s = (index - 8) / 6;
 			int d = (index - 8) % 6;
 			pTetAll2.index[index] = index;
-			optDefDefEdge(s, d, index);			
+			optDefDefEdge(s, d, index);
 		}
-		
-		totalOptTime += pTetAll2.optTime[index];		
+
+
+	}
+
+	for (int i = 0; i < limit; i++) {
+		int index = mask[i];
+		pTetAll2.index[index] = index;
+		totalOptTime += pTetAll2.optTime[index];
 		if (minOptValue > pTetAll2.optValue[index]) {
 			minOptValue = pTetAll2.optValue[index];
 			minOptIndex = index;
@@ -180,6 +199,35 @@ void DefDefPD::resolveDefDefPenetrationWithCulling(int mask[44],int limit) {
 	numOpt++;
 }
 
+void DefDefPD::resolveDefDefPenetrationWithCulling(int index) {
+	if (index < 4) {
+		//1st tet face case
+		optDefDefFace(index, index);
+	}
+	else if (index < 8) {
+		//2nd tet face cases
+		
+		optDefDefFace(index - 4, index);
+	}
+	else if(index<44) {
+		//edge edge casese
+		int s = (index - 8) / 6;
+		int d = (index - 8) % 6;
+		optDefDefEdge(s, d, index);
+	}
+	else {
+
+	}
+	totalOptTime = pTetAll2.optTime[index];
+	minOptValue = pTetAll2.optValue[index];
+	minOptIndex = index;
+	pTet[0] = pTetAll2.pTets1[minOptIndex];
+	pTet[1] = pTetAll2.pTets2[minOptIndex];
+	optPlanePoint = pTetAll2.planePoint[minOptIndex];
+	optimized = true;
+	numOpt++;
+
+}
 
 void DefDefPD::optDefDefFace(int fIndex, int pairIndex) {
 	//calculate normal
@@ -450,6 +498,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 	//          /     |    
 	//  ---t1[0](B)---H------>t1[1](C)-------				
 	if (dot(n_cross, n_cross) == 0) {	
+
 		//vec3 AB = t1[0] - t2[0];
 		//vec3 BCdirection = normalize(t1_e01);
 		//vec3 BH = sqrt(dot(AB, AB) - dot(cross(BCdirection, -AB), cross(BCdirection, -AB)))*BCdirection; 		
@@ -460,6 +509,7 @@ void DefDefPD::optDefDefEdge(int t1Index, int t2Index, int pairIndex) {
 		n_cross = cross(r0s0, t1_e01);
 		if (dot(n_cross, n_cross) == 0) {
 			//if two edges are colinear, ignore
+			cout << "ha" << endl;
 			return;
 		}
 		n = normalize(n_cross);

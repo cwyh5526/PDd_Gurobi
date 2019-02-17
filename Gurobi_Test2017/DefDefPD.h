@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 
 #include<GL/glut.h>
@@ -25,6 +26,7 @@ public:
 	/* def-def PD*/
 	void resolveDefDefPenetration();
 	void resolveDefDefPenetrationWithCulling(int mask[44], int limit);
+	void resolveDefDefPenetrationWithCulling(int index);
 	// getters
 	tet getRTet(int i) { return rTet[i]; };
 	tet getPTet(int i) { if (!optimized) { cout << "ERROR: optimization is not performed yet" << endl; } return pTet[i]; };

@@ -163,7 +163,7 @@ bool RigidPD::overlapTest(tet t[2], vec3 o, vec3 n, float& PD_Value, vec3& PD_n)
 
 	float canPD[2] = {tmax[0]-tmin[1],tmax[1]-tmin[0]};//candidate of PD
 	//no penetration on this axis;
-	if ((canPD[0] < 0) || (canPD[1]) < 0) {
+	if ((canPD[0] < 0.002) || (canPD[1]) < 0.002) {
 		PD_Value = 0; 
 		return false; 
 	}

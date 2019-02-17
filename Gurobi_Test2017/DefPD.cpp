@@ -401,6 +401,7 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 		//n = r0s0 + s0h;
 		if (dot(n_cross, n_cross) == 0) {
 			//if two edges are colinear, use near face plane or ignore this case
+			cout << "edges are colinear" << endl;
 			return;
 		}
 		n = normalize(n_cross);
@@ -512,7 +513,7 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 		//Results
 		// Time, value, pTet.
 		pTetAll.optTime[pairIndex] = model.get(GRB_DoubleAttr_Runtime);
-		pTetAll.optValue[pairIndex] = model.get(GRB_DoubleAttr_ObjVal);
+		pTetAll.optValue[pairIndex] = (model.get(GRB_DoubleAttr_ObjVal));
 		//cout << "-----------------6----------------------------------------------------------" << endl;
 
 		vec3 p0(xP0.get(GRB_DoubleAttr_X), yP0.get(GRB_DoubleAttr_X), zP0.get(GRB_DoubleAttr_X));

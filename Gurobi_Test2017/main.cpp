@@ -2,7 +2,7 @@
 #include "DefPD.h"
 #include "DefDefPD.h"
 
-#define rN() ((float)rand() / (RAND_MAX + 1)) //random number 0 ~ 1.0
+#define rN() ((double)((rand() % 100) /10.0)) // (RAND_MAX + 1)) //random number 0 ~ 1.0
 
 void quick_sort(double *data, int *index, int start, int end) {
 	if (start >= end) {
@@ -68,42 +68,50 @@ int main(int argc, const char *argv[])
 	tet pTet[2]; //deformed pose tetrahedron
 	double minOptValue[3][1000];
 
-	double sortedPD[1000][44];
-	int sortedPDIndex[1000][44];
+	//double sortedPD[1000][44];
+	//int sortedPDIndex[1000][44];
 
-	int minOptIndex[3][1000] = { -1 };
-	double totalOptTime[3][1000] = { 0.0 };
-	double meanOptTime[3] = { 0.0 };
-	double maxTime[3] = { 0.0 };
-	double minTime[3] = { INFINITY };
+	int minOptIndex[4][1000] = { -1 };
+	double totalOptTime[4][1000] = { 0.0 };
+	double meanOptTime[4] = { 0.0 };
+	double maxTime[4] = { 0.0 };
+	double minTime[4] = { INFINITY };
 	double comparePercent = 0.0;
 	int metricComparison = 0;
 	int directionCheck = 0;
 	int directionChecks[44] = { 0 };
-	int directionRank[1000] = { 0 };
+	//int directionRank[1000] = { 0 };
 	double averageDirectoinRank = 0;
 	RigidPD rigidPD;
 	DefPD defPD;
 	DefDefPD defdefPD;
-	int numTest = 100;
+	DefDefPD defrigidPD;
+	int numTest = 1000;
 
 	srand(time(NULL));
 
-	string filename1;
-	string filename2;
+	string filenamedef;
+	string filenameRigid;
+	string filenameDefDef;
+	string filenameRigidDefDef;
 
 	time_t totalSec;
 	time(&totalSec);
 	tm *pt = localtime(&totalSec);
 	string fileMadeTime = "_" + to_string(pt->tm_year + 1900) + "_" + to_string(pt->tm_mon + 1) + "_" + to_string(pt->tm_mday) + "_" + to_string(pt->tm_hour) + "_" + to_string(pt->tm_min) + "_" + to_string(pt->tm_sec);
 
-	filename1 = "test" + fileMadeTime + "def";
-	filename2 = "test" + fileMadeTime + "rigid";
 
-	defdefPD.writeCSVHead(filename1);
-	rigidPD.writeCSVHead(filename2);
+	filenamedef= "Data/test_Def" + fileMadeTime;
+	filenameRigid= "Data/test_Rigid" + fileMadeTime;
+	filenameDefDef= "Data/test_DefDef" + fileMadeTime;
+	filenameRigidDefDef= "Data/test_RigidDef" + fileMadeTime;
 
-	
+	rigidPD.writeCSVHead(filenameRigid);
+	defPD.writeCSVHead(filenamedef);
+	defdefPD.writeCSVHead(filenameDefDef);
+	defrigidPD.writeCSVHead(filenameRigidDefDef);
+
+	//for (int i = 0; i < numTest; i++)//
 
 	for (int i = 0; i < numTest; i++) {
 		clock_t start = clock();
@@ -111,21 +119,23 @@ int main(int argc, const char *argv[])
 		{
 			for (int j = 0; j < 2; j++) {
 				randomTetGeneration(rTet[j]);
-				if (rigidPD.calculateTetVolume(rTet[j]) == 0) {
+				if (rigidPD.calculateTetVolume(rTet[j]) < 0.1f) {
 					randomTetGeneration(rTet[j]);
 				}
 			}
 			rigidPD.init(rTet[0], rTet[1]);
-		} while (rigidPD.resolveRigidPenetration() == false);//if it is separated, generate tet again.
 
-		//totalOptTime[0][i] = totalRigidTime;//rigidPD.getOptTime();
+		} while (rigidPD.resolveRigidPenetration()==false);//if it is separated, generate tet again.
+
+		totalOptTime[0][i] = rigidPD.getOptTime();
 		minOptValue[0][i] = rigidPD.getPD();
 		minOptIndex[0][i] = rigidPD.getMinOptIndex();
-		for (int k = 0; k < 44; k++) {
+		/*for (int k = 0; k < 44; k++) {
 			sortedPD[i][k] = rigidPD.getPTetAll().optValue[k];
 			sortedPDIndex[i][k] = k;
 		}
-		quick_sort(&sortedPD[i][0], &sortedPDIndex[i][0], 0, 43);
+		quick_sort(&sortedPD[i][0], &sortedPDIndex[i][0], 0, 43);*/
+
 		/*for (int k = 0; k < 44; k++) {
 			cout << i << " : [index]=" << sortedPDIndex[i][k] << "[rigid PD]=" << sortedPD[i][k] << endl;
 		}*/
@@ -134,79 +144,98 @@ int main(int argc, const char *argv[])
 		clock_t end = clock();
 		totalOptTime[0][i] = (double)((double)end - (double)start) / (double)CLOCKS_PER_SEC;
 
-		/*defPD.init(rTet[0], rTet[1]);
-		defPD.resolveStaticDefPenetration();
-		totalOptTime[1][i] = defPD.getOptTime();
-		minOptValue[1][i] = defPD.getPD();
-		minOptIndex[1][i] = defPD.getMinOptIndex();
-*/
+		
+		defrigidPD.init(rTet[0], rTet[1]);		
+		defrigidPD.resolveDefDefPenetrationWithCulling(minOptIndex[0][i]);
+		totalOptTime[3][i] = defrigidPD.getOptTime();
+		if (defrigidPD.getPD() <= 0) { i--; continue; }//다시해
+		minOptValue[3][i] = sqrt(defrigidPD.getPD());
+		minOptIndex[3][i] = defrigidPD.getMinOptIndex();
+
 
 		defdefPD.init(rTet[0], rTet[1]);
-		//defdefPD.resolveDefDefPenetration();
-		defdefPD.resolveDefDefPenetrationWithCulling(sortedPDIndex[i],10);
+		defdefPD.resolveDefDefPenetration();
 		totalOptTime[2][i] = defdefPD.getOptTime();
-		minOptValue[2][i] = defdefPD.getPD();
+		minOptValue[2][i] = sqrt(defdefPD.getPD());
 		minOptIndex[2][i] = defdefPD.getMinOptIndex();
 
-		for (int j = 0; j < 3; j++) {
+		defPD.init(rTet[0], rTet[1]);
+		defPD.resolveStaticDefPenetration();
+		totalOptTime[1][i] = defPD.getOptTime();
+		minOptValue[1][i] = sqrt(defPD.getPD());
+		minOptIndex[1][i] = defPD.getMinOptIndex();
+
+		for (int j = 0; j < 4; j++) {
 			meanOptTime[j] += totalOptTime[j][i];
 			if (totalOptTime[j][i] < minTime[j]) { minTime[j] = totalOptTime[j][i]; }
 			if (totalOptTime[j][i] > maxTime[j]) { maxTime[j] = totalOptTime[j][i]; }
 		}
 
-		if (minOptValue[0][i] > minOptValue[2][i]) {
+		if (minOptValue[0][i] >= minOptValue[2][i]) {
 			metricComparison++;
 			comparePercent += (minOptValue[0][i] - minOptValue[2][i]) / minOptValue[0][i];
+		}
+		else {
+			cout << "index:" << i << "metric value for rigid is big???? " << endl;
+			cout << " PD: " << defdefPD.getPD() << endl;
+			cout << "sqrt PD: " << minOptValue[2][i] << endl;
 		}
 		
 		if (minOptIndex[0][i] == minOptIndex[2][i] ) {//count if two direction is same
 			directionCheck++;
-			directionRank[i] = 0;
-			directionChecks[0]++;
+			//directionRank[i] = 0;
+			//directionChecks[0]++;
 		}
-		else {
-			directionRank[i] = 1;
+		//else {
+		//	directionRank[i] = 1;
 
-			while (minOptIndex[2][i] != sortedPDIndex[i][directionRank[i]]) {
-				directionRank[i] += 1;;
-				
-			}
-			
-			averageDirectoinRank += (double)directionRank[i]+1;
-			//for (int haha = 0; haha < directionRank[i]; haha++) {
-				directionChecks[directionRank[i]]++;
-			//}
-		}
+		//	while (minOptIndex[2][i] != sortedPDIndex[i][directionRank[i]]) {
+		//		directionRank[i] += 1;;
+		//		
+		//	}
+		//	
+		//	averageDirectoinRank += (double)directionRank[i]+1;
+		//	//for (int haha = 0; haha < directionRank[i]; haha++) {
+		//		directionChecks[directionRank[i]]++;
+		//	//}
+		//}
 		/*if (sortedPDIndex[i][0] == (minOptIndex[2][i]) || sortedPDIndex[i][1] == (minOptIndex[2][i]) || sortedPDIndex[i][2] == (minOptIndex[2][i])) {
 			directionCheck3rd++;
 		}*/
-
-		defdefPD.writeCSV(filename1);
-		rigidPD.writeCSV(filename2);
+		defPD.writeCSV(filenamedef);
+		defdefPD.writeCSV(filenameDefDef);
+		defrigidPD.writeCSV(filenameRigidDefDef);
+		rigidPD.writeCSV(filenameRigid);
 		if (i % 100 == 0) cout << i << endl;
-
-
-
+		
 	}
 	//clock_t end = clock();
 	//double totalRigidTime = (double)((double)end - (double)start) / (double)CLOCKS_PER_SEC;
 
 
 	comparePercent /= numTest; //10000개로 나누고 100퍼센트로 표시
-	averageDirectoinRank /= numTest;
-	for (int i = 0; i < 3; i++) {
+	//averageDirectoinRank /= numTest;
+	for (int i = 0; i < 4; i++) {
 		meanOptTime[i] /= numTest;
 	}
-	cout << "totalOptTime for Rigid: " << meanOptTime[0] << "seconds" << endl;
-	cout << "totalOptTime for Def: " << meanOptTime[1] << "seconds" << endl;
-	cout << "totalOptTime for DefDef: " << meanOptTime[2] << "seconds" << endl;
+	cout << "meanOptTime for Rigid: \t\t" << meanOptTime[0] << "seconds" << endl;
+	cout << "meanOptTime for Def: \t\t" << meanOptTime[1] << "seconds" << endl;
+	cout << "meanOptTime for DefDef: \t" << meanOptTime[2] << "seconds" << endl;
+	cout << "meanOptTime for DefDef_rigid:\t" << meanOptTime[3] << "seconds" << endl;
 
-	cout << "Min,Max time for Rigid: (" << minTime[0] << "," << maxTime[0] << ") seconds" << endl;
-	cout << "Min,Max time for Def:   (" << minTime[1] << "," << maxTime[1] << ") seconds" << endl;
-	cout << "Min,Max time for DefDef:(" << minTime[2] << "," << maxTime[2] << ") seconds" << endl;
+	cout << "\nMin,Max time for Rigid: \t(" << minTime[0] << "," << maxTime[0] << ") seconds" << endl;
+	cout << "Min,Max time for Def:   \t(" << minTime[1] << "," << maxTime[1] << ") seconds" << endl;
+	cout << "Min,Max time for DefDef:\t(" << minTime[2] << "," << maxTime[2] << ") seconds" << endl;
+	cout << "Min,Max time for DefDef_rigid:\t(" << minTime[3] << "," << maxTime[3] << ") seconds" << endl;
 
 
-	cout << "same direction :" << 100.0*(double)directionCheck / (double)numTest << "%" << endl;
+	//cout << "average Rank:" << averageDirectoinRank << "th rigid PD direction is same with deformed PD direction" << endl;
+	cout << "\nRigid > defdef : " << 100.0*(double)metricComparison / (double)numTest << "%" << endl;
+	cout << "Mean differeces between metric: " << 100.0*comparePercent << "%" << endl;
+	cout << "DefPD is : " << 100.0*(1.0-comparePercent) << "% tighter then RigidPD" << endl;
+
+
+	cout << "\nSame direction :" << 100.0*(double)directionCheck / (double)numTest << "%" << endl;
 	double sum=0;
 	for (int haha = 0; haha < 44; haha++)
 	{
@@ -216,38 +245,39 @@ int main(int argc, const char *argv[])
 
 	}
 
-	cout << "averate Rank:" << averageDirectoinRank << "th rigid PD direction is same with deformed PD direction" << endl;
-	cout << "rigid > defdef : " << 100.0*(double)metricComparison / (double)numTest << "%" << endl;
-	cout << "Mean differeces between metric: " << 100.0*comparePercent << "%" << endl;
-
-
 
 	//defdefPD->printResult(minOptIndex);
 
 	for (int i = 0; i < numTest; i++) {
 		cout << "rigid PD [" << i << "]= " << minOptValue[0][i] << "\t" << "DefDef PD [" << i << "]= " << minOptValue[2][i] << endl;
 		cout << "rigid direction [" << i << "]= " << minOptIndex[0][i] << "\t" << "DefDef direction [" << i << "]= " << minOptIndex[2][i] << endl;
-		cout << directionRank[i]<<"th value:"<<"rigid direction[" << sortedPDIndex[i][directionRank[i]] << "] ="<<sortedPD[i][directionRank[i]] << endl;
+		//cout << directionRank[i]<<"th value:"<<"rigid direction[" << sortedPDIndex[i][directionRank[i]] << "] ="<<sortedPD[i][directionRank[i]] << endl;
 		cout << endl;
 	}
 	//1. random generation : if volume==0, regenerate.
 	// 1) Metric values for each cases --> value comparison, how much?
 	// 2) Opt Pair indices for each cases --> calculate percentage of accuracy if not 100%
 	// 3) Total time for each cases --> speed comparison
-	filename1 = "test" + fileMadeTime + "Total Results";
+	string filenameResult = "Data/test_RESULT_" + fileMadeTime + "Total Results";
 
-	ofstream output(filename1 + ".txt", ios::app);
+	ofstream output(filenameResult + ".txt", ios::app);
 
-	output << "totalOptTime for Rigid: " << meanOptTime[0] << "seconds" << endl;
-	output << "totalOptTime for Def: " << meanOptTime[1] << "seconds" << endl;
-	output << "totalOptTime for DefDef: " << meanOptTime[2] << "seconds" << endl;
+	output << "\nmeanOptTime for Rigid: " << meanOptTime[0] << "seconds" << endl;
+	output << "meanOptTime for Def: " << meanOptTime[1] << "seconds" << endl;
+	output << "meanOptTime for DefDef: " << meanOptTime[2] << "seconds" << endl;
+	output << "meanOptTime for DefDef_rigid: " << meanOptTime[3] << "seconds" << endl;
 
-	output << "Min,Max time for Rigid: (" << minTime[0] << "," << maxTime[0] << ") seconds" << endl;
+	output << "\nMin,Max time for Rigid: (" << minTime[0] << "," << maxTime[0] << ") seconds" << endl;
 	output << "Min,Max time for Def:   (" << minTime[1] << "," << maxTime[1] << ") seconds" << endl;
 	output << "Min,Max time for DefDef:(" << minTime[2] << "," << maxTime[2] << ") seconds" << endl;
+	output << "Min,Max time for DefDef_rigid:(" << minTime[3] << "," << maxTime[3] << ") seconds" << endl;
+	
+	output << "\nRigid > defdef : " << 100.0*(double)metricComparison / (double)numTest << "%" << endl;
+	output << "Mean differeces between metric: " << 100.0*comparePercent << "%" << endl;
+	cout << "DefPD is : " << 100.0*(1.0 - comparePercent) << "% tighter then RigidPD" << endl;
 
 
-	output << "same direction :" << 100.0*(double)directionCheck / (double)numTest << "%" << endl;
+	output << "Same direction :" << 100.0*(double)directionCheck / (double)numTest << "%" << endl;
 	sum = 0;
 	for (int haha = 0; haha < 44; haha++)
 	{
@@ -257,9 +287,7 @@ int main(int argc, const char *argv[])
 
 	}
 
-	output << "averate Rank:" << averageDirectoinRank << "th rigid PD direction is same with deformed PD direction" << endl;
-	output << "rigid > defdef : " << 100.0*(double)metricComparison / (double)numTest << "%" << endl;
-	output << "Mean differeces between metric: " << 100.0*comparePercent << "%" << endl;
+	//output << "average Rank:" << averageDirectoinRank << "th rigid PD direction is same with deformed PD direction" << endl;
 
 
 
@@ -268,7 +296,7 @@ int main(int argc, const char *argv[])
 	for (int i = 0; i < numTest; i++) {
 		output << "rigid PD [" << i << "]= " << minOptValue[0][i] << "\t" << "DefDef PD [" << i << "]= " << minOptValue[2][i] << endl;
 		output << "rigid direction [" << i << "]= " << minOptIndex[0][i] << "\t" << "DefDef direction [" << i << "]= " << minOptIndex[2][i] << endl;
-		output << directionRank[i] << "th value:" << "rigid direction[" << sortedPDIndex[i][directionRank[i]] << "] =" << sortedPD[i][directionRank[i]] << endl;
+		//output << directionRank[i] << "th value:" << "rigid direction[" << sortedPDIndex[i][directionRank[i]] << "] =" << sortedPD[i][directionRank[i]] << endl;
 		output << endl;
 	}
 
