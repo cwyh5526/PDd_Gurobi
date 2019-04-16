@@ -46,8 +46,12 @@
 ///********** rendering variable **********/
 //int   main_window;
 //float scale = 1.0;
-//float view_rotate[16] = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
-//float obj_pos[] = { 0.0, 0.0, 0.0 };
+//float view_rotate[16] =
+//{ cos(-20), 0, -sin(-20), 0,
+//0, 1, 0, 0, 
+//sin(-20), 0, cos(-20), 0,
+//0, 0, 0, 1 };
+//float obj_pos[] = { .0, .0, .0 };
 //
 //float xy_aspect;
 //int   last_x, last_y;
@@ -107,7 +111,7 @@
 //GLUI_Checkbox	*check_deform[45];
 ///********** Miscellaneous global variables **********/
 //
-//GLfloat light0_ambient[] = { 0.1f, 0.1f, 0.3f, 1.0f };
+//GLfloat light0_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 //GLfloat light0_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 //GLfloat light0_position[] = { .5f, .5f, 1.0f, 0.0f };
 //
@@ -222,7 +226,7 @@
 //			staticTet = defPD->getSTet();
 //			restTet = defPD->getRTet();
 //			rOptimalTet = defPD->getPTet();
-//
+//			sOptimalTet = defPD->getSTet();
 //			minOptIndex = defPD->getMinOptIndex();
 //			minOptValue = defPD->getPD();
 //			totalOptTime = defPD->getOptTime();
@@ -419,10 +423,10 @@
 //}
 //void drawLinedFace(tet t,int fIndex,float r, float g, float b) {
 //	glPushMatrix();
-//	glLineWidth(5);
+//	glLineWidth(2);
 //
 //	glBegin(GL_LINES);
-//	glColor3f(r,g,b);
+//	glColor3f(r*0.5f,g*0.5f,b*0.5f);
 //	
 //	glVertex3f(t.face[fIndex][0].x, t.face[fIndex][0].y, t.face[fIndex][0].z);
 //	glVertex3f(t.face[fIndex][1].x, t.face[fIndex][1].y, t.face[fIndex][1].z);
@@ -437,7 +441,7 @@
 //}
 //void drawLinedEdge(tet t, int eIndex, float r, float g, float b) {
 //	glPushMatrix();
-//	glLineWidth(5);
+//	//glLineWidth(5);
 //
 //	glBegin(GL_LINES);
 //	glColor3f(r, g, b);
@@ -499,6 +503,11 @@
 //		}
 //	}
 //	glEnd();
+//	glBegin(GL_LINES);
+//	for (int f = 0; f < 4; f++) {
+//		drawLinedFace(t, f, r, g, b);
+//	}
+//	glEnd();
 //	glPopMatrix();
 //
 //}
@@ -557,14 +566,17 @@
 //	glPushMatrix();
 //	glLineWidth(1);
 //	glBegin(GL_LINES);
-//	glColor3f(0.f, 0.f, 0.f);
+//	
 //	//x axis
+//	glColor3f(1.f, 0.f, 0.f);
 //	glVertex3f(-10.f, 0.f, 0.f);
 //	glVertex3f(10.f, 0.f, 0.f);
-//
+//	
+//	glColor3f(0.f, 1.f, 0.f);
 //	glVertex3f(0.f, -10.f, 0.f);
 //	glVertex3f(0.f, 10.f, 0.f);
 //
+//	glColor3f(0.f, 0.f, 1.f);
 //	glVertex3f(0.f, 0.f, -10.f);
 //	glVertex3f(0.f, 0.f, 10.f);
 //	glEnd();
@@ -576,17 +588,17 @@
 //	glColor4f(0.7f, 0.7f, 0.7f, 0.5f);
 //	glBegin(GL_QUADS);
 //	glNormal3f(0, 1, 0);
-//	glVertex3f(-5, 0, 5);
-//	glVertex3f(5, 0, 5);
-//	glVertex3f(5, 0, -5);
-//	glVertex3f(-5, 0, -5);
+//	glVertex3f(-10, 0, 10);
+//	glVertex3f(10, 0, 10);
+//	glVertex3f(10, 0, -10);
+//	glVertex3f(-10, 0, -10);
 //	glEnd();
 //	glPopMatrix();
 //
 //}
 //void myGlutDisplay(void)
 //{
-//	glClearColor(.9f, .9f, .9f, 1.0f);
+//	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 //	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //
 //	glMatrixMode(GL_PROJECTION);
@@ -603,7 +615,7 @@
 //
 //	glLoadIdentity();
 //
-//	glTranslatef(0.0, -1.0, -10.f);
+//	glTranslatef(-0.0, -4.0, -20.f);
 //	glTranslatef(obj_pos[0], obj_pos[1], -obj_pos[2]);
 //	glMultMatrixf(view_rotate);
 //
@@ -646,19 +658,19 @@
 //	
 //	
 //	if (render_s_optimal_option == ON) {          //defdef
-//		drawTet(sOptimalTet, 0.1f, 0.1f, 1.0f, 0.3f); //defdef
+//		drawTet(sOptimalTet, 1.0f, 0.1f, 0.1f, 0.5f); //defdef
 //		
 //	}
 //	if (render_r_optimal_option == ON) {
-//		drawTet(rOptimalTet, 0.1f, 0.1f, 1.0f, 0.3f);
+//		drawTet(rOptimalTet, 0.1f, 0.1f, 1.0f, 0.5f);
 //		
 //	}
 //	if (render_rest_option == ON) {
-//		drawTet(restTet, 0.1f, 1.0f, 0.1f, 0.3f);
+//		drawTet(restTet, .5f, 0.5f, 1.0f, 0.1f);
 //
 //	}
 //	if (render_static_option == ON) {
-//		drawTet(staticTet, 1.0f, 0.1f, 0.1f, 0.3f);
+//		drawTet(staticTet, 1.0f, 0.5f, 0.5f, 0.1f);
 //	}
 //	if (render_normal_option == ON && (render_s_optimal_option == ON||render_r_optimal_option==ON||render_rest_option==ON|| render_static_option == ON))
 //	{

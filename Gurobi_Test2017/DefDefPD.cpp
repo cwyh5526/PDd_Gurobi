@@ -44,18 +44,42 @@ void DefDefPD::initTet(tet &T, vec3 v0, vec3 v1, vec3 v2, vec3 v3) {
 }
 
 void DefDefPD::initDefault() {
-
 	//static tetrahedron position
-	setRTet(0,vec3(0.0, 0.0, 0.0),
-		vec3(1.0, 0.0, 0.0),
-		vec3(0.0, 1.0, 0.0),
-		vec3(0.0, 0.0, 1.0));
+	setRTet(0,
+	/*	vec3(0.9, 3.4, 4.7),
+		vec3(5.2, 0.1, 5.4),
+		vec3(8.5, 3.5, 9.3),
+		vec3(9.6, 7.8, 5.5));
+*/
+
+vec3(3.6, 6.5,	2.7),
+vec3(1.5, 0.7,	4.3),
+vec3(3.7, 4.5,	0.5),
+vec3(6.1, 8  ,	4.5));
 
 	//rest pose tetrahedron position
-	setRTet(1,vec3(0.2, 0.2, 0.2),
-		vec3(-1.2, 0.2, 0.2),
-		vec3(0.2, 1.2, 0.2),
-		vec3(0.7, 0.7, 1.2));
+	setRTet(1,
+		/*vec3(4.4, 4.1, 7),
+		vec3(5.5, 0.6, 1.3),
+		vec3(9, 0.6, 5.10),
+		vec3(5.5, 8.9, 9.8));*/
+		vec3(2.8,	9.4,3.7),
+		vec3(5.9,	3.6,0.9),
+		vec3(0.8,	6.4,1),
+		vec3(2.3,	1.1,2.2));
+
+
+	////static tetrahedron position
+	//setRTet(0,vec3(0.0, 0.0, 0.0),
+	//	vec3(1.0, 0.0, 0.0),
+	//	vec3(0.0, 1.0, 0.0),
+	//	vec3(0.0, 0.0, 1.0));
+
+	////rest pose tetrahedron position
+	//setRTet(1,vec3(0.2, 0.2, 0.2),
+	//	vec3(-1.2, 0.2, 0.2),
+	//	vec3(0.2, 1.2, 0.2),
+	//	vec3(0.7, 0.7, 1.2));
 
 	//2. Preprocessing
 	for (int i = 0; i < 2; i++) {
@@ -1076,7 +1100,7 @@ void DefDefPD::fprintV3(ofstream &fp, vec3 v) {
 }
 void DefDefPD::writeCSVHead(string fileName) {
 
-	ofstream output(fileName + ".csv");
+	ofstream output(fileName + ".csv", ios::app);
 
 	output << " , INPUT,,,,,,,,OUTPUT,,,,,,,," << endl;
 	output << "No. , Tet1,,,,Tet2,,,,DeformedTet1,,,,DeformedTet2,,,,PD(obj. norm),Opt. Time,Sep. Index,Sep. Pair,Sep. Normal,,, Volume Before1, Volme After1, Volume Before1, Volme After1" << endl;

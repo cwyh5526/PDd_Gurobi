@@ -1,0 +1,88 @@
+
+meanOptTime for Rigid: 0seconds
+meanOptTime for Def: 0.0280066seconds
+meanOptTime for DefDef: 0.0447096seconds
+meanOptTime for DefDef_rigid: 0.0110207seconds
+
+Min,Max time for Rigid: (0,0) seconds
+Min,Max time for Def:   (0,0.0470104) seconds
+Min,Max time for DefDef:(0,0.061018) seconds
+Min,Max time for DefDef_rigid:(0,0.00300026) seconds
+Same direction :30%
+possiblity of within 0th direction :0%, 0%
+possiblity of within 1th direction :0%, 0%
+possiblity of within 2th direction :0%, 0%
+possiblity of within 3th direction :0%, 0%
+possiblity of within 4th direction :0%, 0%
+possiblity of within 5th direction :0%, 0%
+possiblity of within 6th direction :0%, 0%
+possiblity of within 7th direction :0%, 0%
+possiblity of within 8th direction :0%, 0%
+possiblity of within 9th direction :0%, 0%
+possiblity of within 10th direction :0%, 0%
+possiblity of within 11th direction :0%, 0%
+possiblity of within 12th direction :0%, 0%
+possiblity of within 13th direction :0%, 0%
+possiblity of within 14th direction :0%, 0%
+possiblity of within 15th direction :0%, 0%
+possiblity of within 16th direction :0%, 0%
+possiblity of within 17th direction :0%, 0%
+possiblity of within 18th direction :0%, 0%
+possiblity of within 19th direction :0%, 0%
+possiblity of within 20th direction :0%, 0%
+possiblity of within 21th direction :0%, 0%
+possiblity of within 22th direction :0%, 0%
+possiblity of within 23th direction :0%, 0%
+possiblity of within 24th direction :0%, 0%
+possiblity of within 25th direction :0%, 0%
+possiblity of within 26th direction :0%, 0%
+possiblity of within 27th direction :0%, 0%
+possiblity of within 28th direction :0%, 0%
+possiblity of within 29th direction :0%, 0%
+possiblity of within 30th direction :0%, 0%
+possiblity of within 31th direction :0%, 0%
+possiblity of within 32th direction :0%, 0%
+possiblity of within 33th direction :0%, 0%
+possiblity of within 34th direction :0%, 0%
+possiblity of within 35th direction :0%, 0%
+possiblity of within 36th direction :0%, 0%
+possiblity of within 37th direction :0%, 0%
+possiblity of within 38th direction :0%, 0%
+possiblity of within 39th direction :0%, 0%
+possiblity of within 40th direction :0%, 0%
+possiblity of within 41th direction :0%, 0%
+possiblity of within 42th direction :0%, 0%
+possiblity of within 43th direction :0%, 0%
+average Rank:0th rigid PD direction is same with deformed PD direction
+mRigid > defdef : 100%
+Mean differeces between metric: 74.0107%
+rigid PD [0]= 0.496491	DefDef PD [0]= 0.143338
+rigid direction [0]= 8	DefDef direction [0]= 8
+
+rigid PD [1]= 0.932932	DefDef PD [1]= 0.298473
+rigid direction [1]= 41	DefDef direction [1]= 43
+
+rigid PD [2]= 2.41975	DefDef PD [2]= 0.598917
+rigid direction [2]= 34	DefDef direction [2]= 0
+
+rigid PD [3]= 3.69575	DefDef PD [3]= 1.12181
+rigid direction [3]= 14	DefDef direction [3]= 16
+
+rigid PD [4]= 0.729193	DefDef PD [4]= 0.150481
+rigid direction [4]= 8	DefDef direction [4]= 15
+
+rigid PD [5]= 0.745224	DefDef PD [5]= 0.172465
+rigid direction [5]= 2	DefDef direction [5]= 2
+
+rigid PD [6]= 2.54673	DefDef PD [6]= 0.609962
+rigid direction [6]= 43	DefDef direction [6]= 5
+
+rigid PD [7]= 0.616658	DefDef PD [7]= 0.14277
+rigid direction [7]= 2	DefDef direction [7]= 2
+
+rigid PD [8]= 2.3894	DefDef PD [8]= 0.676434
+rigid direction [8]= 40	DefDef direction [8]= 38
+
+rigid PD [9]= 1.18554	DefDef PD [9]= 0.293209
+rigid direction [9]= 18	DefDef direction [9]= 36
+

@@ -103,7 +103,29 @@ void DefPD::initTet(tet &T, vec3 v0, vec3 v1, vec3 v2, vec3 v3) {
 }
 
 void DefPD::initDefault(){
-	
+	//static tetrahedron position
+	setSTet(
+		vec3(0.9, 3.4, 4.7),
+		vec3(5.2, 0.1, 5.4),
+		vec3(8.5, 3.5, 9.3),
+		vec3(9.6, 7.8, 5.5));
+
+		/*vec3(9.1,	4.5,	9.3),
+		vec3(9.6,	4.1,	1.1),
+		vec3(6.9,	4.5,	6.4),
+		vec3(0.4,	0.7,	0.6));*/
+
+	//rest pose tetrahedron position
+	setRTet(
+		vec3(4.4, 4.1, 7),
+		vec3(5.5, 0.6, 1.3),
+		vec3(9, 0.6, 5.10),
+		vec3(5.5, 8.9, 9.8));
+		//vec3(0.2,	4.5,	3.9),
+		//vec3(7.3,	4.9,	1.2),
+		//vec3(7.7,	6.5,	2.8),
+		//vec3(6.1,	2.9,	5  ));
+
 	//static tetrahedron position
 	//setSTet(vec3(0.0, 0.0, 0.0),
 	//	vec3(1.0, 0.0, 0.0),
@@ -116,23 +138,26 @@ void DefPD::initDefault(){
 	//	vec3(0.7, 0.7, 1.2),
 	//	vec3(0.2, 1.2, 0.2));
 
-	//static tetrahedron position
-	setSTet(vec3(0.0, 0.0, 0.0),
-		vec3(1.0, 0.0, 0.0),
-		vec3(0.0, 1.0, 0.0),
-		vec3(0.0, 0.0, 1.0));
+	////static tetrahedron position
+	//setSTet(vec3(0.0, 0.0, 0.0),
+	//	vec3(1.0, 0.0, 0.0),
+	//	vec3(0.0, 1.0, 0.0),
+	//	vec3(0.0, 0.0, 1.0));
 
-	//rest pose tetrahedron position
-	setRTet(vec3(0.2, 0.2, 0.2),
-		vec3(-1.2, 0.2, 0.2),
-		vec3(0.2, 1.2, 0.2),
-		vec3(0.7, 0.7, 1.2));
+	////rest pose tetrahedron position
+	//setRTet(vec3(0.2, 0.2, 0.2),
+	//	vec3(-1.2, 0.2, 0.2),
+	//	vec3(0.2, 1.2, 0.2),
+	//	vec3(0.7, 0.7, 1.2));
 
 	//2. Preprocessing
 	rVolume = calculateTetVolume(rTet);
 	rSumrConstantCalculation();
 	optimized = false;
 	totalOptTime = 0.f;
+	minOptIndex = -1;
+	minOptValue = 1000.0f;
+
 	return;
 
 }
@@ -146,12 +171,14 @@ void DefPD::init(tet tetS, tet tetR) {
 	rSumrConstantCalculation();	
 	optimized = false;
 	totalOptTime = 0.f;
+	minOptIndex = -1;
+	minOptValue = 1000.0f;
 
 }
 
 void DefPD::optStaticFace(int fIndex, int pairIndex) {
 	//cout << "\n =========optStaticFace Face " << fIndex << endl;
-	
+	int vIndex[4][4] = { { 1,3,2,0 },{ 0,2,3,1 },{ 0,3,1,2 },{ 0,1,2,3 } };
 	try {
 		GRBModel model = GRBModel(*env);
 
@@ -179,20 +206,20 @@ void DefPD::optStaticFace(int fIndex, int pairIndex) {
 				+ yP0*yP0 + yP0*yP1 + yP1*yP1 + yP0*yP2 + yP1*yP2 + yP2*yP2 + yP0*yP3 + yP1*yP3 + yP2*yP3 + yP3*yP3
 				+ zP0*zP0 + zP0*zP1 + zP1*zP1 + zP0*zP2 + zP1*zP2 + zP2*zP2 + zP0*zP3 + zP1*zP3 + zP2*zP3 + zP3*zP3
 
-				- xP0*(rSum.x + rTet.vertex[0].x)
-				- xP1*(rSum.x + rTet.vertex[1].x)
-				- xP2*(rSum.x + rTet.vertex[2].x)
-				- xP3*(rSum.x + rTet.vertex[3].x)
+				- xP0*(rSum.x + rTet.vertex[vIndex[fIndex][0]].x)
+				- xP1*(rSum.x + rTet.vertex[vIndex[fIndex][1]].x)
+				- xP2*(rSum.x + rTet.vertex[vIndex[fIndex][2]].x)
+				- xP3*(rSum.x + rTet.vertex[vIndex[fIndex][3]].x)
 
-				- yP0*(rSum.y + rTet.vertex[0].y)
-				- yP1*(rSum.y + rTet.vertex[1].y)
-				- yP2*(rSum.y + rTet.vertex[2].y)
-				- yP3*(rSum.y + rTet.vertex[3].y)
+				- yP0*(rSum.y + rTet.vertex[vIndex[fIndex][0]].y)
+				- yP1*(rSum.y + rTet.vertex[vIndex[fIndex][1]].y)
+				- yP2*(rSum.y + rTet.vertex[vIndex[fIndex][2]].y)
+				- yP3*(rSum.y + rTet.vertex[vIndex[fIndex][3]].y)
 
-				- zP0*(rSum.z + rTet.vertex[0].z)
-				- zP1*(rSum.z + rTet.vertex[1].z)
-				- zP2*(rSum.z + rTet.vertex[2].z)
-				- zP3*(rSum.z + rTet.vertex[3].z)
+				- zP0*(rSum.z + rTet.vertex[vIndex[fIndex][0]].z)
+				- zP1*(rSum.z + rTet.vertex[vIndex[fIndex][1]].z)
+				- zP2*(rSum.z + rTet.vertex[vIndex[fIndex][2]].z)
+				- zP3*(rSum.z + rTet.vertex[vIndex[fIndex][3]].z)
 
 				+ rConstant) / (10.f);
 
@@ -576,7 +603,7 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 					- zP2_*(rSum.z + rTet.vertex[d2].z)
 					- zP3_*(rSum.z + rTet.vertex[d3].z)
 
-					+ rConstant) / (60.f*rVolume);
+					+ rConstant) / (10.f);
 
 			model_second.setObjective(obj_, GRB_MINIMIZE);
 
@@ -631,6 +658,7 @@ void DefPD::optEdgeEdge(int sIndex, int dIndex, int pairIndex) {
 	catch (GRBException e) {
 		cout << "Error code = " << e.getErrorCode() << endl;
 		cout << e.getMessage() << endl;
+		return;
 	}
 	catch (...) {
 		cout << "Exception during optimization" << endl;
@@ -843,7 +871,7 @@ void DefPD::separatingPlaneCalculation(vec3 faceVrtx[3], vec3 vrtx, vec3 *normal
 
 void DefPD::writeCSVHead(string fileName) {
 
-	ofstream output(fileName+".csv");
+	ofstream output(fileName+".csv",ios::app);
 	
 	output << " , INPUT,,,,,,,,OUTPUT,,,,,,,," << endl;
 	output << "No. , StaticTet,,,,RestTet,,,,DeformedTet,,,,PD(obj. norm),Opt. Time,Sep. Index,Sep. Pair,Sep. Normal,,, Volume Before, Volme After"<< endl;

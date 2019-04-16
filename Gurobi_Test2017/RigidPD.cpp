@@ -13,16 +13,31 @@ RigidPD::~RigidPD() {
 //=============
 void RigidPD::initDefault() {
 	//static tetrahedron position
-	setRTet(0, vec3(0.0, 0.0, 0.0),
-		vec3(1.0, 0.0, 0.0),
-		vec3(0.0, 1.0, 0.0),
-		vec3(0.0, 0.0, 1.0));
+	setRTet(0,
+		vec3(0.9, 3.4, 4.7),
+		vec3(5.2, 0.1, 5.4),
+		vec3(8.5, 3.5, 9.3),
+		vec3(9.6, 7.8, 5.5));
+		
 
 	//rest pose tetrahedron position
-	setRTet(1, vec3(0.2, 0.2, 0.2),
-		vec3(-1.2, 0.2, 0.2),
-		vec3(0.2, 1.2, 0.2),
-		vec3(0.7, 0.7, 1.2));
+	setRTet(1,
+		vec3(4.4, 4.1, 7),
+		vec3(5.5, 0.6, 1.3),
+		vec3(9, 0.6, 5.10),
+		vec3(5.5, 8.9, 9.8));
+
+	////static tetrahedron position
+	//setRTet(0, vec3(0.0, 0.0, 0.0),
+	//	vec3(1.0, 0.0, 0.0),
+	//	vec3(0.0, 1.0, 0.0),
+	//	vec3(0.0, 0.0, 1.0));
+
+	////rest pose tetrahedron position
+	//setRTet(1, vec3(0.2, 0.2, 0.2),
+	//	vec3(-1.2, 0.2, 0.2),
+	//	vec3(0.2, 1.2, 0.2),
+	//	vec3(0.7, 0.7, 1.2));
 
 
 
@@ -264,8 +279,8 @@ void RigidPD::fprintV3(ofstream &fp, vec3 v) {
 
 
 void RigidPD::writeCSVHead(string fileName) {
-
-	ofstream output(fileName + ".csv");
+	
+	ofstream output(fileName + ".csv",ios::app);
 
 	output << " , INPUT,,,,,,,,OUTPUT,,,,,,,," << endl;
 	output << "No. , Tet1,,,,Tet2,,,,DeformedTet1,,,,DeformedTet2,,,,PD(obj. norm),Opt. Time,Sep. Index,Sep. Pair,Sep. Normal,,, Volume Before1, Volme After1, Volume Before1, Volme After1" << endl;

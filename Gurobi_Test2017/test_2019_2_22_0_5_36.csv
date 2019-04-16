@@ -1,0 +1,6 @@
+ , INPUT,,,,,,,,OUTPUT,,,,,,,,
+No. , StaticTet,,,,RestTet,,,,DeformedTet,,,,PD(obj. norm),Opt. Time,Sep. Index,Sep. Pair,Sep. Normal,,, Volume Before, Volme After
+1,s0,9.1,4.5,9.3,r0,0.2,4.5,3.9,p0,0,0,0,0,0.0500679,8,SE0 DE0,-0.0763334,0.995661,-0.0532233,10.248,1e-19
+,s1,9.6,4.1,1.1,r1,7.3,4.9,1.2,p1,0,0,0
+,s2,6.9,4.5,6.4,r2,7.7,6.5,2.8,p2,0,0,0
+,s3,0.4,0.7,0.6,r3,6.1,2.9,5,p3,0,0,0
