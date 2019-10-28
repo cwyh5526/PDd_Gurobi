@@ -14,18 +14,32 @@ RigidPD::~RigidPD() {
 void RigidPD::initDefault() {
 	//static tetrahedron position
 	setRTet(0,
-		vec3(0.9, 3.4, 4.7),
-		vec3(5.2, 0.1, 5.4),
-		vec3(8.5, 3.5, 9.3),
-		vec3(9.6, 7.8, 5.5));
-		
+		vec3(-3.9, 3.4,-1.7),
+		vec3(2.2, 0.1, 0.4),
+		vec3(5.5, 3.5, 4.3),
+		vec3(6.6, 7.8, 0.5));
+
 
 	//rest pose tetrahedron position
 	setRTet(1,
-		vec3(4.4, 4.1, 7),
-		vec3(5.5, 0.6, 1.3),
-		vec3(9, 0.6, 5.10),
-		vec3(5.5, 8.9, 9.8));
+		vec3(1.4, 4.1, 2),
+		vec3(2.5, 0.6, -4.3),
+		vec3(6, 0.6, 0.10),
+		vec3(2.5, 8.9, 4.8));
+	////static tetrahedron position
+	//setRTet(0,
+	//	vec3(0.9, 3.4, 4.7),
+	//	vec3(5.2, 0.1, 5.4),
+	//	vec3(8.5, 3.5, 9.3),
+	//	vec3(9.6, 7.8, 5.5));
+	//	
+
+	////rest pose tetrahedron position
+	//setRTet(1,
+	//	vec3(4.4, 4.1, 7),
+	//	vec3(5.5, 0.6, 1.3),
+	//	vec3(9, 0.6, 5.10),
+	//	vec3(5.5, 8.9, 9.8));
 
 	////static tetrahedron position
 	//setRTet(0, vec3(0.0, 0.0, 0.0),

@@ -104,6 +104,7 @@ int	renderDeform[45] = { 0 };
 
 int	render_normal_option = OFF;
 int render_pair_option = OFF;
+string render_txt = "PD : ";
 
 /** Pointers to the windows and some of the controls we'll create **/
 GLUI *glui, *glui2;
@@ -171,7 +172,7 @@ void control_cb(int control)
 
 		if (control == OPTIMIZE_RIGID_ID) {
 			//optimize
-
+			render_txt = "RIGID PD : ";
 			/*rigidPD*/
 			if (ans == 'Y' || ans == 'y') {
 				rigidPD->initDefault();
@@ -195,7 +196,7 @@ void control_cb(int control)
 		}
 		else if (control == OPTIMIZE_DEFDEF_ID) {
 			/*defdefPd*/
-
+			render_txt = "PDd (DEF / DEF) : ";
 			if (ans == 'Y' || ans == 'y') {
 				defdefPD->initDefault();
 			}
@@ -229,6 +230,8 @@ void control_cb(int control)
 		}
 		else {
 			/*defPd*/
+			render_txt = "PDd (STAT / DEF) : ";
+
 			if (ans == 'Y' || ans == 'y') {
 				defPD->initDefault();
 			}
@@ -682,6 +685,16 @@ void drawGround() {
 void drawModel(string fileName) {
 	m.render();
 }
+
+void outputText(int x, int y, int z, float r, float g, float b, string str) {
+	glColor3f(r, g, b);
+	glRasterPos3f(x, y, z);
+	str.append( text_optValue->get_text());
+	for (int i = 0; i < str.length(); ++i) {
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, str[i]);
+	}
+
+}
 void myGlutDisplay(void)
 {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -717,7 +730,6 @@ void myGlutDisplay(void)
 	drawAxis();
 	//glTranslatef();
 	
-
 	if (renderDeform[44] == ON) { //when off is not checked
 		for (int i = 0; i < 44; i++) {
 			if (renderDeform[i] == ON) {				
@@ -771,7 +783,7 @@ void myGlutDisplay(void)
 	if (render_ground_option == ON) {
 		drawGround();
 	}
-
+	outputText(5, 1, 5, 0, 0, 0, render_txt);
 	glEnable(GL_LIGHTING);
 	glutSwapBuffers();
 }
