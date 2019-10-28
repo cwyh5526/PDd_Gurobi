@@ -63,7 +63,7 @@ float obj_pos[] = { .0, .0, .0 };
 float xy_aspect;
 int   last_x, last_y;
 float rotationX = 0.0, rotationY = 0.0;
-
+float rotSpeed = 0.f;
 
 /** These are the live variables passed into GLUI ***/
 // input from user
@@ -131,7 +131,7 @@ GLfloat light0_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat light0_position[] = { .5f, .5f, 1.0f, 0.0f };
 
 GLfloat lights_rotation[16] = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
-
+const GLfloat GROUND = 20.f;
 /**************************************** control_cb() *******************/
 /* GLUI control callback                                                 */
 void control_deform(int control) {
@@ -633,6 +633,12 @@ void drawAnimation() {
 		drawTet(rAnimationTet, 0.1f, 0.1f, 1.0f, 0.5f);
 		drawTet(sAnimationTet, 1.0f, 0.1f, 0.1f, 0.5f); 
 		animationTime++;
+
+		/*float rotationAngle = -(20*animationTime / 10000.f);
+		view_rotate[0] = view_rotate[11] = cos(rotationAngle);
+		view_rotate[2] = -sin(rotationAngle);
+		view_rotate[8] = sin(rotationAngle);*/
+
 		//cout << animationTime << "\n";
 	}
 
@@ -645,16 +651,16 @@ void drawAxis() {
 	
 	//x axis
 	glColor3f(1.f, 0.f, 0.f);
-	glVertex3f(-10.f, 0.f, 0.f);
-	glVertex3f(10.f, 0.f, 0.f);
-	
+	glVertex3f(-GROUND, 0.f, 0.f);
+	glVertex3f(GROUND, 0.f, 0.f);
+	//y axis
 	glColor3f(0.f, 1.f, 0.f);
-	glVertex3f(0.f, -10.f, 0.f);
-	glVertex3f(0.f, 10.f, 0.f);
-
+	glVertex3f(0.f, -GROUND, 0.f);
+	glVertex3f(0.f, GROUND, 0.f);
+	//z axis
 	glColor3f(0.f, 0.f, 1.f);
-	glVertex3f(0.f, 0.f, -10.f);
-	glVertex3f(0.f, 0.f, 10.f);
+	glVertex3f(0.f, 0.f, -GROUND);
+	glVertex3f(0.f, 0.f, GROUND);
 	glEnd();
 	glPopMatrix();
 }
@@ -664,10 +670,10 @@ void drawGround() {
 	glColor4f(0.7f, 0.7f, 0.7f, 0.5f);
 	glBegin(GL_QUADS);
 	glNormal3f(0, 1, 0);
-	glVertex3f(-10, 0, 10);
-	glVertex3f(10, 0, 10);
-	glVertex3f(10, 0, -10);
-	glVertex3f(-10, 0, -10);
+	glVertex3f(-GROUND, 0, GROUND);
+	glVertex3f(GROUND, 0, GROUND);
+	glVertex3f(GROUND, 0, -GROUND);
+	glVertex3f(-GROUND, 0, -GROUND);
 	glEnd();
 	glPopMatrix();
 
@@ -684,8 +690,9 @@ void myGlutDisplay(void)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(45.0f, xy_aspect, 0.1f, 100);
-
+	gluPerspective(45.0f, xy_aspect, 10.f, 100);
+	//glOrtho(-100, 100, -100, 100, -100, 100);
+	
 
 	glMatrixMode(GL_MODELVIEW);
 
@@ -698,7 +705,7 @@ void myGlutDisplay(void)
 	glTranslatef(-0.0, -4.0, -20.f);
 	glTranslatef(obj_pos[0], obj_pos[1], -obj_pos[2]);
 	glMultMatrixf(view_rotate);
-
+	if(animationTime>0)	glRotatef(-rotSpeed*animationTime, 0, 1, 0);
 	//glScalef(scale, scale, scale);
 	glShadeModel(GL_FLAT);
 
@@ -919,10 +926,6 @@ int main(int argc, char* argv[])
 	text_deformValue->set_w(180);
 	glui->add_column_to_panel(deform_value_panel, false);
 
-	GLUI_Panel *text_animation = new GLUI_Panel(deform_value_panel, "Animation", true);
-	GLUI_RadioGroup *animation = new GLUI_RadioGroup(text_animation, &animation_option, ANIMATION_ID, control_cb);
-	new GLUI_RadioButton(animation, "Off");
-	new GLUI_RadioButton(animation, "On");
 
 	glui->add_column_to_panel(in_out_panel, false);
 
@@ -1137,6 +1140,9 @@ int main(int argc, char* argv[])
 		GLUI_SUBWINDOW_BOTTOM);
 	glui2->set_main_gfx_window(main_window);
 
+
+
+
 	GLUI_Rotation *view_rot = new GLUI_Rotation(glui2, "Objects", view_rotate);
 	view_rot->set_spin(1.0);
 	new GLUI_Column(glui2, false);
@@ -1158,6 +1164,16 @@ int main(int argc, char* argv[])
 	GLUI_Translation *trans_z =
 		new GLUI_Translation(glui2, "Objects Z", GLUI_TRANSLATION_Z, &obj_pos[2]);
 	trans_z->set_speed(.005f);
+	new GLUI_Column(glui2, false);
+	//GLUI_Button
+
+	GLUI_Panel *text_animation = new GLUI_Panel(glui2, "Animation", true);
+	GLUI_RadioGroup *animation = new GLUI_RadioGroup(text_animation, &animation_option, ANIMATION_ID, control_cb);
+	new GLUI_RadioButton(animation, "Off");
+	new GLUI_RadioButton(animation, "On");
+	new GLUI_Column(glui2, false);
+
+	new GLUI_EditText(text_animation, "Rotation speed", &rotSpeed, ANIMATION_ID, control_cb);
 
 #if 1
 	/**** We register the idle callback with GLUI, *not* with GLUT ****/
