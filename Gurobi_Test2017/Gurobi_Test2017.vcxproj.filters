@@ -13,6 +13,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{6203b86a-945d-4cb3-b253-04663b967d0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui_impl">
+      <UniqueIdentifier>{fd92ea69-54c3-4340-ac80-3f7b82df013a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="STA_4con_d++.cpp">
@@ -51,6 +57,33 @@
     <ClCompile Include="problem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="extensionUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_glut.cpp">
+      <Filter>imgui_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl2.cpp">
+      <Filter>imgui_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_main.cpp">
+      <Filter>imgui_impl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FullTest_p.h">
@@ -73,6 +106,33 @@
     </ClInclude>
     <ClInclude Include="TetTet.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TetModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_glut.h">
+      <Filter>imgui_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl2.h">
+      <Filter>imgui_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>imgui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

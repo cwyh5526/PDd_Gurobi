@@ -156,11 +156,20 @@
     <ClCompile Include="DataStructure.cpp" />
     <ClCompile Include="DefDefPD.cpp" />
     <ClCompile Include="DefPD.cpp" />
+    <ClCompile Include="extensionUI.cpp" />
     <ClCompile Include="FullTest_d++.cpp" />
     <ClCompile Include="FullTest_p++.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_demo.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_glut.cpp" />
+    <ClCompile Include="imgui_impl_opengl2.cpp" />
+    <ClCompile Include="imgui_main.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PrimitiveTests.cpp" />
     <ClCompile Include="problem.cpp" />
+    <ClCompile Include="ResultAnimation.cpp" />
     <ClCompile Include="RigidPD.cpp" />
     <ClCompile Include="TetTet.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -171,7 +180,16 @@
     <ClInclude Include="DefDefPD.h" />
     <ClInclude Include="DefPD.h" />
     <ClInclude Include="FullTest_p.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_glut.h" />
+    <ClInclude Include="imgui_impl_opengl2.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="RigidPD.h" />
+    <ClInclude Include="TetModel.h" />
     <ClInclude Include="TetTet.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>

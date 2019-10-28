@@ -10,6 +10,8 @@
 //#include "DefPD.h"
 //#include "DefDefPD.h"
 //#include "RigidPD.h"
+//#include "TetModel.h"
+//
 //#include <time.h>
 //
 //#define OFF 0
@@ -36,6 +38,10 @@
 //#define PAIR_RENDER			 306
 //
 //#define DEFORM_TET_RENDER_CHECKED 307
+//
+////model
+//
+//TetModel m;
 //
 ////optimization object;
 //RigidPD *rigidPD;
@@ -596,6 +602,10 @@
 //	glPopMatrix();
 //
 //}
+//
+//void drawModel(string fileName) {
+//	m.render();
+//}
 //void myGlutDisplay(void)
 //{
 //	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -1064,6 +1074,8 @@
 //	defPD = new DefPD();
 //	defdefPD = new DefDefPD();
 //	rigidPD = new RigidPD();
+//	m.readFile("Moon");
+//
 //	glutMainLoop();
 //
 //	return EXIT_SUCCESS;
