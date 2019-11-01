@@ -579,8 +579,9 @@ void drawAnimation() {
 	const int timeGap = 1000;
 	
 	if (animationTime < 0) {
-		drawTet(rAnimationTet, 0.1f, 0.1f, 1.0f, 0.5f);
-		drawTet(sAnimationTet, 1.0f, 0.1f, 0.1f, 0.5f);
+		
+		drawTet(sAnimationTet, 1.0f, 0.1f, 0.1f, 0.4f);
+		drawTet(rAnimationTet, 0.1f, 0.1f, 1.0f, 0.4f);
 		animationTime++;
 	}
 	else if (animationTime == 0) {
@@ -610,8 +611,9 @@ void drawAnimation() {
 		animationTime++;
 	}
 	else if (animationTime >= (int)timestep && animationTime < (int)timestep+timeGap) {
-		drawTet(rAnimationTet, 0.1f, 0.1f, 1.0f, 0.5f);
-		drawTet(sAnimationTet, 1.0f, 0.1f, 0.1f, 0.5f);
+		
+		drawTet(sAnimationTet, 1.0f, 0.1f, 0.1f, 0.4f);
+		drawTet(rAnimationTet, 0.1f, 0.1f, 1.0f, 0.4f);
 		animationTime++;
 		/*stay*/
 	}
@@ -633,8 +635,9 @@ void drawAnimation() {
 		}
 		sAnimationTet.init(sAnimationTet.vertex);
 		rAnimationTet.init(rAnimationTet.vertex);
-		drawTet(rAnimationTet, 0.1f, 0.1f, 1.0f, 0.5f);
-		drawTet(sAnimationTet, 1.0f, 0.1f, 0.1f, 0.5f); 
+		
+		drawTet(sAnimationTet, 1.0f, 0.1f, 0.1f, 0.4f); 
+		drawTet(rAnimationTet, 0.1f, 0.1f, 1.0f, 0.4f);
 		animationTime++;
 
 		/*float rotationAngle = -(20*animationTime / 10000.f);
