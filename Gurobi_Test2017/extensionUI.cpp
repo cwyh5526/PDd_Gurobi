@@ -786,7 +786,7 @@ void myGlutDisplay(void)
 	if (render_ground_option == ON) {
 		drawGround();
 	}
-	outputText(5, 1, 5, 0, 0, 0, render_txt);
+	//outputText(5, 1, 5, 0, 0, 0, render_txt);
 	glEnable(GL_LIGHTING);
 	glutSwapBuffers();
 }
@@ -819,7 +819,7 @@ int main(int argc, char* argv[])
 	glutInitWindowPosition(50, 50);
 	glutInitWindowSize(1500, 900);
 
-	main_window = glutCreateWindow("Collision Detection between Spheres");
+	main_window = glutCreateWindow("Deformable Penetration Depth");
 	glutDisplayFunc(myGlutDisplay);
 	GLUI_Master.set_glutReshapeFunc(myGlutReshape);
 	GLUI_Master.set_glutKeyboardFunc(myGlutKeyboard);
